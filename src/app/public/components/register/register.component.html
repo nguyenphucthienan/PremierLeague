@@ -32,7 +32,8 @@
           <div *ngIf="controlHasError('confirmPassword', 'required')" class="invalid-feedback">
             Confirm password is required
           </div>
-          <div *ngIf="registerForm.get('confirmPassword').touched && registerForm.hasError('passwordMatch')" class="invalid-feedback">
+          <div *ngIf="!controlHasError('confirmPassword', 'required') && registerForm.get('confirmPassword').touched && registerForm.hasError('passwordMatch')"
+            class="invalid-feedback">
             Password must match
           </div>
         </div>
