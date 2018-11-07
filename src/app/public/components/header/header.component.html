@@ -1,25 +1,33 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Premier League</a>
+  <a class="navbar-brand" routerLink="/">Premier League</a>
   <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" [collapse]="isCollapsed">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Clubs</a>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/clubs">Clubs</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Players</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/players">Players</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Fixtures</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/fixtures">Fixtures</a>
       </li>
-      <li dropdown class="nav-item dropdown">
+      <li dropdown class="nav-item dropdown" routerLinkActive="active">
         <a dropdownToggle class="nav-link dropdown-toggle" href="#">Admin</a>
         <div *dropdownMenu class="dropdown-menu">
           <a class="dropdown-item" href="#">Club Manager</a>
           <a class="dropdown-item" href="#">Player Mananger</a>
         </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/about">About</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/login">Login</a>
       </li>
     </ul>
   </div>
