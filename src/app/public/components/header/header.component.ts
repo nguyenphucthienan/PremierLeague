@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/core/services/alert.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class HeaderComponent implements OnInit {
   isCollapsed = true;
 
   constructor(private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
   }
@@ -23,6 +25,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.alertService.info('Logout successfully');
     this.router.navigate(['/']);
   }
 
