@@ -1,0 +1,45 @@
+<div class="container mt-3">
+  <h2 class="text-center">Register</h2>
+  <div class="row">
+    <div class="col-lg-4 col-md-8 col-sm-10 offset-lg-4 offset-md-2 offset-sm-1">
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" formControlName="username" placeholder="Username" class="form-control"
+            [class.is-invalid]="controlHasError('username')">
+          <div *ngIf="controlHasError('username', 'required')" class="invalid-feedback">
+            Username is required
+          </div>
+          <div *ngIf="controlHasError('username', 'minlength')" class="invalid-feedback">
+            Username must be at least 4 characters
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password" placeholder="Password" class="form-control"
+            [class.is-invalid]="controlHasError('password')">
+          <div *ngIf="controlHasError('password', 'required')" class="invalid-feedback">
+            Password is required
+          </div>
+          <div *ngIf="controlHasError('password', 'minlength')" class="invalid-feedback">
+            Password must be at least 6 characters
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm password</label>
+          <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm password"
+            class="form-control" [class.is-invalid]="registerForm.get('confirmPassword').touched && (registerForm.hasError('passwordMatch')|| controlHasError('confirmPassword'))">
+          <div *ngIf="controlHasError('confirmPassword', 'required')" class="invalid-feedback">
+            Confirm password is required
+          </div>
+          <div *ngIf="registerForm.get('confirmPassword').touched && registerForm.hasError('passwordMatch')" class="invalid-feedback">
+            Password must match
+          </div>
+        </div>
+        <div class="form-group text-center">
+          <button type="submit" class="btn btn-block btn-primary" [disabled]="registerForm.invalid">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
