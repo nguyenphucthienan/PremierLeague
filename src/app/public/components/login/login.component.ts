@@ -36,4 +36,9 @@ export class LoginComponent implements OnInit {
       );
   }
 
+  controlHasError(controlName: string, errorName: string): boolean {
+    return this.loginForm.get(controlName).touched
+      && this.loginForm.get(controlName).hasError(errorName);
+  }
+
 }
