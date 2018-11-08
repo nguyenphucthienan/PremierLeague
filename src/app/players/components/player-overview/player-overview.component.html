@@ -1,0 +1,22 @@
+<div class="d-flex flex-row justify-content-between mt-3">
+  <ul class="list-group">
+    <li class="list-group-item m-1">
+      <span class="font-weight-bold">Nationality: </span>
+      {{ player.nationality }}
+    </li>
+    <li class="list-group-item m-1">
+      <span class="font-weight-bold">Birthdate: </span>
+      {{ player.birthdate | date:'mediumDate' }}
+    </li>
+  </ul>
+  <ul class="list-group">
+    <li class="list-group-item m-1">
+      <span class="font-weight-bold">Height: </span>
+      {{ player.height }}cm
+    </li>
+    <li class="list-group-item m-1">
+      <span class="font-weight-bold">Weight: </span>
+      {{ player.weight }}kg
+    </li>
+  </ul>
+</div>

@@ -6,6 +6,9 @@
         <img class="card-img-top" [src]="player.photoUrl" [alt]="player.name">
         <div class="card-body">
           <hr>
+          <i class="fa fa-users"></i><span class="font-weight-bold"> Club: </span>
+          <span>{{ player.clubName }}</span>
+          <hr>
           <i class="fa fa-hashtag"></i><span class="font-weight-bold"> Number: </span>
           <span>{{ player.number }}</span>
           <hr>
@@ -18,7 +21,9 @@
       <div class="card h-100">
         <div class="card-body">
           <tabset>
-            <tab heading="Overview">Overview</tab>
+            <tab heading="Overview">
+              <app-player-overview [player]="player"></app-player-overview>
+            </tab>
             <tab heading="Stats">Stats</tab>
           </tabset>
         </div>

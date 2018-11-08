@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Player } from '../core/models/player.interface';
-import { Pagination } from '../core/models/pagination.interface';
-import { SortMode } from '../core/models/sort-mode.interface';
 import { ActivatedRoute } from '@angular/router';
+
+import { Pagination } from '../core/models/pagination.interface';
+import { Player } from '../core/models/player.interface';
+import { SortMode } from '../core/models/sort-mode.interface';
 import { PlayerService } from '../core/services/player.service';
 
 @Component({
