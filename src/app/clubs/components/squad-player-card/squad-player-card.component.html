@@ -1,0 +1,15 @@
+<div class="card h-100">
+  <img class="card-img-top" [src]="player.photoUrl" [alt]="player.name">
+  <div class="card-body">
+    <h5 class="card-title">{{ player.name }}</h5>
+    <hr>
+    <i class="fa fa-hashtag"></i><span> {{ player.number }}</span>
+    <hr>
+    <i class="fa fa-thumb-tack"></i><span> {{ player.position }}</span>
+    <hr>
+    <i class="fa fa-flag"></i><span> {{ player.nationality }}</span>
+  </div>
+  <div class="card-footer">
+    <a class="btn btn-block btn-sm btn-primary" [routerLink]="['/players', player.id]">Player Profile</a>
+  </div>
+</div>

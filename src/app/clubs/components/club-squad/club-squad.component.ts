@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Club } from 'src/app/core/models/club.interface';
 import { Pagination } from 'src/app/core/models/pagination.interface';
 import { Player } from 'src/app/core/models/player.interface';
+import { SortMode } from 'src/app/core/models/sort-mode.interface';
 import { PlayerService } from 'src/app/core/services/player.service';
 
 @Component({
@@ -10,23 +13,29 @@ import { PlayerService } from 'src/app/core/services/player.service';
 })
 export class ClubSquadComponent implements OnInit {
 
+  @Input() club: Club;
+
   players: Player[];
   pagination: Pagination;
 
-  constructor(private playerService: PlayerService) { }
+  sortMode: SortMode = {
+    sortBy: 'number',
+    isSortAscending: true
+  };
+
+  constructor(private route: ActivatedRoute,
+    private playerService: PlayerService) { }
 
   ngOnInit() {
-    this.pagination = {
-      pageNumber: 1,
-      pageSize: 8,
-      totalItems: 29
-    };
-
-    this.getPlayers();
+    this.route.data.subscribe(data => {
+      this.players = data['players'].items;
+      this.pagination = data['players'].pagination;
+    });
   }
 
   getPlayers() {
-    this.playerService.getPlayers(this.pagination, undefined, 1)
+    this.playerService.getPlayers(this.pagination,
+      this.sortMode, this.club.id)
       .subscribe((response: any) => {
         this.players = response.items;
         this.pagination = response.pagination;

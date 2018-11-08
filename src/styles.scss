@@ -4,3 +4,7 @@
 @import '../node_modules/bootstrap/scss/variables';
 @import '../node_modules/bootstrap/scss/mixins';
 @import '../node_modules/ngx-toastr/toastr-bs4-alert';
+
+ul.pagination {
+  margin-bottom: 0px;
+}

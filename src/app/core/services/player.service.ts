@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { Pagination } from '../models/pagination.interface';
-import { SortMode } from '../models/sort-mode.interface';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
+import { Pagination } from '../models/pagination.interface';
 import { Player } from '../models/player.interface';
+import { SortMode } from '../models/sort-mode.interface';
 
 @Injectable()
 export class PlayerService {
