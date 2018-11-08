@@ -1,6 +1,9 @@
 <div class="container mt-3">
   <h2 class="text-center">Clubs</h2>
   <div class="row">
-    <app-club-card *ngFor="let club of clubs; let index = index" class="col-xl-3 col-lg-4 col-md-6" [club]="club"></app-club-card>
+    <app-club-card *ngFor="let club of clubs; let index = index" [club]="club" class="col-xl-3 col-lg-4 col-md-6" ></app-club-card>
+  </div>
+  <div class="pagination d-flex justify-content-center">
+    <pagination [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.pageSize"></pagination>
   </div>
 </div>

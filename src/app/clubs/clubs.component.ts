@@ -20,7 +20,7 @@ export class ClubsComponent implements OnInit {
     this.pagination = {
       pageNumber: 1,
       pageSize: 8,
-      totalItems: null
+      totalItems: 20
     };
 
     this.getClubs();
