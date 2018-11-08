@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Club } from '../models/club.interface';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
+import { Club } from '../models/club.interface';
 import { SortMode } from '../models/sort-mode.interface';
 
 @Injectable()
