@@ -1,3 +1,25 @@
 <div class="container mt-3">
   <h1 class="text-center">Players</h1>
+  <table class="table mt-3">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Player</th>
+        <th scope="col">Club</th>
+        <th scope="col">Number</th>
+        <th scope="col">Position</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let player of players">
+        <td><a class="player-name font-weight-bold" [routerLink]="['/players', player.id]">{{ player.name }}</a></td>
+        <td>{{ player.clubName }}</td>
+        <td>{{ player.number }}</td>
+        <td>{{ player.position }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination d-flex justify-content-center">
+    <pagination [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.pageSize" (pageChanged)="onPageChanged($event)"
+      [maxSize]="5" [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+  </div>
 </div>
