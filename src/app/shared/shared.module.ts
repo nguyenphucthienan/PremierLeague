@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDropdownModule, CollapseModule, PaginationModule } from 'ngx-bootstrap';
+import { BsDropdownModule, CollapseModule, PaginationModule, TabsModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -10,7 +10,8 @@ import { BsDropdownModule, CollapseModule, PaginationModule } from 'ngx-bootstra
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    TabsModule.forRoot()
   ],
   exports: [
     CommonModule,
@@ -18,7 +19,8 @@ import { BsDropdownModule, CollapseModule, PaginationModule } from 'ngx-bootstra
     ReactiveFormsModule,
     BsDropdownModule.forRoot().ngModule,
     CollapseModule.forRoot().ngModule,
-    PaginationModule.forRoot().ngModule
+    PaginationModule.forRoot().ngModule,
+    TabsModule.forRoot().ngModule
   ]
 })
 export class SharedModule { }

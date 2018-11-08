@@ -35,4 +35,8 @@ export class ClubService {
     return this.http.get<Club[]>(`${this.clubUrl}`, { params: params });
   }
 
+  getClub(id: number): Observable<Club> {
+    return this.http.get<Club>(`${this.clubUrl}/${id}`);
+  }
+
 }
