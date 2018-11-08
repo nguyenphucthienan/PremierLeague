@@ -1,4 +1,30 @@
 <div class="container mt-3">
   <h1 class="text-center">{{ player.name }}</h1>
-  {{ player | json }}
+  <div class="row mt-3">
+    <div class="col-lg-3">
+      <div class="card">
+        <img class="card-img-top" [src]="player.photoUrl" [alt]="player.name">
+        <div class="card-body">
+          <hr>
+          <i class="fa fa-hashtag"></i><span class="font-weight-bold"> Number:</span>
+          <br>
+          <span>{{ player.number }}</span>
+          <hr>
+          <i class="fa fa-user"></i><span class="font-weight-bold"> Position:</span>
+          <br>
+          <span>{{ player.position }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="card h-100">
+        <div class="card-body">
+          <tabset>
+            <tab heading="Overview">Overview</tab>
+            <tab heading="Stats">Stats</tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
