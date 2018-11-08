@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'register', component: RegisterComponent },
+  { path: 'clubs', loadChildren: './clubs/clubs.module#ClubsModule' },
 ];
 
 @NgModule({
