@@ -4,24 +4,31 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { Club } from '../models/club.interface';
+import { Pagination } from '../models/pagination.interface';
 import { SortMode } from '../models/sort-mode.interface';
 
 @Injectable()
 export class ClubService {
 
   private readonly clubUrl = `${environment.apiUrl}/clubs`;
-  private readonly defaultSortMode = {
+
+  private readonly defaultPagination: Pagination = {
+    pageNumber: 1,
+    pageSize: 8
+  };
+
+  private readonly defaultSortMode: SortMode = {
     sortBy: 'name',
     isSortAscending: true
   };
 
   constructor(private http: HttpClient) { }
 
-  getClubs(pageNumber = 1, pageSize = 8,
+  getClubs(pagination = this.defaultPagination,
     sortMode: SortMode = this.defaultSortMode): Observable<Club[]> {
     const params = new HttpParams()
-      .set('pageNumber', pageNumber.toString())
-      .set('pageSize', pageSize.toString())
+      .set('pageNumber', pagination.pageNumber.toString())
+      .set('pageSize', pagination.pageSize.toString())
       .set('sortBy', sortMode.sortBy)
       .set('isSortAscending', sortMode.isSortAscending.toString());
 

@@ -26,8 +26,7 @@ export class ClubsComponent implements OnInit {
   }
 
   getClubs() {
-    this.clubService.getClubs(this.pagination.pageNumber,
-      this.pagination.pageSize)
+    this.clubService.getClubs(this.pagination)
       .subscribe((response: any) => {
         this.clubs = response.items;
         this.pagination = response.pagination;
