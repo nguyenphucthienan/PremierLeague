@@ -5,13 +5,13 @@
   <img class="card-img-top" [src]="club.photoUrl" [alt]="club.name">
   <div class="card-body">
     <hr>
+    <i class="fa fa-thumb-tack"></i><span class="font-weight-bold"> Established year:</span>
+    <br>
+    <span>{{ club.establishedYear }}</span>
+    <hr>
     <i class="fa fa-home"></i><span class="font-weight-bold"> Home field:</span>
     <br>
     <span>{{ club.homeField }}</span>
-    <hr>
-    <i class="fa fa-user"></i><span class="font-weight-bold"> Established year:</span>
-    <br>
-    <span>{{ club.establishedYear }}</span>
   </div>
   <div class="card-footer">
     <a class="btn btn-block btn-sm btn-primary" [routerLink]="['/clubs', club.id]">Club Profile</a>
