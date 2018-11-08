@@ -7,12 +7,14 @@ import { ClubCardComponent } from './components/club-card/club-card.component';
 import { ClubDetailComponent } from './components/club-detail/club-detail.component';
 import { ClubResolver } from './resolvers/club.resolver';
 import { ClubsResolver } from './resolvers/clubs.resolver';
+import { ClubSquadComponent } from './components/club-squad/club-squad.component';
 
 @NgModule({
   declarations: [
     ClubsComponent,
     ClubCardComponent,
-    ClubDetailComponent
+    ClubDetailComponent,
+    ClubSquadComponent
   ],
   imports: [
     SharedModule,

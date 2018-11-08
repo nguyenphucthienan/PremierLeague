@@ -1,16 +1,15 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-
-import { Club } from '../models/club.interface';
 import { Pagination } from '../models/pagination.interface';
 import { SortMode } from '../models/sort-mode.interface';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Player } from '../models/player.interface';
 
 @Injectable()
-export class ClubService {
+export class PlayerService {
 
-  private readonly clubUrl = `${environment.apiUrl}/clubs`;
+  private readonly playerUrl = `${environment.apiUrl}/players`;
 
   private readonly defaultPagination: Pagination = {
     pageNumber: 1,
@@ -24,19 +23,23 @@ export class ClubService {
 
   constructor(private http: HttpClient) { }
 
-  getClubs(pagination: Pagination = this.defaultPagination,
-    sortMode: SortMode = this.defaultSortMode): Observable<Club[]> {
-    const params = new HttpParams()
+  getPlayers(pagination: Pagination = this.defaultPagination,
+    sortMode: SortMode = this.defaultSortMode, clubId?: number): Observable<Player[]> {
+    let params = new HttpParams()
       .set('pageNumber', pagination.pageNumber.toString())
       .set('pageSize', pagination.pageSize.toString())
       .set('sortBy', sortMode.sortBy)
       .set('isSortAscending', sortMode.isSortAscending.toString());
 
-    return this.http.get<Club[]>(`${this.clubUrl}`, { params: params });
+    if (clubId) {
+      params = params.set('clubId', clubId.toString());
+    }
+
+    return this.http.get<Player[]>(`${this.playerUrl}`, { params: params });
   }
 
-  getClub(id: number): Observable<Club> {
-    return this.http.get<Club>(`${this.clubUrl}/${id}`);
+  getPlayer(id: number): Observable<Player> {
+    return this.http.get<Player>(`${this.playerUrl}/${id}`);
   }
 
 }
