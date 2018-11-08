@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'clubs', loadChildren: './clubs/clubs.module#ClubsModule' },
+  { path: 'players', loadChildren: './players/players.module#PlayersModule' }
 ];
 
 @NgModule({
