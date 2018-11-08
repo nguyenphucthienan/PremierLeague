@@ -1,0 +1,12 @@
+<div class="card h-100">
+  <div class="card-header">
+    <h5 class="card-title">{{ club.name }}</h5>
+  </div>
+  <img class="card-img-top" [src]="club.photoUrl" [alt]="club.name">
+  <div class="card-body">
+    <p class="card-text">{{ club.homeField }}</p>
+  </div>
+  <div class="card-footer">
+    <a class="btn btn-block btn-primary" [routerLink]="['/clubs', club.id]">Club Profile</a>
+  </div>
+</div>
