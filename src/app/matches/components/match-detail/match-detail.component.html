@@ -3,21 +3,26 @@
   <div class="row mt-3">
     <div class="col-md-5">
       <span class="club d-flex flex-row justify-content-md-end justify-content-center align-items-center">
-        <img class="club-photo img-fluid" [src]="match.homeClub.photoUrl" [alt]="match.homeClub.name">
         <a class="club-name text-right font-weight-bold" [routerLink]="['/clubs', match.homeClub.id]">
           {{ match.homeClub.name }}
         </a>
+        <img class="club-photo img-fluid" [src]="match.homeClub.photoUrl" [alt]="match.homeClub.name">
+
       </span>
     </div>
     <div class="col-md-2 d-flex justify-content-center align-items-center">
       <span *ngIf="!match.isPlayed" class="info font-weight-bold">TBC</span>
+      <span *ngIf="match.isPlayed" class="info font-weight-bold">
+        {{ match.homeScore }} - {{ match.awayScore }}
+      </span>
     </div>
     <div class="col-md-5">
       <span class="club d-flex flex-md-row flex-row-reverse justify-content-md-start justify-content-center align-items-center">
+          <img class="club-photo" [src]="match.awayClub.photoUrl" [alt]="match.awayClub.name">
+
         <a class="club-name font-weight-bold" [routerLink]="['/clubs', match.awayClub.id]">
           <span>{{ match.awayClub.name }}</span>
         </a>
-        <img class="club-photo" [src]="match.awayClub.photoUrl" [alt]="match.awayClub.name">
       </span>
     </div>
   </div>
@@ -48,6 +53,7 @@
           <span class="font-weight-bold">Goals</span>
         </div>
         <div class="card-body">
+          <app-match-goals [match]="match"></app-match-goals>
         </div>
       </div>
       <div class="card mt-3">

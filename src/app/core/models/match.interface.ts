@@ -1,4 +1,5 @@
 import { Club } from './club.interface';
+import { Goal } from './goal.interface';
 
 export interface Match {
   id: number;
@@ -9,4 +10,5 @@ export interface Match {
   awayScore: number;
   matchTime: Date;
   isPlayed: boolean;
+  goals?: Goal[];
 }
