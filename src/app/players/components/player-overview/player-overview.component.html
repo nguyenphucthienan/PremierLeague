@@ -12,11 +12,11 @@
   <ul class="list-group">
     <li class="list-group-item m-1">
       <span class="font-weight-bold">Height: </span>
-      {{ player.height }}cm
+      {{ player.height ? player.height + 'cm' : ''}}
     </li>
     <li class="list-group-item m-1">
       <span class="font-weight-bold">Weight: </span>
-      {{ player.weight }}kg
+      {{ player.weight ? player.weight + 'kg' : '' }}
     </li>
   </ul>
 </div>

@@ -14,7 +14,7 @@
         <td class="d-flex flex-row justify-content-center align-items-center">
           <span class="club d-flex flex-row justify-content-end align-items-center">
             <a class="club-name text-right font-weight-bold" [routerLink]="['/clubs', match.homeClub.id]">
-              {{ match.homeClub.name}}
+              {{ match.homeClub.name }}
             </a>
             <img class="club-photo" [src]="match.homeClub.photoUrl" [alt]="match.homeClub.name">
           </span>
@@ -22,13 +22,13 @@
           <span class="club d-flex flex-row align-items-center">
             <img class="club-photo" [src]="match.awayClub.photoUrl" [alt]="match.awayClub.name">
             <a class="club-name font-weight-bold" [routerLink]="['/clubs', match.awayClub.id]">
-              <span>{{ match.awayClub.name}}</span>
+              <span>{{ match.awayClub.name }}</span>
             </a>
           </span>
         </td>
-        <td>{{ match.matchTime | date:'mediumDate' }}</td>
-        <td>{{ match.homeClub.homeField }}</td>
-        <td><a class="btn btn-sm btn-primary" [routerLink]="['/matches', match.id]">Match Detail</a></td>
+        <td class="align-middle">{{ match.matchTime | date:'mediumDate' }}</td>
+        <td class="align-middle">{{ match.homeClub.homeField }}</td>
+        <td class="align-middle"><a class="btn btn-sm btn-primary" [routerLink]="['/matches', match.id]">Match Detail</a></td>
       </tr>
     </tbody>
   </table>

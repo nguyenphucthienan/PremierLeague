@@ -1,4 +1,51 @@
 <div class="container mt-3">
   <h1 class="text-center">Match Detail</h1>
-  <p>{{ match | json }}</p>
+  <div class="row mt-3">
+    <div class="col-md-5">
+      <span class="club d-flex flex-row justify-content-md-end justify-content-center align-items-center">
+        <img class="club-photo img-fluid" [src]="match.homeClub.photoUrl" [alt]="match.homeClub.name">
+        <a class="club-name text-right font-weight-bold" [routerLink]="['/clubs', match.homeClub.id]">
+          {{ match.homeClub.name }}
+        </a>
+      </span>
+    </div>
+    <div class="col-md-2 d-flex justify-content-center align-items-center">
+      <span *ngIf="!match.isPlayed" class="info font-weight-bold">TBC</span>
+    </div>
+    <div class="col-md-5">
+      <span class="club d-flex flex-md-row flex-row-reverse justify-content-md-start justify-content-center align-items-center">
+        <a class="club-name font-weight-bold" [routerLink]="['/clubs', match.awayClub.id]">
+          <span>{{ match.awayClub.name }}</span>
+        </a>
+        <img class="club-photo" [src]="match.awayClub.photoUrl" [alt]="match.awayClub.name">
+      </span>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-3">
+      <div class="card mt-3">
+        <div class="card-header">
+          <span class="font-weight-bold">Overview</span>
+        </div>
+        <div class="card-body">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="card mt-3">
+        <div class="card-header">
+          <span class="font-weight-bold">Goals</span>
+        </div>
+        <div class="card-body">
+        </div>
+      </div>
+      <div class="card mt-3">
+        <div class="card-header">
+          <span class="font-weight-bold">Cards</span>
+        </div>
+        <div class="card-body">
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
