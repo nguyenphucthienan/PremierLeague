@@ -6,6 +6,7 @@ import { ProgressAnimationType, ToastrModule } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 
 import { SharedModule } from '../shared/shared.module';
+import { BriefClubsResolver } from './resolvers/brief-clubs.resolver';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
 import { ClubService } from './services/club.service';
@@ -44,7 +45,8 @@ const toastrOptions = {
     AlertService,
     ClubService,
     PlayerService,
-    MatchService
+    MatchService,
+    BriefClubsResolver
   ]
 })
 export class CoreModule { }

@@ -1,14 +1,14 @@
 <div [formGroup]="filterForm" class="row">
   <div class="col-md-10">
     <div class="row">
-      <div *ngFor="let filter of filters; let i = index;" class="col-md-6 filter-item">
+      <div *ngFor="let filterOption of filterOptions" class="col-md-6 filter-item">
         <div class="d-flex flex-row align-items-center">
           <div class="col-md-2 col-4">
-            <span>{{ filter.text }}</span>
+            <span>{{ filterOption.text }}</span>
           </div>
           <div class="col-md-10 col-8">
-            <ng-select [items]="filters[i].values" [selectOnTab]="true" [clearable]="false" bindValue="value" bindLabel="text"
-              placeholder="Select" [formControlName]="filter.name"></ng-select>
+            <ng-select [items]="filterOption.values" [selectOnTab]="true" [clearable]="true" bindValue="value"
+              bindLabel="text" placeholder="Select" [formControlName]="filterOption.name"></ng-select>
           </div>
         </div>
       </div>

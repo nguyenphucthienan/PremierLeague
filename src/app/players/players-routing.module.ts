@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { BriefClubsResolver } from '../core/resolvers/brief-clubs.resolver';
 import { PlayerDetailComponent } from './components/player-detail/player-detail.component';
 import { PlayersComponent } from './players.component';
 import { PlayerResolver } from './resolvers/player.resolver';
@@ -10,7 +11,10 @@ const routes: Routes = [
   {
     path: '',
     component: PlayersComponent,
-    resolve: { players: PlayersResolver }
+    resolve: {
+      clubs: BriefClubsResolver,
+      players: PlayersResolver
+    }
   },
   {
     path: ':id',

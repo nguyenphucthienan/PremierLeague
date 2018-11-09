@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { FilterOption } from './models/filter-option.interface';
+
 @Component({
   selector: 'app-filter-bar',
   templateUrl: './filter-bar.component.html',
@@ -8,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FilterBarComponent implements OnInit {
 
-  @Input() filters: any;
+  @Input() filterOptions: FilterOption[];
   @Output() filtered = new EventEmitter();
 
   filterForm: FormGroup;
@@ -16,36 +18,15 @@ export class FilterBarComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.filters = [
-      {
-        name: 'id',
-        text: 'ID',
-        values: [
-          { text: 'One', value: 1 },
-          { text: 'Two', value: 2 },
-          { text: 'Three', value: 3 }
-        ]
-      },
-      {
-        name: 'code',
-        text: 'Code',
-        values: [
-          { text: 'Four', value: 4 },
-          { text: 'Five', value: 5 }
-        ]
-      }
-    ];
-
     this.initForm();
   }
 
   filter() {
-    console.log(this.filterForm.value);
     this.filtered.emit(this.filterForm.value);
   }
 
   private initForm() {
-    const formControls = this.filters.reduce((controls, filter) => {
+    const formControls = this.filterOptions.reduce((controls, filter) => {
       controls[filter.name] = this.fb.control('', Validators.required);
       return controls;
     }, {});
