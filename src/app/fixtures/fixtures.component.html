@@ -1,4 +1,39 @@
 <div class="container mt-3">
   <h1 class="text-center">Fixtures</h1>
-  <p *ngFor="let match of matches">{{ match | json }}</p>
+  <table class="table mt-3">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Clubs</th>
+        <th scope="col">Date</th>
+        <th scope="col">Stadium</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let match of matches">
+        <td class="d-flex flex-row justify-content-center align-items-center">
+          <span class="club d-flex flex-row justify-content-end align-items-center">
+            <a class="club-name text-right font-weight-bold" [routerLink]="['/clubs', match.homeClub.id]">
+              {{ match.homeClub.name}}
+            </a>
+            <img class="club-photo" [src]="match.homeClub.photoUrl" [alt]="match.homeClub.name">
+          </span>
+          <span class="match-time">{{ match.matchTime | date:'hh:mm' }}</span>
+          <span class="club d-flex flex-row align-items-center">
+            <img class="club-photo" [src]="match.awayClub.photoUrl" [alt]="match.awayClub.name">
+            <a class="club-name font-weight-bold" [routerLink]="['/clubs', match.awayClub.id]">
+              <span>{{ match.awayClub.name}}</span>
+            </a>
+          </span>
+        </td>
+        <td>{{ match.matchTime | date:'mediumDate' }}</td>
+        <td>{{ match.homeClub.homeField }}</td>
+        <td><a class="btn btn-sm btn-primary" [routerLink]="['/matches', match.id]">Match Detail</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination d-flex justify-content-center">
+    <pagination [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.pageSize" (pageChanged)="onPageChanged($event)"
+      [maxSize]="5" [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+  </div>
 </div>

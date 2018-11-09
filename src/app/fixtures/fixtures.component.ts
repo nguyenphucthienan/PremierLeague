@@ -31,4 +31,17 @@ export class FixturesComponent implements OnInit {
     });
   }
 
+  getMatches() {
+    this.matchService.getMatches(this.pagination, this.sortMode)
+      .subscribe((response: any) => {
+        this.matches = response.items;
+        this.pagination = response.pagination;
+      });
+  }
+
+  onPageChanged(event: any) {
+    this.pagination.pageNumber = event.page;
+    this.getMatches();
+  }
+
 }
