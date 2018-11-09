@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { FilterMode } from 'src/app/core/models/filter-mode.interface';
 import { Pagination } from 'src/app/core/models/pagination.interface';
 import { Player } from 'src/app/core/models/player.interface';
 import { SortMode } from 'src/app/core/models/sort-mode.interface';
@@ -21,20 +22,19 @@ export class ClubPlayersResolver implements Resolve<Player[]> {
     isSortAscending: true
   };
 
-  constructor(private router: Router,
-    private playerService: PlayerService,
+  constructor(private playerService: PlayerService,
     private alertService: AlertService) {
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Player[]> {
     const clubId = parseInt(route.paramMap.get('id'), 10);
+    const filterMode: FilterMode = { clubId };
 
     return this.playerService.getPlayers(this.pagination,
-      this.sortMode, clubId)
+      this.sortMode, filterMode)
       .pipe(
         catchError(error => {
           this.alertService.error('Problem retrieving data');
-          this.router.navigate(['/clubs']);
           return of(null);
         })
       );
