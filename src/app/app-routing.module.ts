@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'clubs', loadChildren: './clubs/clubs.module#ClubsModule' },
   { path: 'players', loadChildren: './players/players.module#PlayersModule' },
-  { path: 'fixtures', loadChildren: './fixtures/fixtures.module#FixturesModule' }
+  { path: 'fixtures', loadChildren: './fixtures/fixtures.module#FixturesModule' },
+  { path: 'matches', loadChildren: './matches/matches.module#MatchesModule' }
 ];
 
 @NgModule({
