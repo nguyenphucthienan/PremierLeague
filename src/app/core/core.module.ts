@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
 import { ClubService } from './services/club.service';
+import { MatchService } from './services/match.service';
 import { PlayerService } from './services/player.service';
 
 export function tokenGetter() {
@@ -42,7 +43,8 @@ const toastrOptions = {
     AuthService,
     AlertService,
     ClubService,
-    PlayerService
+    PlayerService,
+    MatchService
   ]
 })
 export class CoreModule { }
