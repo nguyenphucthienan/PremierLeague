@@ -1,20 +1,20 @@
-<div [formGroup]="filterForm" class="row">
-  <div class="col-md-10">
+<div [formGroup]="filterForm" class="row align-items-center">
+  <div class="col-lg-10 align-items-center">
     <div class="row">
-      <div *ngFor="let filterOption of filterOptions" class="col-md-6 filter-item">
+      <div *ngFor="let filterOption of filterOptions" class="col-lg-6 pb-1">
         <div class="d-flex flex-row align-items-center">
-          <div class="col-md-2 col-4">
-            <span>{{ filterOption.text }}</span>
+          <div class="col-lg-3 col-4">
+            <span class="font-weight-bold">{{ filterOption.text }}</span>
           </div>
-          <div class="col-md-10 col-8">
+          <div class="col-lg-9 col-8">
             <ng-select [items]="filterOption.values" [selectOnTab]="true" [clearable]="true" bindValue="value"
-              bindLabel="text" placeholder="Select" [formControlName]="filterOption.name"></ng-select>
+              bindLabel="text" [placeholder]="filterOption.placeholder" [formControlName]="filterOption.name"></ng-select>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-lg-2 pb-1">
     <button class="btn btn-block btn-sm btn-primary" (click)="filter()">Filter</button>
   </div>
 </div>

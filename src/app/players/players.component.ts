@@ -6,6 +6,7 @@ import { Player } from '../core/models/player.interface';
 import { SortMode } from '../core/models/sort-mode.interface';
 import { PlayerService } from '../core/services/player.service';
 import { FilterOption } from '../shared/components/filter-bar/models/filter-option.interface';
+import { FilterMode } from '../core/models/filter-mode.interface';
 
 @Component({
   selector: 'app-players',
@@ -16,13 +17,14 @@ export class PlayersComponent implements OnInit {
 
   players: Player[];
   pagination: Pagination;
-
   filterOptions: FilterOption[] = [];
 
   sortMode: SortMode = {
     sortBy: 'name',
     isSortAscending: true
   };
+
+  filterMode: FilterMode;
 
   constructor(private route: ActivatedRoute,
     private playerService: PlayerService) { }
@@ -35,6 +37,7 @@ export class PlayersComponent implements OnInit {
       const clubOption: FilterOption = {
         name: 'clubId',
         text: 'Club',
+        placeholder: 'Select club',
         values: data['clubs'].map(club => ({
           text: club.name,
           value: club.id
@@ -44,6 +47,7 @@ export class PlayersComponent implements OnInit {
       const positionOption: FilterOption = {
         name: 'position',
         text: 'Position',
+        placeholder: 'Select position',
         values: [
           { text: 'Goalkeeper', value: 'Goalkeeper' },
           { text: 'Defender', value: 'Defender' },
@@ -69,8 +73,8 @@ export class PlayersComponent implements OnInit {
     this.getPlayers();
   }
 
-  onFiltered(filterObject: any) {
-    console.log(filterObject);
+  onFiltered(filterMode: FilterMode) {
+    this.filterMode = filterMode;
   }
 
 }

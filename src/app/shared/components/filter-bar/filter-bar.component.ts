@@ -27,7 +27,7 @@ export class FilterBarComponent implements OnInit {
 
   private initForm() {
     const formControls = this.filterOptions.reduce((controls, filter) => {
-      controls[filter.name] = this.fb.control('', Validators.required);
+      controls[filter.name] = this.fb.control(null, Validators.required);
       return controls;
     }, {});
 
