@@ -28,6 +28,17 @@
           <span class="font-weight-bold">Overview</span>
         </div>
         <div class="card-body">
+          <i class="fa fa-hashtag"></i><span class="font-weight-bold"> Round: </span>
+          <span>{{ match.round }}</span>
+          <hr>
+          <i class="fa fa-clock-o"></i><span class="font-weight-bold"> Time: </span>
+          <span>{{ match.matchTime | date:'hh:mm' }}</span>
+          <hr>
+          <i class="fa fa-calendar"></i><span class="font-weight-bold"> Date: </span>
+          <span>{{ match.matchTime | date:'mediumDate' }}</span>
+          <hr>
+          <i class="fa fa-map-marker"></i><span class="font-weight-bold"> Stadium: </span>
+          <span>{{ match.homeClub.homeField }}</span>
         </div>
       </div>
     </div>
