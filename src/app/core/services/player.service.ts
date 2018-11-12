@@ -16,7 +16,7 @@ export class PlayerService {
 
   private readonly defaultPagination: Pagination = {
     pageNumber: 1,
-    pageSize: 8
+    pageSize: 10
   };
 
   private readonly defaultSortMode: SortMode = {

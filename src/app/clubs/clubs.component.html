@@ -1,6 +1,6 @@
 <div class="container mt-3">
   <h1 class="text-center">Clubs</h1>
-  <div class="row">
+  <div class="row mt-3">
     <div class="col-lg-4 col-md-6">
       <div class="d-flex flex-row align-items-center">
         <div class="col-lg-3 col-4">
@@ -17,7 +17,7 @@
     <app-club-card *ngFor="let club of clubs; let index = index" [club]="club" class="col-xl-3 col-lg-4 col-md-6 pt-3 pl-2 pr-2"></app-club-card>
   </div>
   <div class="pagination d-flex justify-content-center">
-    <pagination *ngIf="pagination" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.pageSize"
+    <pagination *ngIf="clubs?.length > 0" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.pageSize"
       (pageChanged)="onPageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"></pagination>
   </div>
 </div>
