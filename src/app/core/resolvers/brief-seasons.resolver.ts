@@ -2,19 +2,20 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Club } from 'src/app/core/models/club.interface';
 import { AlertService } from 'src/app/core/services/alert.service';
-import { ClubService } from 'src/app/core/services/club.service';
+
+import { Season } from '../models/season.interface';
+import { SeasonService } from '../services/season.service';
 
 @Injectable()
-export class BriefClubsResolver implements Resolve<Club[]> {
+export class BriefSeasonsResolver implements Resolve<Season[]> {
 
-  constructor(private clubService: ClubService,
+  constructor(private seasonService: SeasonService,
     private alertService: AlertService) {
   }
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Club[]> {
-    return this.clubService.getBriefListClub()
+  resolve(route: ActivatedRouteSnapshot): Observable<Season[]> {
+    return this.seasonService.getBriefListSeason()
       .pipe(
         catchError(error => {
           this.alertService.error('Problem retrieving data');

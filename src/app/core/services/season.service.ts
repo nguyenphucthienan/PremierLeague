@@ -3,16 +3,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import { Club } from '../models/club.interface';
 import { FilterMode } from '../models/filter-mode.interface';
 import { Pagination } from '../models/pagination.interface';
+import { Season } from '../models/season.interface';
 import { SortMode } from '../models/sort-mode.interface';
 import { ParamsBuilder } from '../utils/params-builder';
 
 @Injectable()
-export class ClubService {
+export class SeasonService {
 
-  private readonly clubUrl = `${environment.apiUrl}/clubs`;
+  private readonly seasonUrl = `${environment.apiUrl}/seasons`;
 
   private readonly defaultPagination: Pagination = {
     pageNumber: 1,
@@ -26,24 +26,24 @@ export class ClubService {
 
   constructor(private http: HttpClient) { }
 
-  getClubs(pagination: Pagination = this.defaultPagination,
+  getSeasons(pagination: Pagination = this.defaultPagination,
     sortMode: SortMode = this.defaultSortMode,
-    filterMode?: FilterMode): Observable<Club[]> {
+    filterMode?: FilterMode): Observable<Season[]> {
     const params = new ParamsBuilder()
       .applyPagination(pagination)
       .applySort(sortMode)
       .applyFilter(filterMode)
       .build();
 
-    return this.http.get<Club[]>(`${this.clubUrl}`, { params: params });
+    return this.http.get<Season[]>(`${this.seasonUrl}`, { params: params });
   }
 
-  getBriefListClub(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.clubUrl}/brief-list`);
+  getBriefListSeason(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.seasonUrl}/brief-list`);
   }
 
-  getClub(id: number): Observable<Club> {
-    return this.http.get<Club>(`${this.clubUrl}/${id}`);
+  getSeason(id: number): Observable<Season> {
+    return this.http.get<Season>(`${this.seasonUrl}/${id}`);
   }
 
 }

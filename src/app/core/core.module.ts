@@ -7,11 +7,13 @@ import { environment } from 'src/environments/environment';
 
 import { SharedModule } from '../shared/shared.module';
 import { BriefClubsResolver } from './resolvers/brief-clubs.resolver';
+import { BriefSeasonsResolver } from './resolvers/brief-seasons.resolver';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
 import { ClubService } from './services/club.service';
 import { MatchService } from './services/match.service';
 import { PlayerService } from './services/player.service';
+import { SeasonService } from './services/season.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -43,9 +45,11 @@ const toastrOptions = {
   providers: [
     AuthService,
     AlertService,
+    SeasonService,
     ClubService,
     PlayerService,
     MatchService,
+    BriefSeasonsResolver,
     BriefClubsResolver
   ]
 })

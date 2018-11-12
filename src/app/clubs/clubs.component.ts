@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 import { Club } from '../core/models/club.interface';
+import { FilterMode } from '../core/models/filter-mode.interface';
 import { Pagination } from '../core/models/pagination.interface';
+import { Season } from '../core/models/season.interface';
+import { SortMode } from '../core/models/sort-mode.interface';
 import { ClubService } from '../core/services/club.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-clubs',
@@ -12,6 +16,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ClubsComponent implements OnInit {
 
+  @ViewChild(NgSelectComponent) seasonSelect: NgSelectComponent;
+
+  private sortMode: SortMode = {
+    sortBy: 'name', isSortAscending: true
+  };
+
+  private filterMode: FilterMode = {};
+
+  seasons: Season[];
   clubs: Club[];
   pagination: Pagination;
 
@@ -20,13 +33,17 @@ export class ClubsComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.clubs = data['clubs'].items;
-      this.pagination = data['clubs'].pagination;
+      this.seasons = data['seasons'];
     });
+
+    this.seasonSelect.writeValue(this.seasons[0].id);
+    this.filterMode.seasonId = this.seasons[0].id;
+    this.getClubs();
   }
 
   getClubs() {
-    this.clubService.getClubs(this.pagination)
+    this.clubService.getClubs(this.pagination,
+      this.sortMode, this.filterMode)
       .subscribe((response: any) => {
         this.clubs = response.items;
         this.pagination = response.pagination;
@@ -35,6 +52,11 @@ export class ClubsComponent implements OnInit {
 
   onPageChanged(event: any) {
     this.pagination.pageNumber = event.page;
+    this.getClubs();
+  }
+
+  onSeasonFilterChanged(season: Season) {
+    this.filterMode.seasonId = season ? season.id : null;
     this.getClubs();
   }
 

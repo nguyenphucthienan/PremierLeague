@@ -18,4 +18,5 @@ export class MatchDetailComponent implements OnInit {
       this.match = data['match'];
     });
   }
+
 }
