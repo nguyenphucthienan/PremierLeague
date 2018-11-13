@@ -28,17 +28,18 @@
     <thead class="thead-light">
       <tr>
         <th scope="col">Player</th>
-        <th scope="col">Club</th>
-        <th scope="col">Number</th>
         <th scope="col">Position</th>
+        <th scope="col">Nationality</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let player of players">
-        <td><a class="player-name font-weight-bold" [routerLink]="['/players', player.id]">{{ player.name }}</a></td>
-        <td>{{ player.clubName }}</td>
-        <td>{{ player.number }}</td>
-        <td>{{ player.position }}</td>
+        <td class="align-middle">
+          <img class="player-img mr-2" [src]="player.photoUrl" [alt]="player.name">
+          <a class="player-name font-weight-bold" [routerLink]="['/players', player.id]">{{ player.name }}</a>
+        </td>
+        <td class="align-middle">{{ player.position }}</td>
+        <td class="align-middle">{{ player.nationality }}</td>
       </tr>
     </tbody>
   </table>
