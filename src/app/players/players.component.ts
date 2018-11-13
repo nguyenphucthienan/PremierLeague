@@ -22,7 +22,7 @@ export class PlayersComponent implements OnInit {
 
   pagination: Pagination = {
     pageNumber: 1,
-    pageSize: 20
+    pageSize: 15
   };
 
   private sortMode: SortMode = {

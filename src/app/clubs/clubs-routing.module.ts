@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { BriefSeasonsResolver } from '../core/resolvers/brief-seasons.resolver';
 import { ClubsComponent } from './clubs.component';
 import { ClubDetailComponent } from './components/club-detail/club-detail.component';
-import { ClubPlayersResolver } from './resolvers/club-players.resolver';
 import { ClubResolver } from './resolvers/club.resolver';
 
 const routes: Routes = [
@@ -19,8 +18,7 @@ const routes: Routes = [
     path: ':id',
     component: ClubDetailComponent,
     resolve: {
-      club: ClubResolver,
-      players: ClubPlayersResolver
+      club: ClubResolver
     }
   }
 ];

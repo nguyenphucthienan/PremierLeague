@@ -18,6 +18,6 @@
   </div>
   <div class="pagination d-flex justify-content-center">
     <pagination *ngIf="clubs?.length > 0" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.pageSize"
-      (pageChanged)="onPageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"></pagination>
+      (pageChanged)="onPageChanged($event)" [maxSize]="5" previousText="&lsaquo;" nextText="&rsaquo;"></pagination>
   </div>
 </div>

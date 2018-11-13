@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgSelectComponent } from '@ng-select/ng-select';
 import { Club } from 'src/app/core/models/club.interface';
 import { FilterMode } from 'src/app/core/models/filter-mode.interface';
 import { Pagination } from 'src/app/core/models/pagination.interface';
 import { Player } from 'src/app/core/models/player.interface';
 import { SortMode } from 'src/app/core/models/sort-mode.interface';
+import { Squad } from 'src/app/core/models/squad.interface';
 import { PlayerService } from 'src/app/core/services/player.service';
 
 @Component({
@@ -14,30 +16,32 @@ import { PlayerService } from 'src/app/core/services/player.service';
 })
 export class ClubSquadComponent implements OnInit {
 
+  @ViewChild(NgSelectComponent) seasonSelect: NgSelectComponent;
   @Input() club: Club;
 
+  squads: Squad[];
   players: Player[];
-  pagination: Pagination;
 
-  sortMode: SortMode = {
-    sortBy: 'number',
+  pagination: Pagination = {
+    pageNumber: 1,
+    pageSize: 8
+  };
+
+  private sortMode: SortMode = {
+    sortBy: 'name',
     isSortAscending: true
   };
 
-  filterMode: FilterMode;
+  private filterMode: FilterMode = {};
 
   constructor(private route: ActivatedRoute,
     private playerService: PlayerService) { }
 
   ngOnInit() {
-    this.route.data.subscribe(data => {
-      this.players = data['players'].items;
-      this.pagination = data['players'].pagination;
-    });
-
-    this.filterMode = {
-      clubId: this.club.id
-    };
+    this.squads = this.club.squads;
+    this.seasonSelect.writeValue(this.squads[0].id);
+    this.filterMode.squadId = this.squads[0].id;
+    this.getPlayers();
   }
 
   getPlayers() {
@@ -51,6 +55,11 @@ export class ClubSquadComponent implements OnInit {
 
   onPageChanged(event: any) {
     this.pagination.pageNumber = event.page;
+    this.getPlayers();
+  }
+
+  onSquadFilterChanged(squad: Squad) {
+    this.filterMode.squadId = squad ? squad.id : null;
     this.getPlayers();
   }
 
