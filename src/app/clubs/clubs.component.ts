@@ -18,15 +18,20 @@ export class ClubsComponent implements OnInit {
 
   @ViewChild(NgSelectComponent) seasonSelect: NgSelectComponent;
 
+  seasons: Season[];
+  clubs: Club[];
+
+  pagination: Pagination = {
+    pageNumber: 1,
+    pageSize: 8
+  };
+
   private sortMode: SortMode = {
     sortBy: 'name', isSortAscending: true
   };
 
   private filterMode: FilterMode = {};
 
-  seasons: Season[];
-  clubs: Club[];
-  pagination: Pagination;
 
   constructor(private route: ActivatedRoute,
     private clubService: ClubService) { }
