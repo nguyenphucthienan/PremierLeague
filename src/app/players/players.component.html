@@ -43,9 +43,8 @@
       </tr>
     </tbody>
   </table>
-  <div class="pagination d-flex justify-content-center">
-    <pagination *ngIf="players?.length > 0" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.pageSize"
-      (pageChanged)="onPageChanged($event)" [maxSize]="5" [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;"
-      firstText="&laquo;" lastText="&raquo;"></pagination>
+  <div *ngIf="players?.length > 0" class="pagination d-flex justify-content-center">
+    <pagination [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.pageSize" (pageChanged)="onPageChanged($event)"
+      [maxSize]="5" [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
   </div>
 </div>

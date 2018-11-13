@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { Club } from 'src/app/core/models/club.interface';
 import { FilterMode } from 'src/app/core/models/filter-mode.interface';
@@ -34,8 +33,7 @@ export class ClubSquadComponent implements OnInit {
 
   private filterMode: FilterMode = {};
 
-  constructor(private route: ActivatedRoute,
-    private playerService: PlayerService) { }
+  constructor(private playerService: PlayerService) { }
 
   ngOnInit() {
     this.squads = this.club.squads;

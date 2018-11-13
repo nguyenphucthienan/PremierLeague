@@ -14,7 +14,7 @@
 <div class="row">
   <app-squad-player-card *ngFor="let player of players" [player]="player" class="col-xl-3 col-lg-4 col-md-6 pt-3 pl-2 pr-2"></app-squad-player-card>
 </div>
-<div class="pagination d-flex justify-content-center">
-  <pagination *ngIf="players?.length > 0" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.pageSize"
-    (pageChanged)="onPageChanged($event)" [maxSize]="5" previousText="&lsaquo;" nextText="&rsaquo;"></pagination>
+<div *ngIf="players?.length > 0" class="pagination d-flex justify-content-center">
+  <pagination [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.pageSize" (pageChanged)="onPageChanged($event)"
+    [maxSize]="5" previousText="&lsaquo;" nextText="&rsaquo;"></pagination>
 </div>
