@@ -14,7 +14,7 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="/fixtures">Fixtures</a>
       </li>
-      <li dropdown class="nav-item dropdown" routerLinkActive="active">
+      <li dropdown *appHasRole="['Admin']" class="nav-item dropdown" routerLinkActive="active">
         <a dropdownToggle class="nav-link dropdown-toggle">Admin</a>
         <div *dropdownMenu class="dropdown-menu">
           <a class="dropdown-item" routerLink="/admin/clubs">Club Manager</a>

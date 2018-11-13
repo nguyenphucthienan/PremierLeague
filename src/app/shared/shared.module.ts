@@ -5,9 +5,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { BsDropdownModule, CollapseModule, PaginationModule, TabsModule } from 'ngx-bootstrap';
 
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
+import { HasRoleDirective } from './directives/has-role.directive';
 
 @NgModule({
   declarations: [
+    HasRoleDirective,
     FilterBarComponent
   ],
   imports: [
@@ -29,6 +31,7 @@ import { FilterBarComponent } from './components/filter-bar/filter-bar.component
     CollapseModule.forRoot().ngModule,
     PaginationModule.forRoot().ngModule,
     TabsModule.forRoot().ngModule,
+    HasRoleDirective,
     FilterBarComponent
   ]
 })
