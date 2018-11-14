@@ -58,6 +58,7 @@ export class ClubSquadComponent implements OnInit {
 
   onSquadFilterChanged(squad: Squad) {
     this.filterMode.squadId = squad ? squad.id : null;
+    this.pagination = { pageNumber: 1, pageSize: 8 };
     this.getPlayers();
   }
 

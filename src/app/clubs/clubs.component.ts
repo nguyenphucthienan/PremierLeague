@@ -62,6 +62,7 @@ export class ClubsComponent implements OnInit {
 
   onSeasonFilterChanged(season: Season) {
     this.filterMode.seasonId = season ? season.id : null;
+    this.pagination = { pageNumber: 1, pageSize: 8 };
     this.getClubs();
   }
 
