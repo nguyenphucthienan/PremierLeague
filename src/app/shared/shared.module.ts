@@ -6,9 +6,11 @@ import { BsDropdownModule, CollapseModule, PaginationModule, TabsModule } from '
 
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
 import { HasRoleDirective } from './directives/has-role.directive';
+import { PositionTypePipe } from './pipes/position-type.pipe';
 
 @NgModule({
   declarations: [
+    PositionTypePipe,
     HasRoleDirective,
     FilterBarComponent
   ],
@@ -31,6 +33,7 @@ import { HasRoleDirective } from './directives/has-role.directive';
     CollapseModule.forRoot().ngModule,
     PaginationModule.forRoot().ngModule,
     TabsModule.forRoot().ngModule,
+    PositionTypePipe,
     HasRoleDirective,
     FilterBarComponent
   ]

@@ -4,10 +4,17 @@ export interface Player {
   clubName?: string;
   name: string;
   number: number;
-  position: string;
+  positionType: PositionType;
   nationality: string;
   birthdate: Date;
   height?: number;
   weight?: number;
   photoUrl: string;
+}
+
+export enum PositionType {
+  GoalKeeper,
+  Defender,
+  Midfielder,
+  Forward
 }

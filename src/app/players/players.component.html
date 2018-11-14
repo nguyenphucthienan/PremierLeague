@@ -38,7 +38,7 @@
           <img class="player-img mr-2" [src]="player.photoUrl" [alt]="player.name">
           <a class="player-name font-weight-bold" [routerLink]="['/players', player.id]">{{ player.name }}</a>
         </td>
-        <td class="align-middle">{{ player.position }}</td>
+        <td class="align-middle">{{ player.positionType | positionType }}</td>
         <td class="align-middle">{{ player.nationality }}</td>
       </tr>
     </tbody>
