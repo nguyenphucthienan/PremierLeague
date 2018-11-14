@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TabsetComponent } from 'ngx-bootstrap';
 import { Club } from 'src/app/core/models/club.interface';
 
 @Component({
@@ -9,6 +10,8 @@ import { Club } from 'src/app/core/models/club.interface';
 })
 export class ClubDetailComponent implements OnInit {
 
+  @ViewChild(TabsetComponent) tabset: TabsetComponent;
+
   club: Club;
 
   constructor(private route: ActivatedRoute) { }
@@ -17,6 +20,10 @@ export class ClubDetailComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.club = data['club'];
     });
+  }
+
+  selectTab(tabId: number) {
+    this.tabset.tabs[tabId].active = true;
   }
 
 }

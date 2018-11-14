@@ -8,9 +8,7 @@
     <i class="fa fa-thumb-tack"></i><span> {{ club.establishedYear }}</span>
     <hr>
     <i class="fa fa-home"></i>
-    <a class="stadium-name" [routerLink]="['/stadiums', club.stadium.id]">
-      <span> {{ club.stadium.name }}</span>
-    </a>
+    <span> {{ club.stadium.name }}</span>
   </div>
   <div class="card-footer">
     <a class="btn btn-block btn-sm btn-primary" [routerLink]="['/clubs', club.id]">Club Profile</a>
