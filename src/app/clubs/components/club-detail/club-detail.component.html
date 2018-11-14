@@ -10,7 +10,9 @@
           <span>{{ club.establishedYear }}</span>
           <hr>
           <i class="fa fa-home"></i><span class="font-weight-bold"> Home field: </span>
-          <span>{{ club.homeField }}</span>
+          <a class="stadium-name" [routerLink]="['/stadiums', club.stadium.id]">
+            <span> {{ club.stadium.name }}</span>
+          </a>
         </div>
       </div>
     </div>

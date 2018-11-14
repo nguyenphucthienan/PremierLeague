@@ -27,7 +27,7 @@ export class ClubSquadComponent implements OnInit {
   };
 
   private sortMode: SortMode = {
-    sortBy: 'name',
+    sortBy: 'position',
     isSortAscending: true
   };
 
