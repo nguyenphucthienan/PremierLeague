@@ -16,6 +16,7 @@ import { KitService } from './services/kit.service';
 import { MatchService } from './services/match.service';
 import { PlayerService } from './services/player.service';
 import { SeasonService } from './services/season.service';
+import { StadiumService } from './services/stadium.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -48,6 +49,7 @@ const toastrOptions = {
     AuthService,
     AlertService,
     SeasonService,
+    StadiumService,
     ClubService,
     KitService,
     PlayerService,
