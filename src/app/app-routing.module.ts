@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'clubs', loadChildren: './clubs/clubs.module#ClubsModule' },
   { path: 'players', loadChildren: './players/players.module#PlayersModule' },
   { path: 'fixtures', loadChildren: './fixtures/fixtures.module#FixturesModule' },
+  { path: 'results', loadChildren: './results/results.module#ResultsModule' },
   { path: 'matches', loadChildren: './matches/matches.module#MatchesModule' }
 ];
 
