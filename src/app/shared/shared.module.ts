@@ -6,13 +6,15 @@ import { BsDropdownModule, CollapseModule, PaginationModule, TabsModule } from '
 
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
 import { HasRoleDirective } from './directives/has-role.directive';
+import { KitTypePipe } from './pipes/kit-type.pipe';
 import { PositionTypePipe } from './pipes/position-type.pipe';
 
 @NgModule({
   declarations: [
+    KitTypePipe,
     PositionTypePipe,
     HasRoleDirective,
-    FilterBarComponent
+    FilterBarComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +35,7 @@ import { PositionTypePipe } from './pipes/position-type.pipe';
     CollapseModule.forRoot().ngModule,
     PaginationModule.forRoot().ngModule,
     TabsModule.forRoot().ngModule,
+    KitTypePipe,
     PositionTypePipe,
     HasRoleDirective,
     FilterBarComponent
