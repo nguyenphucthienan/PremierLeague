@@ -1,4 +1,5 @@
 import { Squad } from './squad.interface';
+import { Stadium } from './stadium.interface';
 
 export interface Club {
   id: number;
@@ -7,5 +8,6 @@ export interface Club {
   establishedYear: number;
   homeField: number;
   photoUrl: string;
+  stadium?: Stadium;
   squads?: Squad[];
 }
