@@ -12,5 +12,5 @@
   </div>
 </div>
 <div class="row">
-  <p *ngFor="let kit of kits" class="col-md-4 pt-3 pl-2 pr-2">{{ kit | json }}</p>
+  <app-club-kit-card *ngFor="let kit of kits" [kit]="kit" class="col-sm-4 pt-3 pl-2 pr-2"></app-club-kit-card>
 </div>

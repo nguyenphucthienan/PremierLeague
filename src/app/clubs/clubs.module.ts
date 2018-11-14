@@ -6,6 +6,7 @@ import { ClubsComponent } from './clubs.component';
 import { ClubCardComponent } from './components/club-card/club-card.component';
 import { ClubDetailComponent } from './components/club-detail/club-detail.component';
 import { ClubFixturesComponent } from './components/club-fixtures/club-fixtures.component';
+import { ClubKitCardComponent } from './components/club-kit-card/club-kit-card.component';
 import { ClubKitsComponent } from './components/club-kits/club-kits.component';
 import { ClubSquadComponent } from './components/club-squad/club-squad.component';
 import { SquadPlayerCardComponent } from './components/squad-player-card/squad-player-card.component';
@@ -21,7 +22,8 @@ import { ClubsResolver } from './resolvers/clubs.resolver';
     ClubSquadComponent,
     SquadPlayerCardComponent,
     ClubFixturesComponent,
-    ClubKitsComponent
+    ClubKitsComponent,
+    ClubKitCardComponent
   ],
   imports: [
     SharedModule,
