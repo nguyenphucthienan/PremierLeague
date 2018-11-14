@@ -1,1 +1,27 @@
-<div>{{ stadium | json }}</div>
+<div class="mt-3">
+  <img *ngIf="stadium?.photoUrl" [src]="stadium.photoUrl" [alt]="stadium.name" class="img-fluid">
+  <hr>
+  <span class="font-weight-bold">Name: </span>
+  <span> {{ stadium?.name }}</span>
+  <hr>
+  <span class="font-weight-bold">Capacity: </span>
+  <span> {{ stadium?.capacity }}</span>
+  <hr>
+  <span class="font-weight-bold">Built year: </span>
+  <span> {{ stadium?.builtYear }}</span>
+  <hr>
+  <span class="font-weight-bold">Pitch size: </span>
+  <span> {{ stadium?.pitchSize }}</span>
+  <hr>
+  <span class="font-weight-bold">Address: </span>
+  <span> {{ stadium?.address }}</span>
+  <hr>
+  <span class="font-weight-bold">Phone: </span>
+  <span> {{ stadium?.phone }}</span>
+  <hr>
+  <span class="font-weight-bold">Description: </span>
+  <span> {{ stadium?.description }}</span>
+  <hr>
+  <span *ngIf="stadium?.mapPhotoUrl" class="font-weight-bold">Stadium map: </span>
+  <img *ngIf="stadium?.mapPhotoUrl" [src]="stadium.mapPhotoUrl" [alt]="stadium.name" class="img-fluid">
+</div>

@@ -39,6 +39,10 @@ import { PositionTypePipe } from './pipes/position-type.pipe';
     PositionTypePipe,
     HasRoleDirective,
     FilterBarComponent
+  ],
+  providers: [
+    KitTypePipe,
+    PositionTypePipe
   ]
 })
 export class SharedModule { }
