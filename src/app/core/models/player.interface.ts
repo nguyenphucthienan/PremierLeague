@@ -1,7 +1,8 @@
+import { Club } from './club.interface';
+
 export interface Player {
   id: number;
-  clubId: number;
-  clubName?: string;
+  club: Club;
   name: string;
   number: number;
   positionType: PositionType;

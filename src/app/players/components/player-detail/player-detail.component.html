@@ -7,7 +7,9 @@
         <div class="card-body pt-0">
           <hr>
           <i class="fa fa-users"></i><span class="font-weight-bold"> Club: </span>
-          <span>{{ player.clubName }}</span>
+          <a class="club-name" [routerLink]="['/clubs', player.club.id]">
+            <span>{{ player.club.name }}</span>
+          </a>
           <hr>
           <i class="fa fa-hashtag"></i><span class="font-weight-bold"> Number: </span>
           <span>{{ player.number }}</span>
