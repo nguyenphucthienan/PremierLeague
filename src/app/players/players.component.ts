@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 import { Club } from '../core/models/club.interface';
 import { FilterMode } from '../core/models/filter-mode.interface';
@@ -16,13 +17,15 @@ import { PlayerService } from '../core/services/player.service';
 })
 export class PlayersComponent implements OnInit {
 
+  @ViewChild('seasonSelect') seasonSelect: NgSelectComponent;
+
   seasons: Season[];
   clubs: Club[];
   players: Player[];
 
   pagination: Pagination = {
     pageNumber: 1,
-    pageSize: 15
+    pageSize: 10
   };
 
   private sortMode: SortMode = {
@@ -39,16 +42,14 @@ export class PlayersComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.seasons = data['seasons'];
       this.clubs = data['clubs'];
-
-      this.getPlayers();
     });
+
+    this.seasonSelect.writeValue(this.seasons[0].id);
+    this.filterMode.seasonId = this.seasons[0].id;
+    this.getPlayers();
   }
 
   getPlayers() {
-    if (!this.filterMode.seasonId && this.filterMode.clubId) {
-      return;
-    }
-
     this.playerService.getPlayers(this.pagination,
       this.sortMode, this.filterMode)
       .subscribe((response: any) => {
@@ -62,18 +63,15 @@ export class PlayersComponent implements OnInit {
     this.getPlayers();
   }
 
-  onFiltered(filterMode: FilterMode) {
-    this.filterMode = filterMode;
-    this.getPlayers();
-  }
-
   onSeasonFilterChanged(season: Season) {
     this.filterMode.seasonId = season ? season.id : null;
+    this.pagination = { pageNumber: 1, pageSize: 10 };
     this.getPlayers();
   }
 
   onClubFilterChanged(club: Club) {
     this.filterMode.clubId = club ? club.id : null;
+    this.pagination = { pageNumber: 1, pageSize: 10 };
     this.getPlayers();
   }
 

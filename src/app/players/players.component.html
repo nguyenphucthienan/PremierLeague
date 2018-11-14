@@ -7,7 +7,7 @@
           <span class="font-weight-bold">Season: </span>
         </div>
         <div class="col-9">
-          <ng-select [items]="seasons" [selectOnTab]="true" [clearable]="true" bindValue="id" bindLabel="name"
+          <ng-select #seasonSelect [items]="seasons" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
             placeholder="Select season" (change)="onSeasonFilterChanged($event)"></ng-select>
         </div>
       </div>
