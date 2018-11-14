@@ -12,6 +12,7 @@ import { BriefSeasonsResolver } from './resolvers/brief-seasons.resolver';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
 import { ClubService } from './services/club.service';
+import { KitService } from './services/kit.service';
 import { MatchService } from './services/match.service';
 import { PlayerService } from './services/player.service';
 import { SeasonService } from './services/season.service';
@@ -48,6 +49,7 @@ const toastrOptions = {
     AlertService,
     SeasonService,
     ClubService,
+    KitService,
     PlayerService,
     MatchService,
     BriefSeasonsResolver,

@@ -3,6 +3,7 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 import { Club } from 'src/app/core/models/club.interface';
 import { Kit } from 'src/app/core/models/kit.interface';
 import { Squad } from 'src/app/core/models/squad.interface';
+import { KitService } from 'src/app/core/services/kit.service';
 
 @Component({
   selector: 'app-club-kits',
@@ -20,7 +21,7 @@ export class ClubKitsComponent implements OnInit {
 
   kits: Kit[];
 
-  constructor() { }
+  constructor(private kitService: KitService) { }
 
   ngOnInit() {
     this.squads = this.club.squads;
@@ -30,7 +31,8 @@ export class ClubKitsComponent implements OnInit {
   }
 
   getKits() {
-    this.kits = this.currentSquad.kits;
+    this.kitService.getKitsBySquadId(this.currentSquad.id)
+      .subscribe((kits: Kit[]) => this.kits = kits);
   }
 
   onSquadFilterChanged(squad: Squad) {
