@@ -6,6 +6,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { AdminClubManagerComponent } from './components/admin-club-manager/admin-club-manager.component';
 import { AdminSeasonManagerComponent } from './components/admin-season-manager/admin-season-manager.component';
+import { AdminStadiumManagerComponent } from './components/admin-stadium-manager/admin-stadium-manager.component';
 import { AdminClubAddModalComponent } from './modals/admin-club-add-modal/admin-club-add-modal.component';
 import { AdminClubEditModalComponent } from './modals/admin-club-edit-modal/admin-club-edit-modal.component';
 import { AdminSeasonAddModalComponent } from './modals/admin-season-add-modal/admin-season-add-modal.component';
@@ -17,6 +18,7 @@ import { AdminSeasonEditModalComponent } from './modals/admin-season-edit-modal/
     AdminSeasonManagerComponent,
     AdminSeasonAddModalComponent,
     AdminSeasonEditModalComponent,
+    AdminStadiumManagerComponent,
     AdminClubManagerComponent,
     AdminClubAddModalComponent,
     AdminClubEditModalComponent

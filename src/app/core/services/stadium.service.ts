@@ -46,4 +46,16 @@ export class StadiumService {
     return this.http.get<Stadium>(`${this.stadiumUrl}/${id}`);
   }
 
+  createStadium(stadium: Stadium): Observable<Stadium> {
+    return this.http.post<Stadium>(`${this.stadiumUrl}`, stadium);
+  }
+
+  editStadium(id: number, stadium: Stadium): Observable<Stadium> {
+    return this.http.put<Stadium>(`${this.stadiumUrl}/${id}`, stadium);
+  }
+
+  deleteStadium(id: number): Observable<Stadium> {
+    return this.http.delete<Stadium>(`${this.stadiumUrl}/${id}`);
+  }
+
 }

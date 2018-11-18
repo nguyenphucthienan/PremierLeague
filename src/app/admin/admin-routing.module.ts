@@ -5,6 +5,7 @@ import { AuthRoleGuard } from '../core/guards/auth-role.guard';
 import { AdminComponent } from './admin.component';
 import { AdminClubManagerComponent } from './components/admin-club-manager/admin-club-manager.component';
 import { AdminSeasonManagerComponent } from './components/admin-season-manager/admin-season-manager.component';
+import { AdminStadiumManagerComponent } from './components/admin-stadium-manager/admin-stadium-manager.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,12 @@ const routes: Routes = [
   {
     path: 'seasons',
     component: AdminSeasonManagerComponent,
+    canActivate: [AuthRoleGuard],
+    data: { roles: ['Admin'] }
+  },
+  {
+    path: 'stadiums',
+    component: AdminStadiumManagerComponent,
     canActivate: [AuthRoleGuard],
     data: { roles: ['Admin'] }
   },
