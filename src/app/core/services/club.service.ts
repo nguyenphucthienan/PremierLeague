@@ -8,6 +8,7 @@ import { FilterMode } from '../models/filter-mode.interface';
 import { Pagination } from '../models/pagination.interface';
 import { SortMode } from '../models/sort-mode.interface';
 import { ParamsBuilder } from '../utils/params-builder';
+import { Stadium } from '../models/stadium.interface';
 
 @Injectable()
 export class ClubService {
@@ -38,12 +39,16 @@ export class ClubService {
     return this.http.get<Club[]>(`${this.clubUrl}`, { params: params });
   }
 
-  getBriefListClub(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.clubUrl}/brief-list`);
+  getBriefListClub(): Observable<Stadium[]> {
+    return this.http.get<Stadium[]>(`${this.clubUrl}/brief-list`);
   }
 
   getClub(id: number): Observable<Club> {
     return this.http.get<Club>(`${this.clubUrl}/${id}`);
+  }
+
+  createClub(club: Club): Observable<Club> {
+    return this.http.post<Club>(`${this.clubUrl}`, club);
   }
 
   deleteClub(id: number): Observable<Club> {
