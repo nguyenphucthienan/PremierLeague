@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:5000/api',
-  whitelistedDomains: ['localhost:5000/api'],
+  whitelistedDomains: ['localhost:5000'],
   blacklistedRoutes: ['localhost:5000/api/auth']
 };
 

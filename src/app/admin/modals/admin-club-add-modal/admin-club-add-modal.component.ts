@@ -31,7 +31,7 @@ export class AdminClubAddModalComponent implements OnInit {
       code: ['', Validators.required],
       name: ['', Validators.required],
       establishedYear: ['', Validators.required],
-      stadium: [null, Validators.required],
+      stadiumId: [null, Validators.required],
       photoUrl: ['', Validators.required],
     });
 
