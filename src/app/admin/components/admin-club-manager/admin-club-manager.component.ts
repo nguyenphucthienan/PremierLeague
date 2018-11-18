@@ -12,6 +12,7 @@ import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confi
 
 import { AdminClubAddModalComponent } from '../../modals/admin-club-add-modal/admin-club-add-modal.component';
 import { AdminClubManagerTableService } from '../../services/admin-club-manager-table.service';
+import { AdminClubEditModalComponent } from '../../modals/admin-club-edit-modal/admin-club-edit-modal.component';
 
 @Component({
   selector: 'app-admin-club-manager',
@@ -71,7 +72,7 @@ export class AdminClubManagerComponent implements OnInit, AfterViewInit, OnDestr
     });
 
     this.bsModalRef.content.clubAdded
-      .subscribe(data => console.log('data', data));
+      .subscribe(() => this.onClubAdded());
   }
 
   onClubAdded() {
@@ -79,7 +80,16 @@ export class AdminClubManagerComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   openEditModal(rowData: TableRow) {
-    console.log('Edit modal');
+    this.bsModalRef = this.modalService.show(AdminClubEditModalComponent, {
+      initialState: {
+        title: 'Edit Club',
+        rowData
+      },
+      class: 'modal-dialog-centered'
+    });
+
+    this.bsModalRef.content.clubEdited
+      .subscribe(() => this.onClubEdited());
   }
 
   onClubEdited() {

@@ -51,6 +51,10 @@ export class ClubService {
     return this.http.post<Club>(`${this.clubUrl}`, club);
   }
 
+  editClub(id: number, club: Club): Observable<Club> {
+    return this.http.put<Club>(`${this.clubUrl}/${id}`, club);
+  }
+
   deleteClub(id: number): Observable<Club> {
     return this.http.delete<Club>(`${this.clubUrl}/${id}`);
   }
