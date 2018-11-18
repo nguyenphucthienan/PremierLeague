@@ -42,4 +42,16 @@ export class PlayerService {
     return this.http.get<Player>(`${this.playerUrl}/${id}`);
   }
 
+  createPlayer(player: Player): Observable<Player> {
+    return this.http.post<Player>(`${this.playerUrl}`, player);
+  }
+
+  editPlayer(id: number, player: Player): Observable<Player> {
+    return this.http.put<Player>(`${this.playerUrl}/${id}`, player);
+  }
+
+  deletePlayer(id: number): Observable<Player> {
+    return this.http.delete<Player>(`${this.playerUrl}/${id}`);
+  }
+
 }

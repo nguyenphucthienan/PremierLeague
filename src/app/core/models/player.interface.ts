@@ -4,7 +4,7 @@ export interface Player {
   id: number;
   club: Club;
   name: string;
-  number: number;
+  number?: number;
   positionType: PositionType;
   nationality: string;
   birthdate: Date;

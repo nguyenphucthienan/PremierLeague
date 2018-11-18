@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthRoleGuard } from '../core/guards/auth-role.guard';
 import { AdminComponent } from './admin.component';
 import { AdminClubManagerComponent } from './components/admin-club-manager/admin-club-manager.component';
+import { AdminPlayerManagerComponent } from './components/admin-player-manager/admin-player-manager.component';
 import { AdminSeasonManagerComponent } from './components/admin-season-manager/admin-season-manager.component';
 import { AdminStadiumManagerComponent } from './components/admin-stadium-manager/admin-stadium-manager.component';
 
@@ -29,6 +30,12 @@ const routes: Routes = [
   {
     path: 'clubs',
     component: AdminClubManagerComponent,
+    canActivate: [AuthRoleGuard],
+    data: { roles: ['Admin'] }
+  },
+  {
+    path: 'players',
+    component: AdminPlayerManagerComponent,
     canActivate: [AuthRoleGuard],
     data: { roles: ['Admin'] }
   }
