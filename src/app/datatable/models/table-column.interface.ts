@@ -3,4 +3,5 @@ export interface TableColumn {
   text: string;
   type: string;
   sortable?: boolean;
+  center?: boolean;
 }

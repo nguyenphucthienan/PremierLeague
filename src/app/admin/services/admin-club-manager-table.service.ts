@@ -15,6 +15,7 @@ export class AdminClubManagerTableService implements TableService {
 
   columns: TableColumn[] = [
     { name: 'id', text: 'ID', type: 'IdTableCellComponent', sortable: true },
+    { name: 'photoUrl', text: 'Logo', type: 'ImageTableCellComponent', sortable: false, center: true },
     { name: 'code', text: 'Code', type: 'TextTableCellComponent', sortable: true },
     { name: 'name', text: 'Name', type: 'TextTableCellComponent', sortable: true },
     { name: 'establishedYear', text: 'Established Year', type: 'TextTableCellComponent', sortable: true },

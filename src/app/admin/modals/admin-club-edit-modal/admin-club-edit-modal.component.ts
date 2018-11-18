@@ -33,7 +33,7 @@ export class AdminClubEditModalComponent implements OnInit {
       code: [this.rowData.cells['code'].value, Validators.required],
       name: [this.rowData.cells['name'].value, Validators.required],
       establishedYear: [this.rowData.cells['establishedYear'].value, Validators.required],
-      stadiumId: [null, Validators.required],
+      stadiumId: [this.rowData.cells['stadium'].value.id, Validators.required],
       photoUrl: [this.rowData.cells['photoUrl'].value, Validators.required],
     });
 
