@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 
+import { DatatableModule } from '../datatable/datatable.module';
 import { SharedModule } from '../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
@@ -10,7 +11,8 @@ import { AdminComponent } from './admin.component';
   ],
   imports: [
     SharedModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    DatatableModule
   ]
 })
 export class AdminModule { }

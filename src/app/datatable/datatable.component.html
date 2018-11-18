@@ -1,0 +1,31 @@
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead class="primary-color white-text">
+      <tr>
+        <th *ngIf="selectableRow" class="text-center align-middle">
+          <input type="checkbox" [checked]="selectAllOnPage" (change)="selectAllHeader($event.target.checked)">
+        </th>
+        <th *ngFor="let column of columns" scope="col" (click)="changeSortMode(column)" class="align-middle"
+          [class.header-clickable]="column.sortable">
+          {{ column.text }}
+          <span *ngIf="column.sortable" [ngClass]="getHeaderIconClass(column)"></span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows">
+        <td *ngIf="selectableRow" class="table-cell text-center align-middle">
+          <input type="checkbox" [checked]="row.selected" (change)="selectRow($event.target.checked, row)">
+        </td>
+        <td *ngFor="let column of columns" class="align-middle">
+          <app-table-cell [column]="column" [row]="row" [cellType]="column.type" [cell]="row.cells[column.name]"
+            (cellChanged)="onCellChanged($event)"></app-table-cell>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="d-flex flex-column justify-content-center align-items-center mt-4">
+  <pagination [totalItems]="tableService.pagination.totalItems" [itemsPerPage]="tableService.pagination.pageSize"
+    (pageChanged)="onPageChanged($event)" [maxSize]="5" previousText="&lsaquo;" nextText="&rsaquo;"></pagination>
+</div>

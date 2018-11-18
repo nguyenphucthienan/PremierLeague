@@ -1,0 +1,4 @@
+<ng-container [ngSwitch]="cellType">
+  <app-text-table-cell *ngSwitchCase="'TextTableCellComponent'" [column]="column" [row]="row" [cell]="cell"></app-text-table-cell>
+  <app-text-table-cell *ngSwitchDefault [column]="column" [row]="row" [cell]="cell"></app-text-table-cell>
+</ng-container>
