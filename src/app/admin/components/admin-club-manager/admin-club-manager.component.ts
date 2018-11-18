@@ -8,6 +8,7 @@ import { DatatableComponent } from 'src/app/datatable/datatable.component';
 import { TableActionType } from 'src/app/datatable/models/table-action.interface';
 import { TableCellChange } from 'src/app/datatable/models/table-cell-change.interface';
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
+import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
 import { AdminClubAddModalComponent } from '../../modals/admin-club-add-modal/admin-club-add-modal.component';
 import { AdminClubManagerTableService } from '../../services/admin-club-manager-table.service';
@@ -86,7 +87,15 @@ export class AdminClubManagerComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   openDeleteModal(id: number) {
-    console.log('Delete modal');
+    this.bsModalRef = this.modalService.show(ConfirmModalComponent, {
+      initialState: {
+        content: 'Are you sure you want to delete this club?'
+      },
+      class: 'modal-dialog-centered'
+    });
+
+    this.bsModalRef.content.ok
+      .subscribe(() => this.confirmDeleteClub(id));
   }
 
   confirmDeleteClub(id: number) {
@@ -98,9 +107,6 @@ export class AdminClubManagerComponent implements OnInit, AfterViewInit, OnDestr
         },
         () => this.alertService.error('Delete club failed')
       );
-  }
-
-  cancelDeleteClub() {
   }
 
   ngOnDestroy() {

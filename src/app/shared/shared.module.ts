@@ -8,6 +8,7 @@ import { BsDropdownModule, CollapseModule, ModalModule, PaginationModule, TabsMo
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
 import { PhotoUploaderComponent } from './components/photo-uploader/photo-uploader.component';
 import { HasRoleDirective } from './directives/has-role.directive';
+import { ConfirmModalComponent } from './modals/confirm-modal/confirm-modal.component';
 import { KitTypePipe } from './pipes/kit-type.pipe';
 import { PositionTypePipe } from './pipes/position-type.pipe';
 
@@ -19,7 +20,8 @@ import { PositionTypePipe } from './pipes/position-type.pipe';
     PositionTypePipe,
     HasRoleDirective,
     FilterBarComponent,
-    PhotoUploaderComponent
+    PhotoUploaderComponent,
+    ConfirmModalComponent
   ],
   imports: [
     CommonModule,
@@ -51,6 +53,9 @@ import { PositionTypePipe } from './pipes/position-type.pipe';
   providers: [
     KitTypePipe,
     PositionTypePipe
+  ],
+  entryComponents: [
+    ConfirmModalComponent
   ]
 })
 export class SharedModule { }
