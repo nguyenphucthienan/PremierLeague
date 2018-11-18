@@ -18,6 +18,7 @@ export class AdminClubManagerTableService implements TableService {
     { name: 'code', text: 'Code', type: 'TextTableCellComponent', sortable: true },
     { name: 'name', text: 'Name', type: 'TextTableCellComponent', sortable: true },
     { name: 'establishedYear', text: 'Established Year', type: 'TextTableCellComponent', sortable: true },
+    { name: 'stadium', text: 'Stadium', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];
 
@@ -69,9 +70,16 @@ export class AdminClubManagerTableService implements TableService {
               continue;
             }
 
-            cells[key] = {
-              value: row[key]
-            };
+            if (key === 'stadium') {
+              cells[key] = {
+                value: row[key],
+                textProperty: 'name'
+              };
+            } else {
+              cells[key] = {
+                value: row[key]
+              };
+            }
           }
 
           cells['actions'] = {
