@@ -1,0 +1,6 @@
+<div class="text-center">
+  <button *ngFor="let action of actions" [ngClass]="'btn btn-sm ' + action.class" (click)="onActionClicked(action)">
+    <span [ngClass]="action.icon"></span>
+    <span *ngIf="showText"> {{ action.text }}</span>
+  </button>
+</div>

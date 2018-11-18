@@ -10,9 +10,7 @@ import { TableColumn } from 'src/app/datatable/models/table-column.interface';
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { TableService } from 'src/app/datatable/services/table.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AdminSeasonManagerTableService implements TableService {
 
   columns: TableColumn[] = [
@@ -85,4 +83,5 @@ export class AdminSeasonManagerTableService implements TableService {
         return this.rows;
       });
   }
+
 }

@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { SortMode } from '../core/models/sort-mode.interface';
+import { TableUtils } from '../utils/table-utils';
 import { TableColumn } from './models/table-column.interface';
 import { TableRow } from './models/table-row.interface';
 import { TableRowSelectTrackingService } from './services/table-row-select-tracking.service';
 import { TableService } from './services/table.service';
-import { TableUtils } from '../utils/table-utils';
 
 @Component({
   selector: 'app-datatable',
@@ -95,6 +95,5 @@ export class DatatableComponent implements OnInit {
 
     this.getTableData();
   }
-
 
 }

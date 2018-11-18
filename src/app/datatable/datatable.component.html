@@ -27,5 +27,6 @@
 </div>
 <div class="d-flex flex-column justify-content-center align-items-center mt-4">
   <pagination [totalItems]="tableService.pagination.totalItems" [itemsPerPage]="tableService.pagination.pageSize"
-    (pageChanged)="onPageChanged($event)" [maxSize]="5" previousText="&lsaquo;" nextText="&rsaquo;"></pagination>
+    (pageChanged)="onPageChanged($event)" [maxSize]="5" [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;"
+    firstText="&laquo;" lastText="&raquo;"></pagination>
 </div>
