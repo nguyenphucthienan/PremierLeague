@@ -11,6 +11,7 @@ import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
 import { AdminSeasonAddModalComponent } from '../../modals/admin-season-add-modal/admin-season-add-modal.component';
+import { AdminSeasonEditModalComponent } from '../../modals/admin-season-edit-modal/admin-season-edit-modal.component';
 import { AdminSeasonManagerTableService } from '../../services/admin-season-manager-table.service';
 
 @Component({
@@ -79,7 +80,16 @@ export class AdminSeasonManagerComponent implements OnInit, AfterViewInit, OnDes
   }
 
   openEditModal(rowData: TableRow) {
-    console.log('Edit modal');
+    this.bsModalRef = this.modalService.show(AdminSeasonEditModalComponent, {
+      initialState: {
+        title: 'Edit Season',
+        rowData
+      },
+      class: 'modal-dialog-centered'
+    });
+
+    this.bsModalRef.content.seasonEdited
+      .subscribe(() => this.onSeasonEdited());
   }
 
   onSeasonEdited() {

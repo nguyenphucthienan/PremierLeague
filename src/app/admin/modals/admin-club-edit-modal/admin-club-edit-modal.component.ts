@@ -52,10 +52,10 @@ export class AdminClubEditModalComponent implements OnInit {
       .subscribe(
         (club: Club) => {
           this.bsModalRef.hide();
-          this.alertService.success('Add club successfully');
+          this.alertService.success('Edit club successfully');
           this.clubEdited.emit(club);
         },
-        error => this.alertService.error('Add club failed')
+        error => this.alertService.error('Edit club failed')
       );
   }
 

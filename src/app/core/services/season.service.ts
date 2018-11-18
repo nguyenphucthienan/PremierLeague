@@ -50,6 +50,10 @@ export class SeasonService {
     return this.http.post<Season>(`${this.seasonUrl}`, season);
   }
 
+  updateSeason(id: number, season: Season): Observable<Season> {
+    return this.http.put<Season>(`${this.seasonUrl}/${id}`, season);
+  }
+
   deleteSeason(id: number): Observable<Season> {
     return this.http.delete<Season>(`${this.seasonUrl}/${id}`);
   }
