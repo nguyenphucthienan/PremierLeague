@@ -10,6 +10,7 @@ import { TableCellChange } from 'src/app/datatable/models/table-cell-change.inte
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
+import { AdminPlayerAddModalComponent } from '../../modals/admin-player-add-modal/admin-player-add-modal.component';
 import { AdminPlayerManagerTableService } from '../../services/admin-player-manager-table.service';
 
 @Component({
@@ -62,15 +63,15 @@ export class AdminPlayerManagerComponent implements OnInit, AfterViewInit, OnDes
   }
 
   openAddModal() {
-    // this.bsModalRef = this.modalService.show(AdminClubAddModalComponent, {
-    //   initialState: {
-    //     title: 'Add New Club'
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminPlayerAddModalComponent, {
+      initialState: {
+        title: 'Add New Player'
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.clubAdded
-    //   .subscribe(() => this.onClubAdded());
+    this.bsModalRef.content.playerAdded
+      .subscribe(() => this.onPlayerAdded());
   }
 
   onPlayerAdded() {
