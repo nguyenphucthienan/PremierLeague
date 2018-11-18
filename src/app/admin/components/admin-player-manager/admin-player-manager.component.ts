@@ -11,6 +11,7 @@ import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
 import { AdminPlayerAddModalComponent } from '../../modals/admin-player-add-modal/admin-player-add-modal.component';
+import { AdminPlayerEditModalComponent } from '../../modals/admin-player-edit-modal/admin-player-edit-modal.component';
 import { AdminPlayerManagerTableService } from '../../services/admin-player-manager-table.service';
 
 @Component({
@@ -79,16 +80,16 @@ export class AdminPlayerManagerComponent implements OnInit, AfterViewInit, OnDes
   }
 
   openEditModal(rowData: TableRow) {
-    // this.bsModalRef = this.modalService.show(AdminClubEditModalComponent, {
-    //   initialState: {
-    //     title: 'Edit Club',
-    //     rowData
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminPlayerEditModalComponent, {
+      initialState: {
+        title: 'Edit Player',
+        rowData
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.clubEdited
-    //   .subscribe(() => this.onClubEdited());
+    this.bsModalRef.content.playerEdited
+      .subscribe(() => this.onPlayerEdited());
   }
 
   onPlayerEdited() {
