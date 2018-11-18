@@ -46,6 +46,10 @@ export class SeasonService {
     return this.http.get<Season>(`${this.seasonUrl}/${id}`);
   }
 
+  createSeason(season: Season): Observable<Season> {
+    return this.http.post<Season>(`${this.seasonUrl}`, season);
+  }
+
   deleteSeason(id: number): Observable<Season> {
     return this.http.delete<Season>(`${this.seasonUrl}/${id}`);
   }

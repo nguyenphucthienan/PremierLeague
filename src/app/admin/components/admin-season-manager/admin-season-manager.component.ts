@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, map, tap } from 'rxjs/operators';
 import { AlertService } from 'src/app/core/services/alert.service';
@@ -7,7 +8,9 @@ import { DatatableComponent } from 'src/app/datatable/datatable.component';
 import { TableActionType } from 'src/app/datatable/models/table-action.interface';
 import { TableCellChange } from 'src/app/datatable/models/table-cell-change.interface';
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
+import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
+import { AdminSeasonAddModalComponent } from '../../modals/admin-season-add-modal/admin-season-add-modal.component';
 import { AdminSeasonManagerTableService } from '../../services/admin-season-manager-table.service';
 
 @Component({
@@ -22,10 +25,12 @@ export class AdminSeasonManagerComponent implements OnInit, AfterViewInit, OnDes
   @ViewChild('search') search: ElementRef;
 
   searchSubscription: Subscription;
+  bsModalRef: BsModalRef;
 
   constructor(public adminSeasonManagerTableService: AdminSeasonManagerTableService,
     private seasonService: SeasonService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private modalService: BsModalService) { }
 
   ngOnInit() {
   }
@@ -58,7 +63,15 @@ export class AdminSeasonManagerComponent implements OnInit, AfterViewInit, OnDes
   }
 
   openAddModal() {
-    console.log('Add modal');
+    this.bsModalRef = this.modalService.show(AdminSeasonAddModalComponent, {
+      initialState: {
+        title: 'Add New Season'
+      },
+      class: 'modal-dialog-centered'
+    });
+
+    this.bsModalRef.content.seasonAdded
+      .subscribe(() => this.onSeasonAdded());
   }
 
   onSeasonAdded() {
@@ -74,7 +87,15 @@ export class AdminSeasonManagerComponent implements OnInit, AfterViewInit, OnDes
   }
 
   openDeleteModal(id: number) {
-    console.log('Delete modal');
+    this.bsModalRef = this.modalService.show(ConfirmModalComponent, {
+      initialState: {
+        content: 'Are you sure you want to delete this season?'
+      },
+      class: 'modal-dialog-centered'
+    });
+
+    this.bsModalRef.content.ok
+      .subscribe(() => this.confirmDeleteSeason(id));
   }
 
   confirmDeleteSeason(id: number) {
@@ -86,9 +107,6 @@ export class AdminSeasonManagerComponent implements OnInit, AfterViewInit, OnDes
         },
         () => this.alertService.error('Delete season failed')
       );
-  }
-
-  cancelDeleteSeason() {
   }
 
   ngOnDestroy() {

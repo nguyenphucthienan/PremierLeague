@@ -8,11 +8,13 @@ import { AdminClubManagerComponent } from './components/admin-club-manager/admin
 import { AdminSeasonManagerComponent } from './components/admin-season-manager/admin-season-manager.component';
 import { AdminClubAddModalComponent } from './modals/admin-club-add-modal/admin-club-add-modal.component';
 import { AdminClubEditModalComponent } from './modals/admin-club-edit-modal/admin-club-edit-modal.component';
+import { AdminSeasonAddModalComponent } from './modals/admin-season-add-modal/admin-season-add-modal.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
     AdminSeasonManagerComponent,
+    AdminSeasonAddModalComponent,
     AdminClubManagerComponent,
     AdminClubAddModalComponent,
     AdminClubEditModalComponent
@@ -23,6 +25,7 @@ import { AdminClubEditModalComponent } from './modals/admin-club-edit-modal/admi
     DatatableModule
   ],
   entryComponents: [
+    AdminSeasonAddModalComponent,
     AdminClubAddModalComponent,
     AdminClubEditModalComponent
   ]
