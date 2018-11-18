@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, map, tap } from 'rxjs/operators';
 import { AlertService } from 'src/app/core/services/alert.service';
@@ -8,6 +9,7 @@ import { TableActionType } from 'src/app/datatable/models/table-action.interface
 import { TableCellChange } from 'src/app/datatable/models/table-cell-change.interface';
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 
+import { AdminClubAddModalComponent } from '../../modals/admin-club-add-modal/admin-club-add-modal.component';
 import { AdminClubManagerTableService } from '../../services/admin-club-manager-table.service';
 
 @Component({
@@ -22,10 +24,12 @@ export class AdminClubManagerComponent implements OnInit, AfterViewInit, OnDestr
   @ViewChild('search') search: ElementRef;
 
   searchSubscription: Subscription;
+  bsModalRef: BsModalRef;
 
   constructor(public adminClubManagerTableService: AdminClubManagerTableService,
     private clubService: ClubService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private modalService: BsModalService) { }
 
   ngOnInit() {
   }
@@ -58,7 +62,15 @@ export class AdminClubManagerComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   openAddModal() {
-    console.log('Add modal');
+    this.bsModalRef = this.modalService.show(AdminClubAddModalComponent, {
+      initialState: {
+        title: 'Add New Club'
+      },
+      class: 'modal-dialog-centered'
+    });
+
+    this.bsModalRef.content.clubAdded
+      .subscribe(data => console.log('data', data));
   }
 
   onClubAdded() {

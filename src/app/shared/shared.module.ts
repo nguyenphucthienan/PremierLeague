@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { BsDropdownModule, CollapseModule, PaginationModule, TabsModule } from 'ngx-bootstrap';
+import { BsDropdownModule, CollapseModule, ModalModule, PaginationModule, TabsModule } from 'ngx-bootstrap';
 
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
 import { HasRoleDirective } from './directives/has-role.directive';
@@ -24,7 +24,8 @@ import { PositionTypePipe } from './pipes/position-type.pipe';
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
     PaginationModule.forRoot(),
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    ModalModule.forRoot()
   ],
   exports: [
     CommonModule,
@@ -35,6 +36,7 @@ import { PositionTypePipe } from './pipes/position-type.pipe';
     CollapseModule.forRoot().ngModule,
     PaginationModule.forRoot().ngModule,
     TabsModule.forRoot().ngModule,
+    ModalModule.forRoot().ngModule,
     KitTypePipe,
     PositionTypePipe,
     HasRoleDirective,
