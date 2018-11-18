@@ -53,25 +53,25 @@ export class DatatableComponent implements OnInit {
     this.selectAllOnPage = checked;
     this.rows.forEach(row => {
       row.selected = checked;
-      this.tableRowSelectTrackingService.setStateId(row.cells['_id'].value, row.selected);
+      this.tableRowSelectTrackingService.setStateId(row.cells['id'].value, row.selected);
     });
   }
 
   selectRow(checked: boolean, row: TableRow) {
     row.selected = checked;
-    this.tableRowSelectTrackingService.setStateId(row.cells['_id'].value, row.selected);
+    this.tableRowSelectTrackingService.setStateId(row.cells['id'].value, row.selected);
     this.checkSelectAllOnPage();
   }
 
   private recheckSelectRows(rows: TableRow[]) {
     rows.forEach(row =>
-      row.selected = this.tableRowSelectTrackingService.getStateId(row.cells['_id'].value)
+      row.selected = this.tableRowSelectTrackingService.getStateId(row.cells['id'].value)
     );
   }
 
   private checkSelectAllOnPage() {
     this.selectAllOnPage = this.rows
-      .every(row => this.tableRowSelectTrackingService.getStateId(row.cells['_id'].value));
+      .every(row => this.tableRowSelectTrackingService.getStateId(row.cells['id'].value));
   }
 
   getHeaderIconClass(column: TableColumn) {

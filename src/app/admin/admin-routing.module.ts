@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthRoleGuard } from '../core/guards/auth-role.guard';
 import { AdminComponent } from './admin.component';
+import { AdminSeasonManagerComponent } from './components/admin-season-manager/admin-season-manager.component';
 
 const routes: Routes = [
   {
@@ -10,7 +11,13 @@ const routes: Routes = [
     component: AdminComponent,
     canActivate: [AuthRoleGuard],
     data: { roles: ['Admin', 'Moderator'] }
-  }
+  },
+  {
+    path: 'seasons',
+    component: AdminSeasonManagerComponent,
+    canActivate: [AuthRoleGuard],
+    data: { roles: ['Admin'] }
+  },
 ];
 
 @NgModule({

@@ -20,6 +20,7 @@
       <li dropdown *appHasRole="['Admin']" class="nav-item dropdown" routerLinkActive="active">
         <a dropdownToggle class="nav-link dropdown-toggle">Admin</a>
         <div *dropdownMenu class="dropdown-menu">
+          <a class="dropdown-item" routerLink="/admin/seasons">Season Manager</a>
           <a class="dropdown-item" routerLink="/admin/clubs">Club Manager</a>
           <a class="dropdown-item" routerLink="/admin/players">Player Mananger</a>
         </div>
