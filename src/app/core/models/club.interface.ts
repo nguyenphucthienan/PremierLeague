@@ -6,7 +6,6 @@ export interface Club {
   code: string;
   name: string;
   establishedYear: number;
-  homeField: number;
   photoUrl: string;
   stadium?: Stadium;
   squads?: Squad[];

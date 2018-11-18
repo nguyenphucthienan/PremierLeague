@@ -46,4 +46,8 @@ export class ClubService {
     return this.http.get<Club>(`${this.clubUrl}/${id}`);
   }
 
+  deleteClub(id: number): Observable<Club> {
+    return this.http.delete<Club>(`${this.clubUrl}/${id}`);
+  }
+
 }

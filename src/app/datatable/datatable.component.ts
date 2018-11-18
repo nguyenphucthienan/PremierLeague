@@ -40,8 +40,8 @@ export class DatatableComponent implements OnInit {
     await this.getTableData();
   }
 
-  onPageChanged(pageNumber: number) {
-    this.tableService.pagination.pageNumber = pageNumber;
+  onPageChanged(event: any) {
+    this.tableService.pagination.pageNumber = event.page;
     this.getTableData();
   }
 
