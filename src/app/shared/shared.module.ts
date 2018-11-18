@@ -2,19 +2,24 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FileDropDirective, FileSelectDirective } from 'ng2-file-upload';
 import { BsDropdownModule, CollapseModule, ModalModule, PaginationModule, TabsModule } from 'ngx-bootstrap';
 
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
+import { PhotoUploaderComponent } from './components/photo-uploader/photo-uploader.component';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { KitTypePipe } from './pipes/kit-type.pipe';
 import { PositionTypePipe } from './pipes/position-type.pipe';
 
 @NgModule({
   declarations: [
+    FileSelectDirective,
+    FileDropDirective,
     KitTypePipe,
     PositionTypePipe,
     HasRoleDirective,
     FilterBarComponent,
+    PhotoUploaderComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +45,8 @@ import { PositionTypePipe } from './pipes/position-type.pipe';
     KitTypePipe,
     PositionTypePipe,
     HasRoleDirective,
-    FilterBarComponent
+    FilterBarComponent,
+    PhotoUploaderComponent
   ],
   providers: [
     KitTypePipe,

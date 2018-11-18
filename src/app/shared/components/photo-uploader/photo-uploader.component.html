@@ -1,0 +1,45 @@
+<div class="col-xs-12">
+  <div class="custom-file">
+    <input #fileSelect type="file" ng2FileSelect [uploader]="uploader" class="custom-file-input" id="customFile">
+    <label class="custom-file-label" for="customFile">Choose file</label>
+  </div>
+</div>
+<div class="col-xs-12">
+  <div ng2FileDrop (fileOver)="fileOver($event)" [uploader]="uploader" [class.nv-file-over]="hasDropZoneOver" class="card bg-faded p-3 text-center mb-3 my-drop-zone">
+    <i class="fa fa-upload fa-3x"></i>Drop photo here
+  </div>
+</div>
+<div *ngIf="uploader?.queue?.length" class="col-xs-12">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th width="70%">Name</th>
+          <th>Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of uploader.queue">
+          <td><strong>{{ item?.file?.name }}</strong></td>
+          <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'1.2-2' }} MB</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex flex-row justify-content-center flex-wrap">
+    <div>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-sm btn-success" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+      <span class="fa fa-upload"></span> Upload
+    </button>
+    <button type="button" class="btn btn-sm btn-warning" (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+      <span class="fa fa-ban"></span> Cancel
+    </button>
+    <button type="button" class="btn btn-sm btn-danger" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+      <span class="fa fa-trash"></span> Remove
+    </button>
+  </div>
+</div>

@@ -15,7 +15,7 @@ import { StadiumService } from 'src/app/core/services/stadium.service';
 export class AdminClubAddModalComponent implements OnInit {
 
   title: string;
-  clubAdded = new EventEmitter<any>();
+  clubAdded = new EventEmitter();
 
   addForm: FormGroup;
   stadiums: Stadium[];
@@ -37,6 +37,10 @@ export class AdminClubAddModalComponent implements OnInit {
 
     this.stadiumService.getBriefListStadium()
       .subscribe((stadiums: Stadium[]) => this.stadiums = stadiums);
+  }
+
+  photoUploaded(response) {
+    this.addForm.controls['photoUrl'].setValue(response.secureUrl);
   }
 
   addClub() {
