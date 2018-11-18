@@ -11,6 +11,7 @@ import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
 import { AdminStadiumManagerTableService } from '../../services/admin-stadium-manager-table.service';
+import { AdminStadiumAddModalComponent } from '../../modals/admin-stadium-add-modal/admin-stadium-add-modal.component';
 
 @Component({
   selector: 'app-admin-stadium-manager',
@@ -62,15 +63,15 @@ export class AdminStadiumManagerComponent implements OnInit, AfterViewInit, OnDe
   }
 
   openAddModal() {
-    // this.bsModalRef = this.modalService.show(AdminClubAddModalComponent, {
-    //   initialState: {
-    //     title: 'Add New Stadium'
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminStadiumAddModalComponent, {
+      initialState: {
+        title: 'Add New Stadium'
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.clubAdded
-    //   .subscribe(() => this.onStadiumAdded());
+    this.bsModalRef.content.stadiumAdded
+      .subscribe(() => this.onStadiumAdded());
   }
 
   onStadiumAdded() {

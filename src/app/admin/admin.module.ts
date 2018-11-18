@@ -11,6 +11,7 @@ import { AdminClubAddModalComponent } from './modals/admin-club-add-modal/admin-
 import { AdminClubEditModalComponent } from './modals/admin-club-edit-modal/admin-club-edit-modal.component';
 import { AdminSeasonAddModalComponent } from './modals/admin-season-add-modal/admin-season-add-modal.component';
 import { AdminSeasonEditModalComponent } from './modals/admin-season-edit-modal/admin-season-edit-modal.component';
+import { AdminStadiumAddModalComponent } from './modals/admin-stadium-add-modal/admin-stadium-add-modal.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AdminSeasonEditModalComponent } from './modals/admin-season-edit-modal/
     AdminSeasonAddModalComponent,
     AdminSeasonEditModalComponent,
     AdminStadiumManagerComponent,
+    AdminStadiumAddModalComponent,
     AdminClubManagerComponent,
     AdminClubAddModalComponent,
     AdminClubEditModalComponent
@@ -31,6 +33,7 @@ import { AdminSeasonEditModalComponent } from './modals/admin-season-edit-modal/
   entryComponents: [
     AdminSeasonAddModalComponent,
     AdminSeasonEditModalComponent,
+    AdminStadiumAddModalComponent,
     AdminClubAddModalComponent,
     AdminClubEditModalComponent
   ]
