@@ -1,0 +1,61 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{ title }}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="editForm" (ngSubmit)="editStadium()" class="form">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" class="form-control" formControlName="name" placeholder="Name">
+    </div>
+    <div class="form-group">
+      <label for="capacity">Capacity</label>
+      <input type="number" id="capacity" class="form-control" formControlName="capacity" placeholder="Capacity">
+    </div>
+    <div class="form-group">
+      <label for="capacity">Built Year</label>
+      <input type="number" id="builtYear" class="form-control" formControlName="builtYear" placeholder="Built Year">
+    </div>
+    <div class="form-group">
+      <label for="pitchSize">Pitch Size</label>
+      <input type="text" id="builtYear" class="form-control" formControlName="pitchSize" placeholder="Pitch Size">
+    </div>
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" id="address" class="form-control" formControlName="address" placeholder="Address">
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" class="form-control" formControlName="phone" placeholder="Phone">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" id="description" class="form-control" formControlName="description" placeholder="Description">
+    </div>
+    <div class="form-group">
+      <label for="photoUrl">Photo</label>
+      <input type="input" id="photoUrl" class="form-control" formControlName="photoUrl" placeholder="Photo URL"
+        [attr.disabled]="true">
+    </div>
+    <div class="form-group">
+      <div class="form-group">
+        <app-photo-uploader (uploadSucceed)="photoUploaded($event)"></app-photo-uploader>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="photoUrl">Map Photo</label>
+      <input type="input" id="mapPhotoUrl" class="form-control" formControlName="mapPhotoUrl" placeholder="Map Photo URL"
+        [attr.disabled]="true">
+    </div>
+    <div class="form-group">
+      <div class="form-group">
+        <app-photo-uploader (uploadSucceed)="mapPhotoUploaded($event)"></app-photo-uploader>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-block btn-primary" (click)="editStadium()" [disabled]="editForm.invalid">OK</button>
+</div>

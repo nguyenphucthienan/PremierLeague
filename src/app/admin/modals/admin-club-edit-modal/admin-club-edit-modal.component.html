@@ -5,7 +5,7 @@
   </button>
 </div>
 <div class="modal-body">
-  <form [formGroup]="editForm" (ngSubmit)="addClub()" class="form">
+  <form [formGroup]="editForm" (ngSubmit)="editClub()" class="form">
     <div class="form-group">
       <label for="name">Code</label>
       <input type="text" id="code" class="form-control" formControlName="code" placeholder="Code">
@@ -37,5 +37,5 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-block btn-primary" (click)="editClub()" [disabled]="editForm.invalid">Add</button>
+  <button type="button" class="btn btn-block btn-primary" (click)="editClub()" [disabled]="editForm.invalid">OK</button>
 </div>

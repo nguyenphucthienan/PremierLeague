@@ -10,8 +10,9 @@ import { TableCellChange } from 'src/app/datatable/models/table-cell-change.inte
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
-import { AdminStadiumManagerTableService } from '../../services/admin-stadium-manager-table.service';
 import { AdminStadiumAddModalComponent } from '../../modals/admin-stadium-add-modal/admin-stadium-add-modal.component';
+import { AdminStadiumManagerTableService } from '../../services/admin-stadium-manager-table.service';
+import { AdminStadiumEditModalComponent } from '../../modals/admin-stadium-edit-modal/admin-stadium-edit-modal.component';
 
 @Component({
   selector: 'app-admin-stadium-manager',
@@ -79,16 +80,16 @@ export class AdminStadiumManagerComponent implements OnInit, AfterViewInit, OnDe
   }
 
   openEditModal(rowData: TableRow) {
-    // this.bsModalRef = this.modalService.show(AdminClubEditModalComponent, {
-    //   initialState: {
-    //     title: 'Edit Club',
-    //     rowData
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminStadiumEditModalComponent, {
+      initialState: {
+        title: 'Edit Stadium',
+        rowData
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.clubEdited
-    //   .subscribe(() => this.onStadiumEdited());
+    this.bsModalRef.content.stadiumEdited
+      .subscribe(() => this.onStadiumEdited());
   }
 
   onStadiumEdited() {
