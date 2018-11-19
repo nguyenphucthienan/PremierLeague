@@ -13,6 +13,7 @@ import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
 import { AdminSquadAddModalComponent } from '../../modals/admin-squad-add-modal/admin-squad-add-modal.component';
+import { AdminSquadEditModalComponent } from '../../modals/admin-squad-edit-modal/admin-squad-edit-modal.component';
 import { AdminSquadManagerTableService } from '../../services/admin-squad-manager-table.service';
 
 @Component({
@@ -81,16 +82,16 @@ export class AdminSquadManagerComponent implements OnInit {
   }
 
   openEditModal(rowData: TableRow) {
-    // this.bsModalRef = this.modalService.show(AdminClubEditModalComponent, {
-    //   initialState: {
-    //     title: 'Edit Squad',
-    //     rowData
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminSquadEditModalComponent, {
+      initialState: {
+        title: 'Edit Squad',
+        rowData
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.clubEdited
-    //   .subscribe(() => this.onSquadEdited());
+    this.bsModalRef.content.squadEdited
+      .subscribe(() => this.onSquadEdited());
   }
 
   onSquadEdited() {
