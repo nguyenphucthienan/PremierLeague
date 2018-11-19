@@ -7,8 +7,8 @@ import { Club } from '../models/club.interface';
 import { FilterMode } from '../models/filter-mode.interface';
 import { Pagination } from '../models/pagination.interface';
 import { SortMode } from '../models/sort-mode.interface';
-import { ParamsBuilder } from '../utils/params-builder';
 import { Stadium } from '../models/stadium.interface';
+import { ParamsBuilder } from '../utils/params-builder';
 
 @Injectable()
 export class ClubService {

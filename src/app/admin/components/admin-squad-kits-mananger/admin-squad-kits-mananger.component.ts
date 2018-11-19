@@ -14,6 +14,9 @@ import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confi
 import {
   AdminSquadKitsAddModalComponent,
 } from '../../modals/admin-squad-kits-add-modal/admin-squad-kits-add-modal.component';
+import {
+  AdminSquadKitsEditModalComponent,
+} from '../../modals/admin-squad-kits-edit-modal/admin-squad-kits-edit-modal.component';
 import { AdminSquadKitsManagerTableService } from '../../services/admin-squad-kits-manager-table.service';
 
 @Component({
@@ -89,16 +92,16 @@ export class AdminSquadKitsManangerComponent implements OnInit, AfterViewInit, O
   }
 
   openEditModal(rowData: TableRow) {
-    // this.bsModalRef = this.modalService.show(AdminClubEditModalComponent, {
-    //   initialState: {
-    //     title: 'Edit Club',
-    //     rowData
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminSquadKitsEditModalComponent, {
+      initialState: {
+        title: 'Edit Kit',
+        rowData
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.clubEdited
-    //   .subscribe(() => this.onClubEdited());
+    this.bsModalRef.content.kitEdited
+      .subscribe(() => this.onKitEdited());
   }
 
   onKitEdited() {

@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{ title }}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="editForm" (ngSubmit)="editKit()" class="form">
+    <div class="form-group">
+      <label for="kitType">Kit Type</label>
+      <ng-select [items]="kitTypes" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
+        placeholder="Select Kit Type" formControlName="kitType">
+      </ng-select>
+    </div>
+    <div class="form-group">
+      <label for="photoUrl">Photo</label>
+      <input type="input" id="photoUrl" class="form-control" formControlName="photoUrl" placeholder="Photo URL"
+        [attr.disabled]="true">
+    </div>
+    <div class="form-group">
+      <div class="form-group">
+        <app-photo-uploader (uploadSucceed)="photoUploaded($event)"></app-photo-uploader>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-block btn-primary" (click)="editKit()" [disabled]="editForm.invalid">OK</button>
+</div>
