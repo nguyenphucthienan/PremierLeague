@@ -6,6 +6,7 @@ import { AdminComponent } from './admin.component';
 import { AdminClubManagerComponent } from './components/admin-club-manager/admin-club-manager.component';
 import { AdminPlayerManagerComponent } from './components/admin-player-manager/admin-player-manager.component';
 import { AdminSeasonManagerComponent } from './components/admin-season-manager/admin-season-manager.component';
+import { AdminSquadManagerComponent } from './components/admin-squad-manager/admin-squad-manager.component';
 import { AdminStadiumManagerComponent } from './components/admin-stadium-manager/admin-stadium-manager.component';
 
 const routes: Routes = [
@@ -30,6 +31,12 @@ const routes: Routes = [
   {
     path: 'clubs',
     component: AdminClubManagerComponent,
+    canActivate: [AuthRoleGuard],
+    data: { roles: ['Admin'] }
+  },
+  {
+    path: 'squads',
+    component: AdminSquadManagerComponent,
     canActivate: [AuthRoleGuard],
     data: { roles: ['Admin'] }
   },

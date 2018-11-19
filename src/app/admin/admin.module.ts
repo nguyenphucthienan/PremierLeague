@@ -7,6 +7,7 @@ import { AdminComponent } from './admin.component';
 import { AdminClubManagerComponent } from './components/admin-club-manager/admin-club-manager.component';
 import { AdminPlayerManagerComponent } from './components/admin-player-manager/admin-player-manager.component';
 import { AdminSeasonManagerComponent } from './components/admin-season-manager/admin-season-manager.component';
+import { AdminSquadManagerComponent } from './components/admin-squad-manager/admin-squad-manager.component';
 import { AdminStadiumManagerComponent } from './components/admin-stadium-manager/admin-stadium-manager.component';
 import { AdminClubAddModalComponent } from './modals/admin-club-add-modal/admin-club-add-modal.component';
 import { AdminClubEditModalComponent } from './modals/admin-club-edit-modal/admin-club-edit-modal.component';
@@ -31,7 +32,8 @@ import { AdminStadiumEditModalComponent } from './modals/admin-stadium-edit-moda
     AdminClubEditModalComponent,
     AdminPlayerManagerComponent,
     AdminPlayerAddModalComponent,
-    AdminPlayerEditModalComponent
+    AdminPlayerEditModalComponent,
+    AdminSquadManagerComponent
   ],
   imports: [
     SharedModule,
