@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/core/services/alert.service';
+import { SquadService } from 'src/app/core/services/squad.service';
 import { DatatableComponent } from 'src/app/datatable/datatable.component';
 import { TableActionType } from 'src/app/datatable/models/table-action.interface';
 import { TableCellChange } from 'src/app/datatable/models/table-cell-change.interface';
@@ -30,6 +31,7 @@ export class AdminSquadPlayersManagerComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     public adminSquadPlayersManagerTableService: AdminSquadPlayersManagerTableService,
+    private squadService: SquadService,
     private alertService: AlertService,
     private modalService: BsModalService) { }
 
@@ -79,14 +81,14 @@ export class AdminSquadPlayersManagerComponent implements OnInit {
   }
 
   confirmRemovePlayer(id: number) {
-    // this.playerService.deletePlayer(id)
-    //   .subscribe(
-    //     () => {
-    //       this.alertService.success('Remove player successfully');
-    //       this.datatable.refresh();
-    //     },
-    //     () => this.alertService.error('Remove player failed')
-    //   );
+    this.squadService.removePlayerFromSquad(this.squadId, id)
+      .subscribe(
+        () => {
+          this.alertService.success('Remove player successfully');
+          this.datatable.refresh();
+        },
+        () => this.alertService.error('Remove player failed')
+      );
   }
 
 }

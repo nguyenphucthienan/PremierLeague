@@ -7,11 +7,6 @@
 <div class="modal-body">
   <form [formGroup]="addForm" (ngSubmit)="addPlayer()" class="form">
     <div class="form-group">
-      <label for="squadId">Squad</label>
-      <input type="text" id="squadId" class="form-control" formControlName="squadId" placeholder="Squad"
-        [attr.disabled]="true">
-    </div>
-    <div class="form-group">
       <label for="playerId">Player</label>
       <ng-select [items]="players" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
         placeholder="Select Player" formControlName="playerId">

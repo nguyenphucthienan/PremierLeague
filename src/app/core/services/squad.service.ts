@@ -56,9 +56,14 @@ export class SquadService {
     return this.http.delete<Squad>(`${this.squadUrl}/${id}`);
   }
 
-  addPlayerToSquad(id: number, playerId: number): Observable<Squad> {
+  addPlayerToSquad(id: number, playerId: number): Observable<any> {
     const url = UrlUtils.resolveParams(this.squadPlayersUrl, { id, playerId });
-    return this.http.post<Squad>(url, null);
+    return this.http.post<any>(url, null);
+  }
+
+  removePlayerFromSquad(id: number, playerId: number): Observable<any> {
+    const url = UrlUtils.resolveParams(this.squadPlayersUrl, { id, playerId });
+    return this.http.delete<any>(url);
   }
 
 }
