@@ -3,12 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/core/services/alert.service';
-import { PlayerService } from 'src/app/core/services/player.service';
 import { DatatableComponent } from 'src/app/datatable/datatable.component';
 import { TableActionType } from 'src/app/datatable/models/table-action.interface';
 import { TableCellChange } from 'src/app/datatable/models/table-cell-change.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
+import {
+  AdminSquadPlayersAddModalComponent,
+} from '../../modals/admin-squad-players-add-modal/admin-squad-players-add-modal.component';
 import { AdminSquadPlayersManagerTableService } from '../../services/admin-squad-players-manager-table.service';
 
 @Component({
@@ -22,18 +24,19 @@ export class AdminSquadPlayersManagerComponent implements OnInit {
   @ViewChild(DatatableComponent) datatable: DatatableComponent;
   @ViewChild('search') search: ElementRef;
 
+  squadId: number;
   searchSubscription: Subscription;
   bsModalRef: BsModalRef;
 
   constructor(private route: ActivatedRoute,
     public adminSquadPlayersManagerTableService: AdminSquadPlayersManagerTableService,
-    private playerService: PlayerService,
     private alertService: AlertService,
     private modalService: BsModalService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.adminSquadPlayersManagerTableService.filterMode.squadId = params.get('squadId');
+      this.squadId = parseInt(params.get('squadId'), 10);
+      this.adminSquadPlayersManagerTableService.filterMode.squadId = this.squadId;
     });
   }
 
@@ -47,15 +50,16 @@ export class AdminSquadPlayersManagerComponent implements OnInit {
   }
 
   openAddModal() {
-    // this.bsModalRef = this.modalService.show(AdminPlayerAddModalComponent, {
-    //   initialState: {
-    //     title: 'Add New Player'
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminSquadPlayersAddModalComponent, {
+      initialState: {
+        title: 'Add Player',
+        squadId: this.squadId
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.playerAdded
-    //   .subscribe(() => this.onPlayerAdded());
+    this.bsModalRef.content.playerAdded
+      .subscribe(() => this.onPlayerAdded());
   }
 
   onPlayerAdded() {

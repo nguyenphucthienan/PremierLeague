@@ -8,11 +8,13 @@ import { Pagination } from '../models/pagination.interface';
 import { SortMode } from '../models/sort-mode.interface';
 import { Squad } from '../models/squad.interface';
 import { ParamsBuilder } from '../utils/params-builder';
+import { UrlUtils } from '../utils/url-utils';
 
 @Injectable()
 export class SquadService {
 
   private readonly squadUrl = `${environment.apiUrl}/squads`;
+  private readonly squadPlayersUrl = `${environment.apiUrl}/squads/{id}/players/{playerId}`;
 
   private readonly defaultPagination: Pagination = {
     pageNumber: 1,
@@ -52,6 +54,11 @@ export class SquadService {
 
   deleteSquad(id: number): Observable<Squad> {
     return this.http.delete<Squad>(`${this.squadUrl}/${id}`);
+  }
+
+  addPlayerToSquad(id: number, playerId: number): Observable<Squad> {
+    const url = UrlUtils.resolveParams(this.squadPlayersUrl, { id, playerId });
+    return this.http.post<Squad>(url, null);
   }
 
 }
