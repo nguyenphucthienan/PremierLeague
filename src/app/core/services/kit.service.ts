@@ -51,4 +51,19 @@ export class KitService {
     return this.http.get<Kit>(url);
   }
 
+  createKit(squadId: number, kit: Kit): Observable<Kit> {
+    const url = UrlUtils.resolveParams(this.kitUrl, { squadId });
+    return this.http.post<Kit>(url, kit);
+  }
+
+  editKit(squadId: number, id: number, kit: Kit): Observable<Kit> {
+    const url = UrlUtils.resolveParams(this.kitDetailUrl, { squadId, id });
+    return this.http.put<Kit>(url, kit);
+  }
+
+  deleteKit(squadId: number, id: number): Observable<Kit> {
+    const url = UrlUtils.resolveParams(this.kitDetailUrl, { squadId, id });
+    return this.http.delete<Kit>(url);
+  }
+
 }
