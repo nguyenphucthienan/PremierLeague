@@ -9,11 +9,16 @@ import { AbstractTableCellComponent } from '../abstract-table-cell/abstract-tabl
 })
 export class ImageTableCellComponent extends AbstractTableCellComponent {
 
+  maxHeight = 40;
+
   constructor() {
     super();
   }
 
   updateValue() {
+    if (this.cell && this.cell.maxHeight) {
+      this.maxHeight = this.cell.maxHeight;
+    }
   }
 
 }

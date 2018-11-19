@@ -68,9 +68,16 @@ export class AdminSquadKitsManagerTableService implements TableService {
               continue;
             }
 
-            cells[key] = {
-              value: row[key]
-            };
+            if (key === 'photoUrl') {
+              cells[key] = {
+                value: row[key],
+                maxHeight: 80
+              };
+            } else {
+              cells[key] = {
+                value: row[key]
+              };
+            }
           }
 
           cells['actions'] = {
