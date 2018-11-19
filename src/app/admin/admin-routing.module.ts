@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthRoleGuard } from '../core/guards/auth-role.guard';
+import { BriefSeasonsResolver } from '../core/resolvers/brief-seasons.resolver';
 import { AdminComponent } from './admin.component';
 import { AdminClubManagerComponent } from './components/admin-club-manager/admin-club-manager.component';
 import { AdminPlayerManagerComponent } from './components/admin-player-manager/admin-player-manager.component';
@@ -38,7 +39,8 @@ const routes: Routes = [
     path: 'squads',
     component: AdminSquadManagerComponent,
     canActivate: [AuthRoleGuard],
-    data: { roles: ['Admin'] }
+    data: { roles: ['Admin'] },
+    resolve: { seasons: BriefSeasonsResolver }
   },
   {
     path: 'players',

@@ -1,7 +1,9 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgSelectComponent } from '@ng-select/ng-select';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime, map, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { Season } from 'src/app/core/models/season.interface';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { SquadService } from 'src/app/core/services/squad.service';
 import { DatatableComponent } from 'src/app/datatable/datatable.component';
@@ -18,30 +20,29 @@ import { AdminSquadManagerTableService } from '../../services/admin-squad-manage
   styleUrls: ['./admin-squad-manager.component.scss'],
   providers: [AdminSquadManagerTableService]
 })
-export class AdminSquadManagerComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AdminSquadManagerComponent implements OnInit {
 
+  @ViewChild(NgSelectComponent) seasonSelect: NgSelectComponent;
   @ViewChild(DatatableComponent) datatable: DatatableComponent;
   @ViewChild('search') search: ElementRef;
+
+  seasons: Season[];
 
   searchSubscription: Subscription;
   bsModalRef: BsModalRef;
 
-  constructor(public adminSquadManagerTableService: AdminSquadManagerTableService,
+  constructor(private route: ActivatedRoute,
+    public adminSquadManagerTableService: AdminSquadManagerTableService,
     private squadService: SquadService,
     private alertService: AlertService,
     private modalService: BsModalService) { }
 
   ngOnInit() {
-  }
-
-  ngAfterViewInit() {
-    this.searchSubscription = fromEvent(this.search.nativeElement, 'keyup')
-      .pipe(
-        map((event: any) => event.target.value),
-        debounceTime(250),
-        tap((value: string) => this.searchSquad(value))
-      )
-      .subscribe();
+    this.route.data.subscribe(data => {
+      this.seasons = data['seasons'];
+      this.seasonSelect.writeValue(this.seasons[0].id);
+      this.adminSquadManagerTableService.filterMode.seasonId = this.seasons[0].id;
+    });
   }
 
   onTableCellChanged(tableCellChange: TableCellChange) {
@@ -56,8 +57,9 @@ export class AdminSquadManagerComponent implements OnInit, AfterViewInit, OnDest
     }
   }
 
-  searchSquad(value: string) {
-    this.adminSquadManagerTableService.filterMode['name'] = value;
+  onSeasonFilterChanged(season: Season) {
+    this.adminSquadManagerTableService.filterMode.seasonId = season ? season.id : null;
+    this.adminSquadManagerTableService.pagination = { pageNumber: 1, pageSize: 10 };
     this.datatable.refresh();
   }
 
@@ -115,10 +117,6 @@ export class AdminSquadManagerComponent implements OnInit, AfterViewInit, OnDest
         },
         () => this.alertService.error('Delete squad failed')
       );
-  }
-
-  ngOnDestroy() {
-    this.searchSubscription.unsubscribe();
   }
 
 }
