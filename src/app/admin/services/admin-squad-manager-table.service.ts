@@ -15,7 +15,7 @@ export class AdminSquadManagerTableService implements TableService {
 
   columns: TableColumn[] = [
     { name: 'id', text: 'ID', type: 'IdTableCellComponent', sortable: true },
-    { name: 'season', text: 'Season', type: 'ObjectTextTableCellComponent', sortable: true },
+    { name: 'season', text: 'Season', type: 'ObjectTextTableCellComponent', sortable: false },
     { name: 'club', text: 'Club', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];

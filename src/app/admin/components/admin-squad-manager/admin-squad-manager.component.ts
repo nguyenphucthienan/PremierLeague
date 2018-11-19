@@ -12,6 +12,7 @@ import { TableCellChange } from 'src/app/datatable/models/table-cell-change.inte
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
+import { AdminSquadAddModalComponent } from '../../modals/admin-squad-add-modal/admin-squad-add-modal.component';
 import { AdminSquadManagerTableService } from '../../services/admin-squad-manager-table.service';
 
 @Component({
@@ -64,15 +65,15 @@ export class AdminSquadManagerComponent implements OnInit {
   }
 
   openAddModal() {
-    // this.bsModalRef = this.modalService.show(AdminClubAddModalComponent, {
-    //   initialState: {
-    //     title: 'Add New Squad'
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminSquadAddModalComponent, {
+      initialState: {
+        title: 'Add New Squad'
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.clubAdded
-    //   .subscribe(() => this.onSquadAdded());
+    this.bsModalRef.content.squadAdded
+      .subscribe(() => this.onSquadAdded());
   }
 
   onSquadAdded() {

@@ -15,6 +15,7 @@ import { AdminPlayerAddModalComponent } from './modals/admin-player-add-modal/ad
 import { AdminPlayerEditModalComponent } from './modals/admin-player-edit-modal/admin-player-edit-modal.component';
 import { AdminSeasonAddModalComponent } from './modals/admin-season-add-modal/admin-season-add-modal.component';
 import { AdminSeasonEditModalComponent } from './modals/admin-season-edit-modal/admin-season-edit-modal.component';
+import { AdminSquadAddModalComponent } from './modals/admin-squad-add-modal/admin-squad-add-modal.component';
 import { AdminStadiumAddModalComponent } from './modals/admin-stadium-add-modal/admin-stadium-add-modal.component';
 import { AdminStadiumEditModalComponent } from './modals/admin-stadium-edit-modal/admin-stadium-edit-modal.component';
 
@@ -33,7 +34,8 @@ import { AdminStadiumEditModalComponent } from './modals/admin-stadium-edit-moda
     AdminPlayerManagerComponent,
     AdminPlayerAddModalComponent,
     AdminPlayerEditModalComponent,
-    AdminSquadManagerComponent
+    AdminSquadManagerComponent,
+    AdminSquadAddModalComponent
   ],
   imports: [
     SharedModule,
@@ -48,7 +50,8 @@ import { AdminStadiumEditModalComponent } from './modals/admin-stadium-edit-moda
     AdminClubAddModalComponent,
     AdminClubEditModalComponent,
     AdminPlayerAddModalComponent,
-    AdminPlayerEditModalComponent
+    AdminPlayerEditModalComponent,
+    AdminSquadAddModalComponent
   ]
 })
 export class AdminModule { }
