@@ -9,6 +9,7 @@ import { TableCell } from 'src/app/datatable/models/table-cell.interface';
 import { TableColumn } from 'src/app/datatable/models/table-column.interface';
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { TableService } from 'src/app/datatable/services/table.service';
+import { PositionTypePipe } from 'src/app/shared/pipes/position-type.pipe';
 
 @Injectable()
 export class AdminPlayerManagerTableService implements TableService {
@@ -17,7 +18,7 @@ export class AdminPlayerManagerTableService implements TableService {
     { name: 'id', text: 'ID', type: 'IdTableCellComponent', sortable: true },
     { name: 'photoUrl', text: 'Photo', type: 'ImageTableCellComponent', sortable: false, center: true },
     { name: 'name', text: 'Name', type: 'TextTableCellComponent', sortable: true },
-    { name: 'positionType', text: 'Position', type: 'TextTableCellComponent', sortable: true },
+    { name: 'positionType', text: 'Position', type: 'PipedTextTableCellComponent', sortable: true },
     { name: 'nationality', text: 'Nationality', type: 'TextTableCellComponent', sortable: true },
     { name: 'birthdate', text: 'Birthdate', type: 'TextTableCellComponent', sortable: true },
     { name: 'height', text: 'Height', type: 'TextTableCellComponent', sortable: true },
@@ -44,7 +45,8 @@ export class AdminPlayerManagerTableService implements TableService {
     { class: 'btn-danger', icon: 'fa fa-trash', text: 'Delete', type: TableActionType.Delete }
   ];
 
-  constructor(private playerService: PlayerService) { }
+  constructor(private playerService: PlayerService,
+    private positionTypePipe: PositionTypePipe) { }
 
   getDataColumns() {
     return this.columns;
@@ -73,9 +75,16 @@ export class AdminPlayerManagerTableService implements TableService {
               continue;
             }
 
-            cells[key] = {
-              value: row[key]
-            };
+            if (key === 'positionType') {
+              cells[key] = {
+                value: row[key],
+                pipe: this.positionTypePipe
+              };
+            } else {
+              cells[key] = {
+                value: row[key]
+              };
+            }
           }
 
           cells['actions'] = {

@@ -9,6 +9,7 @@ import { TableCell } from 'src/app/datatable/models/table-cell.interface';
 import { TableColumn } from 'src/app/datatable/models/table-column.interface';
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { TableService } from 'src/app/datatable/services/table.service';
+import { KitTypePipe } from 'src/app/shared/pipes/kit-type.pipe';
 
 @Injectable()
 export class AdminSquadKitsManagerTableService implements TableService {
@@ -16,7 +17,7 @@ export class AdminSquadKitsManagerTableService implements TableService {
   columns: TableColumn[] = [
     { name: 'id', text: 'ID', type: 'IdTableCellComponent', sortable: true },
     { name: 'photoUrl', text: 'Photo', type: 'ImageTableCellComponent', sortable: false, center: true },
-    { name: 'kitType', text: 'Type', type: 'TextTableCellComponent', sortable: true },
+    { name: 'kitType', text: 'Type', type: 'PipedTextTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];
 
@@ -39,7 +40,8 @@ export class AdminSquadKitsManagerTableService implements TableService {
     { class: 'btn-danger', icon: 'fa fa-trash', text: 'Delete', type: TableActionType.Delete }
   ];
 
-  constructor(private kitService: KitService) { }
+  constructor(private kitService: KitService,
+    private kitTypePipe: KitTypePipe) { }
 
   getDataColumns() {
     return this.columns;
@@ -68,7 +70,12 @@ export class AdminSquadKitsManagerTableService implements TableService {
               continue;
             }
 
-            if (key === 'photoUrl') {
+            if (key === 'kitType') {
+              cells[key] = {
+                value: row[key],
+                pipe: this.kitTypePipe
+              };
+            } else if (key === 'photoUrl') {
               cells[key] = {
                 value: row[key],
                 maxHeight: 80
