@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap';
+import { concat, of, Subject } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Player } from 'src/app/core/models/player.interface';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { PlayerService } from 'src/app/core/services/player.service';
@@ -19,6 +21,7 @@ export class AdminSquadPlayersAddModalComponent implements OnInit {
 
   addForm: FormGroup;
   players: Player[];
+  playerSearch$ = new Subject<string>();
 
   constructor(public bsModalRef: BsModalRef,
     private fb: FormBuilder,
@@ -28,11 +31,10 @@ export class AdminSquadPlayersAddModalComponent implements OnInit {
 
   ngOnInit() {
     this.addForm = this.fb.group({
-      playerId: ['', Validators.required]
+      playerId: [null, Validators.required]
     });
 
-    this.playerService.getPlayers()
-      .subscribe((response: any) => this.players = response.items);
+    this.getPlayers();
   }
 
   addPlayer() {
@@ -46,6 +48,22 @@ export class AdminSquadPlayersAddModalComponent implements OnInit {
       },
         error => this.alertService.error('Add player failed')
       );
+  }
+
+  private getPlayers() {
+    this.playerService.getPlayers()
+      .subscribe((response: any) => this.players = response.items);
+
+    concat(
+      of([]),
+      this.playerSearch$.pipe(
+        debounceTime(200),
+        distinctUntilChanged(),
+        switchMap(value => this.playerService.getPlayers(
+          undefined, undefined, { name: value })
+          .pipe(catchError(() => of([]))))
+      )
+    ).subscribe((response: any) => this.players = response.items);
   }
 
 }

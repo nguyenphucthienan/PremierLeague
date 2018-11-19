@@ -8,8 +8,8 @@
   <form [formGroup]="addForm" (ngSubmit)="addPlayer()" class="form">
     <div class="form-group">
       <label for="playerId">Player</label>
-      <ng-select [items]="players" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
-        placeholder="Select Player" formControlName="playerId">
+      <ng-select [items]="players" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name" [addTag]="false"
+        [typeahead]="playerSearch$" placeholder="Search Player" formControlName="playerId">
       </ng-select>
     </div>
   </form>
