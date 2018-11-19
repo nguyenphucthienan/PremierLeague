@@ -1,7 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, map, tap } from 'rxjs/operators';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { SquadService } from 'src/app/core/services/squad.service';
 import { DatatableComponent } from 'src/app/datatable/datatable.component';
@@ -20,7 +21,7 @@ import { AdminSquadPlayersManagerTableService } from '../../services/admin-squad
   styleUrls: ['./admin-squad-players-manager.component.scss'],
   providers: [AdminSquadPlayersManagerTableService]
 })
-export class AdminSquadPlayersManagerComponent implements OnInit {
+export class AdminSquadPlayersManagerComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(DatatableComponent) datatable: DatatableComponent;
   @ViewChild('search') search: ElementRef;
@@ -42,6 +43,16 @@ export class AdminSquadPlayersManagerComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    this.searchSubscription = fromEvent(this.search.nativeElement, 'keyup')
+      .pipe(
+        map((event: any) => event.target.value),
+        debounceTime(250),
+        tap((value: string) => this.searchPlayer(value))
+      )
+      .subscribe();
+  }
+
   onTableCellChanged(tableCellChange: TableCellChange) {
     const action = tableCellChange.newValue;
     switch (action.type) {
@@ -49,6 +60,11 @@ export class AdminSquadPlayersManagerComponent implements OnInit {
         this.openRemoveModal(tableCellChange.row.cells['id'].value);
         break;
     }
+  }
+
+  searchPlayer(value: string) {
+    this.adminSquadPlayersManagerTableService.filterMode['name'] = value;
+    this.datatable.refresh();
   }
 
   openAddModal() {
@@ -89,6 +105,10 @@ export class AdminSquadPlayersManagerComponent implements OnInit {
         },
         () => this.alertService.error('Remove player failed')
       );
+  }
+
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
   }
 
 }

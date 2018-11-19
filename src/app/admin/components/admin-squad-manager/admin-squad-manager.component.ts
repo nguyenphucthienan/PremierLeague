@@ -51,6 +51,9 @@ export class AdminSquadManagerComponent implements OnInit {
   onTableCellChanged(tableCellChange: TableCellChange) {
     const action = tableCellChange.newValue;
     switch (action.type) {
+      case TableActionType.NavigateToSquadKits:
+        this.navigateToSquadKits(tableCellChange.row.cells['id'].value);
+        break;
       case TableActionType.NavigateToSquadPlayers:
         this.navigateToSquadPlayers(tableCellChange.row.cells['id'].value);
         break;
@@ -61,6 +64,10 @@ export class AdminSquadManagerComponent implements OnInit {
         this.openDeleteModal(tableCellChange.row.cells['id'].value);
         break;
     }
+  }
+
+  navigateToSquadKits(squadId: number) {
+    this.router.navigate(['/admin', 'squads', squadId, 'kits']);
   }
 
   navigateToSquadPlayers(squadId: number) {

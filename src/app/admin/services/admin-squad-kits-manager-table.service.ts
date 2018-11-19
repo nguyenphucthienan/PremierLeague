@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { FilterMode } from 'src/app/core/models/filter-mode.interface';
 import { Pagination } from 'src/app/core/models/pagination.interface';
 import { SortMode } from 'src/app/core/models/sort-mode.interface';
-import { SquadService } from 'src/app/core/services/squad.service';
+import { KitService } from 'src/app/core/services/kit.service';
 import { TableAction, TableActionType } from 'src/app/datatable/models/table-action.interface';
 import { TableCell } from 'src/app/datatable/models/table-cell.interface';
 import { TableColumn } from 'src/app/datatable/models/table-column.interface';
@@ -11,12 +11,12 @@ import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { TableService } from 'src/app/datatable/services/table.service';
 
 @Injectable()
-export class AdminSquadManagerTableService implements TableService {
+export class AdminSquadKitsManagerTableService implements TableService {
 
   columns: TableColumn[] = [
     { name: 'id', text: 'ID', type: 'IdTableCellComponent', sortable: true },
-    { name: 'season', text: 'Season', type: 'ObjectTextTableCellComponent', sortable: false },
-    { name: 'club', text: 'Club', type: 'ObjectTextTableCellComponent', sortable: true },
+    { name: 'photoUrl', text: 'Photo', type: 'ImageTableCellComponent', sortable: false, center: true },
+    { name: 'kitType', text: 'Type', type: 'TextTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];
 
@@ -35,20 +35,18 @@ export class AdminSquadManagerTableService implements TableService {
   filterMode: FilterMode = {};
 
   actions: TableAction[] = [
-    { class: 'btn-info', icon: 'fa fa-snowflake-o', text: 'Players', type: TableActionType.NavigateToSquadKits },
-    { class: 'btn-info', icon: 'fa fa-users', text: 'Players', type: TableActionType.NavigateToSquadPlayers },
     { class: 'btn-primary', icon: 'fa fa-edit', text: 'Edit', type: TableActionType.Edit },
     { class: 'btn-danger', icon: 'fa fa-trash', text: 'Delete', type: TableActionType.Delete }
   ];
 
-  constructor(private squadService: SquadService) { }
+  constructor(private kitService: KitService) { }
 
   getDataColumns() {
     return this.columns;
   }
 
   getRawData() {
-    return this.squadService.getSquads(this.pagination,
+    return this.kitService.getKits(this.pagination,
       this.sortMode, this.filterMode)
       .pipe(
         map((response: any) => {
@@ -70,16 +68,9 @@ export class AdminSquadManagerTableService implements TableService {
               continue;
             }
 
-            if (key === 'season' || key === 'club') {
-              cells[key] = {
-                value: row[key],
-                textProperty: 'name'
-              };
-            } else {
-              cells[key] = {
-                value: row[key]
-              };
-            }
+            cells[key] = {
+              value: row[key]
+            };
           }
 
           cells['actions'] = {

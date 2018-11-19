@@ -7,6 +7,7 @@ import { AdminComponent } from './admin.component';
 import { AdminClubManagerComponent } from './components/admin-club-manager/admin-club-manager.component';
 import { AdminPlayerManagerComponent } from './components/admin-player-manager/admin-player-manager.component';
 import { AdminSeasonManagerComponent } from './components/admin-season-manager/admin-season-manager.component';
+import { AdminSquadKitsManangerComponent } from './components/admin-squad-kits-mananger/admin-squad-kits-mananger.component';
 import { AdminSquadManagerComponent } from './components/admin-squad-manager/admin-squad-manager.component';
 import {
   AdminSquadPlayersManagerComponent,
@@ -47,6 +48,13 @@ const routes: Routes = [
   {
     path: 'squads',
     component: AdminSquadManagerComponent,
+    canActivate: [AuthRoleGuard],
+    data: { roles: ['Admin'] },
+    resolve: { seasons: BriefSeasonsResolver }
+  },
+  {
+    path: 'squads/:squadId/kits',
+    component: AdminSquadKitsManangerComponent,
     canActivate: [AuthRoleGuard],
     data: { roles: ['Admin'] },
     resolve: { seasons: BriefSeasonsResolver }
