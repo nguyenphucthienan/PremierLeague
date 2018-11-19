@@ -19,6 +19,7 @@ import { AdminSquadAddModalComponent } from './modals/admin-squad-add-modal/admi
 import { AdminSquadEditModalComponent } from './modals/admin-squad-edit-modal/admin-squad-edit-modal.component';
 import { AdminStadiumAddModalComponent } from './modals/admin-stadium-add-modal/admin-stadium-add-modal.component';
 import { AdminStadiumEditModalComponent } from './modals/admin-stadium-edit-modal/admin-stadium-edit-modal.component';
+import { AdminSquadPlayersManagerComponent } from './components/admin-squad-players-manager/admin-squad-players-manager.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AdminStadiumEditModalComponent } from './modals/admin-stadium-edit-moda
     AdminPlayerEditModalComponent,
     AdminSquadManagerComponent,
     AdminSquadAddModalComponent,
-    AdminSquadEditModalComponent
+    AdminSquadEditModalComponent,
+    AdminSquadPlayersManagerComponent
   ],
   imports: [
     SharedModule,

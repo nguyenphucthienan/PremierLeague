@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Subscription } from 'rxjs';
@@ -33,7 +33,8 @@ export class AdminSquadManagerComponent implements OnInit {
   searchSubscription: Subscription;
   bsModalRef: BsModalRef;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private router: Router,
+    private route: ActivatedRoute,
     public adminSquadManagerTableService: AdminSquadManagerTableService,
     private squadService: SquadService,
     private alertService: AlertService,
@@ -50,6 +51,9 @@ export class AdminSquadManagerComponent implements OnInit {
   onTableCellChanged(tableCellChange: TableCellChange) {
     const action = tableCellChange.newValue;
     switch (action.type) {
+      case TableActionType.NavigateToSquadPlayers:
+        this.navigateToSquadPlayers(tableCellChange.row.cells['id'].value);
+        break;
       case TableActionType.Edit:
         this.openEditModal(tableCellChange.row);
         break;
@@ -57,6 +61,10 @@ export class AdminSquadManagerComponent implements OnInit {
         this.openDeleteModal(tableCellChange.row.cells['id'].value);
         break;
     }
+  }
+
+  navigateToSquadPlayers(squadId: number) {
+    this.router.navigate(['/admin', 'squads', squadId, 'players']);
   }
 
   onSeasonFilterChanged(season: Season) {

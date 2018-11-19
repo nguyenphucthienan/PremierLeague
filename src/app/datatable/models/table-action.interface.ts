@@ -9,5 +9,7 @@ export interface TableAction {
 export enum TableActionType {
   Edit,
   Delete,
-  DeleteAll
+  DeleteAll,
+  NavigateToSquadKits,
+  NavigateToSquadPlayers
 }
