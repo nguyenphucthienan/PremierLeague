@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{ title }}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="editForm" (ngSubmit)="editMatch()" class="form">
+    <div class="form-group">
+      <label for="homeClubId">Home Club</label>
+      <ng-select #homeClubSelect [items]="clubs" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
+        placeholder="Select Home Club" formControlName="homeClubId">
+      </ng-select>
+    </div>
+    <div class="form-group">
+      <label for="awayClubId">Away Club</label>
+      <ng-select #awayClubSelect [items]="clubs" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
+        placeholder="Select Away Club" formControlName="awayClubId">
+      </ng-select>
+    </div>
+    <div class="form-group">
+      <label for="awayClubId">Stadium</label>
+      <ng-select [items]="stadiums" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
+        placeholder="Select Stadium" formControlName="stadiumId">
+      </ng-select>
+    </div>
+    <div class="form-check form-check-inline">
+      <input type="checkbox" id="name" class="form-check-input" formControlName="isPlayed" placeholder=" Played">
+      <label for="isPlayed">Played</label>
+    </div>
+    <div class="form-group">
+      <label for="matchTime">Match Time</label>
+      <input bsDatepicker type="text" id="matchTime" class="form-control" formControlName="matchTime" placeholder="Match Time"
+        [bsConfig]="{ dateInputFormat: 'MMM DD, YYYY, h:mm:ss a' }" placement="top">
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-block btn-primary" (click)="editMatch()" [disabled]="editForm.invalid">OK</button>
+</div>

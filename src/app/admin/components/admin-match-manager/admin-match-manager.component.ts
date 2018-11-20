@@ -11,6 +11,7 @@ import { TableActionType } from 'src/app/datatable/models/table-action.interface
 import { TableCellChange } from 'src/app/datatable/models/table-cell-change.interface';
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 
+import { AdminMatchEditModalComponent } from '../../modals/admin-match-edit-modal/admin-match-edit-modal.component';
 import { AdminMatchManagerTableService } from '../../services/admin-match-manager-table.service';
 
 @Component({
@@ -91,19 +92,19 @@ export class AdminMatchManagerComponent implements OnInit {
   }
 
   openEditModal(rowData: TableRow) {
-    // this.bsModalRef = this.modalService.show(AdminSquadEditModalComponent, {
-    //   initialState: {
-    //     title: 'Edit Squad',
-    //     rowData
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminMatchEditModalComponent, {
+      initialState: {
+        title: 'Edit Match',
+        rowData
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.squadEdited
-    //   .subscribe(() => this.onSquadEdited());
+    this.bsModalRef.content.matchEdited
+      .subscribe(() => this.onMatchEdited());
   }
 
-  onSquadEdited() {
+  onMatchEdited() {
     this.datatable.refresh();
   }
 

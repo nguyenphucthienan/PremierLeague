@@ -35,11 +35,23 @@ export class MatchService {
       .applyFilter(filterMode)
       .build();
 
-    return this.http.get<Match[]>(`${this.matchUrl}`, { params: params });
+    return this.http.get<Match[]>(`${this.matchUrl}`, { params });
   }
 
   getMatch(id: number): Observable<Match> {
     return this.http.get<Match>(`${this.matchUrl}/${id}`);
+  }
+
+  generateMatches(seasonId: number): Observable<any> {
+    const params = new ParamsBuilder()
+      .applyFilter({ seasonId })
+      .build();
+
+    return this.http.post<any>(`${this.matchUrl}`, null, { params });
+  }
+
+  editMatch(id: number, match: Match): Observable<Match> {
+    return this.http.put<Match>(`${this.matchUrl}/${id}`, match);
   }
 
 }
