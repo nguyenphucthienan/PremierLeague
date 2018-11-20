@@ -14,6 +14,9 @@ import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confi
 
 import { AdminMatchAddModalComponent } from '../../modals/admin-match-add-modal/admin-match-add-modal.component';
 import { AdminMatchEditModalComponent } from '../../modals/admin-match-edit-modal/admin-match-edit-modal.component';
+import {
+  AdminMatchGenerateModalComponent,
+} from '../../modals/admin-match-generate-modal/admin-match-generate-modal.component';
 import { AdminMatchManagerTableService } from '../../services/admin-match-manager-table.service';
 
 @Component({
@@ -24,12 +27,13 @@ import { AdminMatchManagerTableService } from '../../services/admin-match-manage
 })
 export class AdminMatchManagerComponent implements OnInit {
 
-  @ViewChild(NgSelectComponent) seasonSelect: NgSelectComponent;
+  @ViewChild('seasonSelect') seasonSelect: NgSelectComponent;
   @ViewChild(DatatableComponent) datatable: DatatableComponent;
   @ViewChild('search') search: ElementRef;
 
+  currentSeason: Season;
   seasons: Season[];
-  rounds: number[];
+  rounds: any[];
 
   searchSubscription: Subscription;
   bsModalRef: BsModalRef;
@@ -44,12 +48,12 @@ export class AdminMatchManagerComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.seasons = data['seasons'];
+      this.currentSeason = this.seasons[0];
       this.seasonSelect.writeValue(this.seasons[0].id);
       this.adminMatchManagerTableService.filterMode.seasonId = this.seasons[0].id;
     });
 
-    this.matchService.getListRounds(this.seasons[0].id)
-      .subscribe((rounds: number[]) => this.rounds = rounds);
+    this.getListRound();
   }
 
   onTableCellChanged(tableCellChange: TableCellChange) {
@@ -78,13 +82,19 @@ export class AdminMatchManagerComponent implements OnInit {
     this.router.navigate(['/admin', 'matches', matchId, 'cards']);
   }
 
+  private getListRound() {
+    this.matchService.getListRounds(this.currentSeason.id)
+      .subscribe((rounds: any[]) => {
+        this.rounds = rounds;
+      });
+  }
+
   onSeasonFilterChanged(season: Season) {
+    this.currentSeason = season;
     this.adminMatchManagerTableService.filterMode.seasonId = season ? season.id : null;
     this.adminMatchManagerTableService.pagination = { pageNumber: 1, pageSize: 10 };
+    this.getListRound();
     this.datatable.refresh();
-
-    this.matchService.getListRounds(season.id)
-      .subscribe((rounds: number[]) => this.rounds = rounds);
   }
 
   onRoundFilterChanged(round: any) {
@@ -94,18 +104,20 @@ export class AdminMatchManagerComponent implements OnInit {
   }
 
   openGenerateModal() {
-    // this.bsModalRef = this.modalService.show(AdminSquadAddModalComponent, {
-    //   initialState: {
-    //     title: 'Add New Squad'
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminMatchGenerateModalComponent, {
+      initialState: {
+        season: this.currentSeason
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.squadAdded
-    //   .subscribe(() => this.onSquadAdded());
+    this.bsModalRef.content.ok
+      .subscribe(() => this.onMatchesGenerated());
   }
 
   onMatchesGenerated() {
+    this.adminMatchManagerTableService.filterMode.round = null;
+    this.adminMatchManagerTableService.pagination = { pageNumber: 1, pageSize: 10 };
     this.datatable.refresh();
   }
 

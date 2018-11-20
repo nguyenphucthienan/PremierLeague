@@ -7,7 +7,6 @@ import { Club } from '../models/club.interface';
 import { FilterMode } from '../models/filter-mode.interface';
 import { Pagination } from '../models/pagination.interface';
 import { SortMode } from '../models/sort-mode.interface';
-import { Stadium } from '../models/stadium.interface';
 import { ParamsBuilder } from '../utils/params-builder';
 
 @Injectable()
@@ -36,11 +35,19 @@ export class ClubService {
       .applyFilter(filterMode)
       .build();
 
-    return this.http.get<Club[]>(`${this.clubUrl}`, { params: params });
+    return this.http.get<Club[]>(`${this.clubUrl}`, { params });
   }
 
-  getBriefListClub(): Observable<Stadium[]> {
-    return this.http.get<Stadium[]>(`${this.clubUrl}/brief-list`);
+  getBriefListClub(): Observable<Club[]> {
+    return this.http.get<Club[]>(`${this.clubUrl}/brief-list`);
+  }
+
+  getBriefListClubBySeasonId(seasonId: number): Observable<Club[]> {
+    const params = new ParamsBuilder()
+      .applyFilter({ seasonId })
+      .build();
+
+    return this.http.get<Club[]>(`${this.clubUrl}/brief-list`, { params });
   }
 
   getClub(id: number): Observable<Club> {

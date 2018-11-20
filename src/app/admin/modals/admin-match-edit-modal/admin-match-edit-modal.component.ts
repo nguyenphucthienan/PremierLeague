@@ -26,7 +26,7 @@ export class AdminMatchEditModalComponent implements OnInit, AfterViewInit {
   matchEdited = new EventEmitter();
 
   editForm: FormGroup;
-  rounds: number[];
+  rounds: any[];
   clubs: Club[];
   stadiums: Stadium[];
 

@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Generate Matches</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p class="font-weight-bold">Season {{ season.name }} will have:</p>
+  <p>{{ clubs?.length }} <span class="font-weight-bold"> Clubs</span> </p>
+  <p>{{ (clubs?.length - 1) * 2 }}<span class="font-weight-bold"> Rounds</span> </p>
+  <p>{{ (clubs?.length - 1) * 2 * (clubs?.length / 2) }}<span class="font-weight-bold"> Matches</span> </p>
+  <p>All old matches data will be lost. Are you sure you want to generate new matches for this season?</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="selectOk()">OK</button>
+  <button type="button" class="btn btn-danger" (click)="selectCancel()">Cancel</button>
+</div>
