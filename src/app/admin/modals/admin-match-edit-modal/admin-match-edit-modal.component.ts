@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgSelectComponent } from '@ng-select/ng-select';
 import { BsModalRef } from 'ngx-bootstrap';
 import { Club } from 'src/app/core/models/club.interface';
 import { Match } from 'src/app/core/models/match.interface';
@@ -9,7 +10,6 @@ import { ClubService } from 'src/app/core/services/club.service';
 import { MatchService } from 'src/app/core/services/match.service';
 import { StadiumService } from 'src/app/core/services/stadium.service';
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
-import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-admin-match-edit-modal',

@@ -1,0 +1,20 @@
+<span class="d-flex flex-row justify-content-center align-items-center">
+  <span class="club d-flex flex-row justify-content-end align-items-center">
+    <a class="club-name text-right font-weight-bold" [routerLink]="['/clubs', homeClub.id]">
+      {{ homeClub.name }}
+    </a>
+    <img class="club-photo" [src]="homeClub.photoUrl" [alt]="homeClub.name">
+  </span>
+  <span *ngIf="isPlayed">
+    {{ homeScore }} - {{ awayScore }}
+  </span>
+  <span *ngIf="!isPlayed">
+    TBC
+  </span>
+  <span class="club d-flex flex-row align-items-center">
+    <img class="club-photo" [src]="awayClub.photoUrl" [alt]="awayClub.name">
+    <a class="club-name font-weight-bold" [routerLink]="['/clubs', awayClub.id]">
+      <span>{{ awayClub.name }}</span>
+    </a>
+  </span>
+</span>
