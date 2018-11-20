@@ -4,6 +4,7 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 import { BsModalRef } from 'ngx-bootstrap';
 import { Club } from 'src/app/core/models/club.interface';
 import { Match } from 'src/app/core/models/match.interface';
+import { Season } from 'src/app/core/models/season.interface';
 import { Stadium } from 'src/app/core/models/stadium.interface';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { ClubService } from 'src/app/core/services/club.service';
@@ -24,6 +25,7 @@ export class AdminMatchAddModalComponent implements OnInit {
   matchAdded = new EventEmitter();
 
   addForm: FormGroup;
+  season: Season;
   clubs: Club[];
   stadiums: Stadium[];
 
@@ -36,6 +38,7 @@ export class AdminMatchAddModalComponent implements OnInit {
 
   ngOnInit() {
     this.addForm = this.fb.group({
+      seasonId: this.season.id,
       round: [null, Validators.required],
       homeClubId: [null, Validators.required],
       awayClubId: [null, Validators.required],

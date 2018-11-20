@@ -124,7 +124,8 @@ export class AdminMatchManagerComponent implements OnInit {
   openAddModal() {
     this.bsModalRef = this.modalService.show(AdminMatchAddModalComponent, {
       initialState: {
-        title: 'Add New Match'
+        title: 'Add New Match',
+        season: this.currentSeason
       },
       class: 'modal-dialog-centered'
     });
