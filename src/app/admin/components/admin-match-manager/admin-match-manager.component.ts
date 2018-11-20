@@ -10,7 +10,9 @@ import { DatatableComponent } from 'src/app/datatable/datatable.component';
 import { TableActionType } from 'src/app/datatable/models/table-action.interface';
 import { TableCellChange } from 'src/app/datatable/models/table-cell-change.interface';
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
+import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
+import { AdminMatchAddModalComponent } from '../../modals/admin-match-add-modal/admin-match-add-modal.component';
 import { AdminMatchEditModalComponent } from '../../modals/admin-match-edit-modal/admin-match-edit-modal.component';
 import { AdminMatchManagerTableService } from '../../services/admin-match-manager-table.service';
 
@@ -62,6 +64,9 @@ export class AdminMatchManagerComponent implements OnInit {
       case TableActionType.Edit:
         this.openEditModal(tableCellChange.row);
         break;
+      case TableActionType.Delete:
+        this.openDeleteModal(tableCellChange.row.cells['id'].value);
+        break;
     }
   }
 
@@ -88,7 +93,7 @@ export class AdminMatchManagerComponent implements OnInit {
     this.datatable.refresh();
   }
 
-  openAddModal() {
+  openGenerateModal() {
     // this.bsModalRef = this.modalService.show(AdminSquadAddModalComponent, {
     //   initialState: {
     //     title: 'Add New Squad'
@@ -100,7 +105,23 @@ export class AdminMatchManagerComponent implements OnInit {
     //   .subscribe(() => this.onSquadAdded());
   }
 
-  onSquadAdded() {
+  onMatchesGenerated() {
+    this.datatable.refresh();
+  }
+
+  openAddModal() {
+    this.bsModalRef = this.modalService.show(AdminMatchAddModalComponent, {
+      initialState: {
+        title: 'Add New Match'
+      },
+      class: 'modal-dialog-centered'
+    });
+
+    this.bsModalRef.content.matchAdded
+      .subscribe(() => this.onMatchAdded());
+  }
+
+  onMatchAdded() {
     this.datatable.refresh();
   }
 
@@ -119,6 +140,29 @@ export class AdminMatchManagerComponent implements OnInit {
 
   onMatchEdited() {
     this.datatable.refresh();
+  }
+
+  openDeleteModal(id: number) {
+    this.bsModalRef = this.modalService.show(ConfirmModalComponent, {
+      initialState: {
+        content: 'Are you sure you want to delete this match?'
+      },
+      class: 'modal-dialog-centered'
+    });
+
+    this.bsModalRef.content.ok
+      .subscribe(() => this.confirmDeleteMatch(id));
+  }
+
+  confirmDeleteMatch(id: number) {
+    this.matchService.deleteMatch(id)
+      .subscribe(
+        () => {
+          this.alertService.success('Delete match successfully');
+          this.datatable.refresh();
+        },
+        () => this.alertService.error('Delete match failed')
+      );
   }
 
 }

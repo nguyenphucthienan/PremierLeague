@@ -5,7 +5,11 @@
   </button>
 </div>
 <div class="modal-body">
-  <form [formGroup]="editForm" (ngSubmit)="editMatch()" class="form">
+  <form [formGroup]="addForm" (ngSubmit)="addMatch()" class="form">
+    <div class="form-group">
+      <label for="round">Round</label>
+      <input type="number" id="round" class="form-control" formControlName="round" placeholder="Round">
+    </div>
     <div class="form-group">
       <label for="homeClubId">Home Club</label>
       <ng-select #homeClubSelect [items]="clubs" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
@@ -36,5 +40,5 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-block btn-primary" (click)="editMatch()" [disabled]="editForm.invalid">OK</button>
+  <button type="button" class="btn btn-block btn-primary" (click)="addMatch()" [disabled]="addForm.invalid">OK</button>
 </div>

@@ -47,11 +47,19 @@ export class MatchService {
       .applyFilter({ seasonId })
       .build();
 
-    return this.http.post<any>(`${this.matchUrl}`, null, { params });
+    return this.http.post<any>(`${this.matchUrl}/generate`, null, { params });
+  }
+
+  createMatch(match: Match): Observable<Match> {
+    return this.http.post<Match>(`${this.matchUrl}`, match);
   }
 
   editMatch(id: number, match: Match): Observable<Match> {
     return this.http.put<Match>(`${this.matchUrl}/${id}`, match);
+  }
+
+  deleteMatch(id: number): Observable<Match> {
+    return this.http.delete<Match>(`${this.matchUrl}/${id}`);
   }
 
   getListRounds(seasonId: number): Observable<number[]> {
