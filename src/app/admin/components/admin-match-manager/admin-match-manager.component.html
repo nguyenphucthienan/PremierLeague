@@ -1,14 +1,28 @@
 <div class="container mt-3 mb-4">
   <h1 class="text-center">Match Manager</h1>
   <div class="row mt-3">
-    <div class="col-lg-6 col-md-8 align-self-center">
+    <div class="col-lg-4 col-md-6">
       <div class="d-flex flex-row align-items-center">
-        <span class="font-weight-bold mr-2">Season: </span>
-        <ng-select [items]="seasons" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
-          placeholder="Select season" (change)="onSeasonFilterChanged($event)" class="flex-grow-1"></ng-select>
+        <div class="col-3">
+          <span class="font-weight-bold">Season: </span>
+        </div>
+        <div class="col-9">
+          <ng-select #seasonSelect [items]="seasons" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
+            placeholder="Select Season" (change)="onSeasonFilterChanged($event)"></ng-select>
+        </div>
       </div>
     </div>
-    <div class="col-lg-6 col-md-4 text-right mt-md-0 mt-3">
+    <div class="col-lg-6 col-md-6">
+      <div class="d-flex flex-row align-items-center">
+        <div class="col-3">
+          <span class="font-weight-bold">Round: </span>
+        </div>
+        <div class="col-9">
+          <ng-select [items]="rounds" [selectOnTab]="true" [clearable]="true" placeholder="Select Round" (change)="onRoundFilterChanged($event)"></ng-select>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-2 text-right mt-lg-0 mt-3">
       <button type="button" class="btn btn-sm btn-primary" (click)="openAddModal()">Generate Matches</button>
     </div>
   </div>

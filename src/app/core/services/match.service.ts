@@ -54,4 +54,12 @@ export class MatchService {
     return this.http.put<Match>(`${this.matchUrl}/${id}`, match);
   }
 
+  getListRounds(seasonId: number): Observable<number[]> {
+    const params = new ParamsBuilder()
+      .applyFilter({ seasonId })
+      .build();
+
+    return this.http.get<number[]>(`${this.matchUrl}/round-list`, { params });
+  }
+
 }

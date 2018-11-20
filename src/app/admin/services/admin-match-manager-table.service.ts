@@ -38,9 +38,9 @@ export class AdminMatchManagerTableService implements TableService {
   filterMode: FilterMode = {};
 
   actions: TableAction[] = [
+    { class: 'btn-info', icon: 'fa fa-info-circle', text: 'Detail', type: TableActionType.GetDetail },
     { class: 'btn-info', icon: 'fa fa-snowflake-o', text: 'Goals', type: TableActionType.NavigateToMatchGoals },
     { class: 'btn-info', icon: 'fa fa-users', text: 'Cards', type: TableActionType.NavigateToMatchCards },
-    { class: 'btn-info', icon: 'fa fa-info-circle', text: 'Detail', type: TableActionType.GetDetail },
     { class: 'btn-primary', icon: 'fa fa-edit', text: 'Edit', type: TableActionType.Edit }
   ];
 

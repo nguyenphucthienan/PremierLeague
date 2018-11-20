@@ -27,6 +27,7 @@ export class AdminMatchManagerComponent implements OnInit {
   @ViewChild('search') search: ElementRef;
 
   seasons: Season[];
+  rounds: number[];
 
   searchSubscription: Subscription;
   bsModalRef: BsModalRef;
@@ -44,6 +45,9 @@ export class AdminMatchManagerComponent implements OnInit {
       this.seasonSelect.writeValue(this.seasons[0].id);
       this.adminMatchManagerTableService.filterMode.seasonId = this.seasons[0].id;
     });
+
+    this.matchService.getListRounds(this.seasons[0].id)
+      .subscribe((rounds: number[]) => this.rounds = rounds);
   }
 
   onTableCellChanged(tableCellChange: TableCellChange) {
@@ -71,6 +75,15 @@ export class AdminMatchManagerComponent implements OnInit {
 
   onSeasonFilterChanged(season: Season) {
     this.adminMatchManagerTableService.filterMode.seasonId = season ? season.id : null;
+    this.adminMatchManagerTableService.pagination = { pageNumber: 1, pageSize: 10 };
+    this.datatable.refresh();
+
+    this.matchService.getListRounds(season.id)
+      .subscribe((rounds: number[]) => this.rounds = rounds);
+  }
+
+  onRoundFilterChanged(round: number) {
+    this.adminMatchManagerTableService.filterMode.round = round ? round : null;
     this.adminMatchManagerTableService.pagination = { pageNumber: 1, pageSize: 10 };
     this.datatable.refresh();
   }
