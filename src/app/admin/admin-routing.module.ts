@@ -5,6 +5,7 @@ import { AuthRoleGuard } from '../core/guards/auth-role.guard';
 import { BriefSeasonsResolver } from '../core/resolvers/brief-seasons.resolver';
 import { AdminComponent } from './admin.component';
 import { AdminClubManagerComponent } from './components/admin-club-manager/admin-club-manager.component';
+import { AdminMatchManagerComponent } from './components/admin-match-manager/admin-match-manager.component';
 import { AdminPlayerManagerComponent } from './components/admin-player-manager/admin-player-manager.component';
 import { AdminSeasonManagerComponent } from './components/admin-season-manager/admin-season-manager.component';
 import { AdminSquadKitsManangerComponent } from './components/admin-squad-kits-mananger/admin-squad-kits-mananger.component';
@@ -56,12 +57,17 @@ const routes: Routes = [
     path: 'squads/:squadId/kits',
     component: AdminSquadKitsManangerComponent,
     canActivate: [AuthRoleGuard],
-    data: { roles: ['Admin'] },
-    resolve: { seasons: BriefSeasonsResolver }
+    data: { roles: ['Admin'] }
   },
   {
     path: 'squads/:squadId/players',
     component: AdminSquadPlayersManagerComponent,
+    canActivate: [AuthRoleGuard],
+    data: { roles: ['Admin'] }
+  },
+  {
+    path: 'matches',
+    component: AdminMatchManagerComponent,
     canActivate: [AuthRoleGuard],
     data: { roles: ['Admin'] },
     resolve: { seasons: BriefSeasonsResolver }

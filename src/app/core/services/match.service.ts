@@ -1,11 +1,13 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
+import { FilterMode } from '../models/filter-mode.interface';
 import { Match } from '../models/match.interface';
 import { Pagination } from '../models/pagination.interface';
 import { SortMode } from '../models/sort-mode.interface';
+import { ParamsBuilder } from '../utils/params-builder';
 
 @Injectable()
 export class MatchService {
@@ -25,16 +27,13 @@ export class MatchService {
   constructor(private http: HttpClient) { }
 
   getMatches(pagination: Pagination = this.defaultPagination,
-    sortMode: SortMode = this.defaultSortMode, clubId?: number): Observable<Match[]> {
-    let params = new HttpParams()
-      .set('pageNumber', pagination.pageNumber.toString())
-      .set('pageSize', pagination.pageSize.toString())
-      .set('sortBy', sortMode.sortBy)
-      .set('isSortAscending', sortMode.isSortAscending.toString());
-
-    if (clubId) {
-      params = params.set('clubId', clubId.toString());
-    }
+    sortMode: SortMode = this.defaultSortMode,
+    filterMode?: FilterMode): Observable<Match[]> {
+    const params = new ParamsBuilder()
+      .applyPagination(pagination)
+      .applySort(sortMode)
+      .applyFilter(filterMode)
+      .build();
 
     return this.http.get<Match[]>(`${this.matchUrl}`, { params: params });
   }

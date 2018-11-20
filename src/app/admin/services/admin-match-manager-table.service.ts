@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { FilterMode } from 'src/app/core/models/filter-mode.interface';
 import { Pagination } from 'src/app/core/models/pagination.interface';
 import { SortMode } from 'src/app/core/models/sort-mode.interface';
-import { SquadService } from 'src/app/core/services/squad.service';
+import { MatchService } from 'src/app/core/services/match.service';
 import { TableAction, TableActionType } from 'src/app/datatable/models/table-action.interface';
 import { TableCell } from 'src/app/datatable/models/table-cell.interface';
 import { TableColumn } from 'src/app/datatable/models/table-column.interface';
@@ -11,12 +11,16 @@ import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { TableService } from 'src/app/datatable/services/table.service';
 
 @Injectable()
-export class AdminSquadManagerTableService implements TableService {
+export class AdminMatchManagerTableService implements TableService {
 
   columns: TableColumn[] = [
-    { name: 'id', text: 'ID', type: 'IdTableCellComponent', sortable: true },
-    { name: 'season', text: 'Season', type: 'ObjectTextTableCellComponent', sortable: false },
-    { name: 'club', text: 'Club', type: 'ObjectTextTableCellComponent', sortable: true },
+    { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true },
+    { name: 'round', text: 'Round', type: 'TextTableCellComponent', sortable: true },
+    { name: 'homeClub', text: 'Home Club', type: 'ObjectTextTableCellComponent', sortable: true },
+    { name: 'awayClub', text: 'Away Club', type: 'ObjectTextTableCellComponent', sortable: true },
+    { name: 'matchTime', text: 'Match Time', type: 'DateTableCellComponent', sortable: true },
+    { name: 'isPlayed', text: 'Played', type: 'TextTableCellComponent', sortable: true },
+    { name: 'stadium', text: 'Stadium', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];
 
@@ -28,27 +32,26 @@ export class AdminSquadManagerTableService implements TableService {
   };
 
   sortMode: SortMode = {
-    sortBy: 'id',
+    sortBy: 'matchTime',
     isSortAscending: true
   };
 
   filterMode: FilterMode = {};
 
   actions: TableAction[] = [
-    { class: 'btn-info', icon: 'fa fa-snowflake-o', text: 'Kits', type: TableActionType.NavigateToSquadKits },
-    { class: 'btn-info', icon: 'fa fa-users', text: 'Players', type: TableActionType.NavigateToSquadPlayers },
-    { class: 'btn-primary', icon: 'fa fa-edit', text: 'Edit', type: TableActionType.Edit },
-    { class: 'btn-danger', icon: 'fa fa-trash', text: 'Delete', type: TableActionType.Delete }
+    { class: 'btn-info', icon: 'fa fa-snowflake-o', text: 'Goals', type: TableActionType.NavigateToMatchGoals },
+    { class: 'btn-info', icon: 'fa fa-users', text: 'Cards', type: TableActionType.NavigateToMatchCards },
+    { class: 'btn-primary', icon: 'fa fa-edit', text: 'Edit', type: TableActionType.Edit }
   ];
 
-  constructor(private squadService: SquadService) { }
+  constructor(private matchService: MatchService) { }
 
   getDataColumns() {
     return this.columns;
   }
 
   getRawData() {
-    return this.squadService.getSquads(this.pagination,
+    return this.matchService.getMatches(this.pagination,
       this.sortMode, this.filterMode)
       .pipe(
         map((response: any) => {
@@ -70,7 +73,9 @@ export class AdminSquadManagerTableService implements TableService {
               continue;
             }
 
-            if (key === 'season' || key === 'club') {
+            if (key === 'homeClub'
+              || key === 'awayClub'
+              || key === 'stadium') {
               cells[key] = {
                 value: row[key],
                 textProperty: 'name'

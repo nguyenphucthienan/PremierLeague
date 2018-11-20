@@ -3,6 +3,7 @@
   <table class="table mt-3">
     <thead class="thead-light">
       <tr>
+        <th scope="col">Round</th>
         <th scope="col">Clubs</th>
         <th scope="col">Date</th>
         <th scope="col">Stadium</th>
@@ -11,6 +12,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let match of matches">
+        <td class="align-middle">{{ match.round }}</td>
         <td class="d-flex flex-row justify-content-center align-items-center">
           <span class="club d-flex flex-row justify-content-end align-items-center">
             <a class="club-name text-right font-weight-bold" [routerLink]="['/clubs', match.homeClub.id]">
