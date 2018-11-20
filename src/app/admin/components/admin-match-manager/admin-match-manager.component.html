@@ -18,7 +18,8 @@
           <span class="font-weight-bold">Round: </span>
         </div>
         <div class="col-9">
-          <ng-select [items]="rounds" [selectOnTab]="true" [clearable]="true" placeholder="Select Round" (change)="onRoundFilterChanged($event)"></ng-select>
+          <ng-select [items]="rounds" [selectOnTab]="true" [clearable]="true" bindValue="id" bindLabel="name"
+            placeholder="Select Round" (change)="onRoundFilterChanged($event)"></ng-select>
         </div>
       </div>
     </div>

@@ -87,8 +87,8 @@ export class AdminMatchManagerComponent implements OnInit {
       .subscribe((rounds: number[]) => this.rounds = rounds);
   }
 
-  onRoundFilterChanged(round: number) {
-    this.adminMatchManagerTableService.filterMode.round = round ? round : null;
+  onRoundFilterChanged(round: any) {
+    this.adminMatchManagerTableService.filterMode.round = round ? round.id : null;
     this.adminMatchManagerTableService.pagination = { pageNumber: 1, pageSize: 10 };
     this.datatable.refresh();
   }

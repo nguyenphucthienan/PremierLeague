@@ -26,6 +26,7 @@ export class AdminMatchEditModalComponent implements OnInit, AfterViewInit {
   matchEdited = new EventEmitter();
 
   editForm: FormGroup;
+  rounds: number[];
   clubs: Club[];
   stadiums: Stadium[];
 
@@ -45,6 +46,9 @@ export class AdminMatchEditModalComponent implements OnInit, AfterViewInit {
       isPlayed: [this.rowData.cells['isPlayed'].value, Validators.required],
       stadiumId: [this.rowData.cells['stadium'].value.id, Validators.required]
     });
+
+    this.matchService.getListRounds(this.rowData.cells['seasonId'].value)
+      .subscribe((rounds: number[]) => this.rounds = rounds);
 
     this.clubService.getBriefListClub()
       .subscribe((clubs: Club[]) => this.clubs = clubs);

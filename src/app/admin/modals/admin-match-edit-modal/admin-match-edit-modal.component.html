@@ -7,6 +7,12 @@
 <div class="modal-body">
   <form [formGroup]="editForm" (ngSubmit)="editMatch()" class="form">
     <div class="form-group">
+      <label for="round">Round</label>
+      <ng-select [items]="rounds" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name" placeholder="Select Round"
+        formControlName="round">
+      </ng-select>
+    </div>
+    <div class="form-group">
       <label for="homeClubId">Home Club</label>
       <ng-select #homeClubSelect [items]="clubs" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
         placeholder="Select Home Club" formControlName="homeClubId">
