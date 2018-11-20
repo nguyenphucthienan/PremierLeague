@@ -18,7 +18,9 @@ export class AdminMatchManagerTableService implements TableService {
     { name: 'round', text: 'Round', type: 'TextTableCellComponent', sortable: true },
     { name: 'homeClub', text: 'Home Club', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'awayClub', text: 'Away Club', type: 'ObjectTextTableCellComponent', sortable: true },
-    { name: 'matchTime', text: 'Match Time', type: 'DateTableCellComponent', sortable: true },
+    { name: 'matchTime', text: 'Match Time', type: 'DateTimeTableCellComponent', sortable: true },
+    { name: 'homeScore', text: 'H.Sc.', type: 'TextTableCellComponent', sortable: true },
+    { name: 'awayScore', text: 'A.Sc.', type: 'TextTableCellComponent', sortable: true },
     { name: 'isPlayed', text: 'Played', type: 'TextTableCellComponent', sortable: true },
     { name: 'stadium', text: 'Stadium', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
@@ -39,6 +41,7 @@ export class AdminMatchManagerTableService implements TableService {
   filterMode: FilterMode = {};
 
   actions: TableAction[] = [
+    { class: 'btn-info', icon: 'fa fa-info-circle', text: 'Detail', type: TableActionType.GetDetail },
     { class: 'btn-info', icon: 'fa fa-snowflake-o', text: 'Goals', type: TableActionType.NavigateToMatchGoals },
     { class: 'btn-info', icon: 'fa fa-users', text: 'Cards', type: TableActionType.NavigateToMatchCards },
     { class: 'btn-primary', icon: 'fa fa-edit', text: 'Edit', type: TableActionType.Edit }
@@ -79,6 +82,17 @@ export class AdminMatchManagerTableService implements TableService {
               cells[key] = {
                 value: row[key],
                 textProperty: 'name'
+              };
+            } else if (key === 'homeScore'
+              || key === 'awayScore') {
+              if (cells['isPlay']) {
+                cells[key] = {
+                  value: row[key]
+                };
+              }
+
+              cells[key] = {
+                value: null
               };
             } else {
               cells[key] = {

@@ -10,6 +10,7 @@ export enum TableActionType {
   Edit,
   Delete,
   DeleteAll,
+  GetDetail,
   NavigateToSquadKits,
   NavigateToSquadPlayers,
   NavigateToMatchGoals,

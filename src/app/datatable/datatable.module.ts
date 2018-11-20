@@ -9,6 +9,7 @@ import { TableCellComponent } from './cells/table-cell/table-cell.component';
 import { TextTableCellComponent } from './cells/text-table-cell/text-table-cell.component';
 import { DatatableComponent } from './datatable.component';
 import { TableRowSelectTrackingService } from './services/table-row-select-tracking.service';
+import { DateTimeTableCellComponent } from './cells/date-time-table-cell/date-time-table-cell.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TableRowSelectTrackingService } from './services/table-row-select-track
     ObjectTextTableCellComponent,
     PipedTextTableCellComponent,
     ActionsTableCellComponent,
-    ImageTableCellComponent
+    ImageTableCellComponent,
+    DateTimeTableCellComponent
   ],
   imports: [
     SharedModule
