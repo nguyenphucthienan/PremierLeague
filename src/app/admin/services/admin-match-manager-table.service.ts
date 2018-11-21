@@ -18,7 +18,7 @@ export class AdminMatchManagerTableService implements TableService {
     { name: 'round', text: 'Round', type: 'TextTableCellComponent', sortable: true },
     { name: 'matchClubs', text: 'Clubs', type: 'MatchClubsTableCellComponent', sortable: false },
     { name: 'matchTime', text: 'Match Time', type: 'DateTimeTableCellComponent', sortable: true },
-    { name: 'isPlayed', text: 'Played', type: 'TextTableCellComponent', sortable: true },
+    { name: 'isPlayed', text: 'Played', type: 'BooleanTableCellComponent', sortable: true },
     { name: 'stadium', text: 'Stadium', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];

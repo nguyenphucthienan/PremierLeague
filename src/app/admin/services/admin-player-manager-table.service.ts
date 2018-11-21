@@ -15,7 +15,7 @@ import { PositionTypePipe } from 'src/app/shared/pipes/position-type.pipe';
 export class AdminPlayerManagerTableService implements TableService {
 
   columns: TableColumn[] = [
-    { name: 'id', text: 'ID', type: 'IdTableCellComponent', sortable: true },
+    { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true },
     { name: 'photoUrl', text: 'Photo', type: 'ImageTableCellComponent', sortable: false, center: true },
     { name: 'name', text: 'Name', type: 'TextTableCellComponent', sortable: true },
     { name: 'positionType', text: 'Position', type: 'PipedTextTableCellComponent', sortable: true },

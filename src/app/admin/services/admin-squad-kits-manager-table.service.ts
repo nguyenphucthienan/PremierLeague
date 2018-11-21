@@ -15,7 +15,7 @@ import { KitTypePipe } from 'src/app/shared/pipes/kit-type.pipe';
 export class AdminSquadKitsManagerTableService implements TableService {
 
   columns: TableColumn[] = [
-    { name: 'id', text: 'ID', type: 'IdTableCellComponent', sortable: true },
+    { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true },
     { name: 'photoUrl', text: 'Photo', type: 'ImageTableCellComponent', sortable: false, center: true },
     { name: 'kitType', text: 'Type', type: 'PipedTextTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
