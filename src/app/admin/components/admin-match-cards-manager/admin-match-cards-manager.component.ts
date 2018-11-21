@@ -4,28 +4,22 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, map, tap } from 'rxjs/operators';
 import { AlertService } from 'src/app/core/services/alert.service';
-import { GoalService } from 'src/app/core/services/goal.service';
+import { CardService } from 'src/app/core/services/card.service';
 import { DatatableComponent } from 'src/app/datatable/datatable.component';
 import { TableActionType } from 'src/app/datatable/models/table-action.interface';
 import { TableCellChange } from 'src/app/datatable/models/table-cell-change.interface';
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
-import {
-  AdminMatchGoalsAddModalComponent,
-} from '../../modals/admin-match-goals-add-modal/admin-match-goals-add-modal.component';
-import {
-  AdminMatchGoalsEditModalComponent,
-} from '../../modals/admin-match-goals-edit-modal/admin-match-goals-edit-modal.component';
-import { AdminMatchGoalsManagerTableService } from '../../services/admin-match-goals-manager-table.service';
+import { AdminMatchCardsManagerTableService } from '../../services/admin-match-cards-manager-table.service';
 
 @Component({
-  selector: 'app-admin-match-goals-manager',
-  templateUrl: './admin-match-goals-manager.component.html',
-  styleUrls: ['./admin-match-goals-manager.component.scss'],
-  providers: [AdminMatchGoalsManagerTableService]
+  selector: 'app-admin-match-cards-manager',
+  templateUrl: './admin-match-cards-manager.component.html',
+  styleUrls: ['./admin-match-cards-manager.component.scss'],
+  providers: [AdminMatchCardsManagerTableService]
 })
-export class AdminMatchGoalsManagerComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AdminMatchCardsManagerComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(DatatableComponent) datatable: DatatableComponent;
   @ViewChild('search') search: ElementRef;
@@ -35,15 +29,15 @@ export class AdminMatchGoalsManagerComponent implements OnInit, AfterViewInit, O
   bsModalRef: BsModalRef;
 
   constructor(private route: ActivatedRoute,
-    public adminMatchGoalsManagerTableService: AdminMatchGoalsManagerTableService,
-    private goalService: GoalService,
+    public adminMatchCardsManagerTableService: AdminMatchCardsManagerTableService,
+    private cardService: CardService,
     private alertService: AlertService,
     private modalService: BsModalService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.matchId = parseInt(params.get('matchId'), 10);
-      this.adminMatchGoalsManagerTableService.filterMode.matchId = this.matchId;
+      this.adminMatchCardsManagerTableService.filterMode.matchId = this.matchId;
     });
   }
 
@@ -52,7 +46,7 @@ export class AdminMatchGoalsManagerComponent implements OnInit, AfterViewInit, O
       .pipe(
         map((event: any) => event.target.value),
         debounceTime(250),
-        tap((value: string) => this.searchGoal(value))
+        tap((value: string) => this.searchCard(value))
       )
       .subscribe();
   }
@@ -69,66 +63,66 @@ export class AdminMatchGoalsManagerComponent implements OnInit, AfterViewInit, O
     }
   }
 
-  searchGoal(value: string) {
-    this.adminMatchGoalsManagerTableService.filterMode['id'] = value;
+  searchCard(value: string) {
+    this.adminMatchCardsManagerTableService.filterMode['id'] = value;
     this.datatable.refresh();
   }
 
   openAddModal() {
-    this.bsModalRef = this.modalService.show(AdminMatchGoalsAddModalComponent, {
-      initialState: {
-        title: 'Add Goal',
-        matchId: this.matchId
-      },
-      class: 'modal-dialog-centered'
-    });
+    // this.bsModalRef = this.modalService.show(AdminMatchGoalsAddModalComponent, {
+    //   initialState: {
+    //     title: 'Add Goal',
+    //     matchId: this.matchId
+    //   },
+    //   class: 'modal-dialog-centered'
+    // });
 
-    this.bsModalRef.content.goalAdded
-      .subscribe(() => this.onGoalAdded());
+    // this.bsModalRef.content.goalAdded
+    //   .subscribe(() => this.onCardAdded());
   }
 
-  onGoalAdded() {
+  onCardAdded() {
     this.datatable.refresh();
   }
 
   openEditModal(rowData: TableRow) {
-    this.bsModalRef = this.modalService.show(AdminMatchGoalsEditModalComponent, {
-      initialState: {
-        title: 'Edit Kit',
-        matchId: this.matchId,
-        rowData
-      },
-      class: 'modal-dialog-centered'
-    });
+    // this.bsModalRef = this.modalService.show(AdminMatchGoalsEditModalComponent, {
+    //   initialState: {
+    //     title: 'Edit Card',
+    //     matchId: this.matchId,
+    //     rowData
+    //   },
+    //   class: 'modal-dialog-centered'
+    // });
 
-    this.bsModalRef.content.goalEdited
-      .subscribe(() => this.onGoalEdited());
+    // this.bsModalRef.content.goalEdited
+    //   .subscribe(() => this.onCardlEdited());
   }
 
-  onGoalEdited() {
+  onCardlEdited() {
     this.datatable.refresh();
   }
 
   openDeleteModal(id: number) {
     this.bsModalRef = this.modalService.show(ConfirmModalComponent, {
       initialState: {
-        content: 'Are you sure you want to remove this goal from this match?'
+        content: 'Are you sure you want to remove this card from this match?'
       },
       class: 'modal-dialog-centered'
     });
 
     this.bsModalRef.content.ok
-      .subscribe(() => this.confirmDeleteGoal(id));
+      .subscribe(() => this.confirmDeleteCard(id));
   }
 
-  confirmDeleteGoal(id: number) {
-    this.goalService.deleteGoal(this.matchId, id)
+  confirmDeleteCard(id: number) {
+    this.cardService.deleteCard(this.matchId, id)
       .subscribe(
         () => {
-          this.alertService.success('Delete goal successfully');
+          this.alertService.success('Delete card successfully');
           this.datatable.refresh();
         },
-        () => this.alertService.error('Delete goal failed')
+        () => this.alertService.error('Delete card failed')
       );
   }
 
