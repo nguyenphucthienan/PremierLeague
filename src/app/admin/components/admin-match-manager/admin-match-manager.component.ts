@@ -59,6 +59,9 @@ export class AdminMatchManagerComponent implements OnInit {
   onTableCellChanged(tableCellChange: TableCellChange) {
     const action = tableCellChange.newValue;
     switch (action.type) {
+      case TableActionType.GetDetail:
+        this.navigateToMatchDetail(tableCellChange.row.cells['id'].value);
+        break;
       case TableActionType.NavigateToMatchGoals:
         this.navigateToMatchGoals(tableCellChange.row.cells['id'].value);
         break;
@@ -72,6 +75,10 @@ export class AdminMatchManagerComponent implements OnInit {
         this.openDeleteModal(tableCellChange.row.cells['id'].value);
         break;
     }
+  }
+
+  navigateToMatchDetail(matchId: number) {
+    this.router.navigate(['/matches', matchId]);
   }
 
   navigateToMatchGoals(matchId: number) {

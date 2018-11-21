@@ -19,7 +19,7 @@ export class AdminMatchGoalsManagerTableService implements TableService {
     { name: 'club', text: 'Club', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'player', text: 'Player', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'goalType', text: 'Type', type: 'PipedTextTableCellComponent', sortable: true },
-    { name: 'isOwnGoal', text: 'OG', type: 'TextTableCellComponent', sortable: true },
+    { name: 'isOwnGoal', text: 'OG', type: 'BooleanTableCellComponent', sortable: true },
     { name: 'goalTime', text: 'Time', type: 'TextTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];

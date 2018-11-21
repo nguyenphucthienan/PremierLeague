@@ -34,7 +34,7 @@ export class AdminPlayerManagerTableService implements TableService {
   };
 
   sortMode: SortMode = {
-    sortBy: 'id',
+    sortBy: 'name',
     isSortAscending: true
   };
 
