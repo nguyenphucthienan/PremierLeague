@@ -14,6 +14,9 @@ import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confi
 import {
   AdminMatchCardsAddModalComponent,
 } from '../../modals/admin-match-cards-add-modal/admin-match-cards-add-modal.component';
+import {
+  AdminMatchCardsEditModalComponent,
+} from '../../modals/admin-match-cards-edit-modal/admin-match-cards-edit-modal.component';
 import { AdminMatchCardsManagerTableService } from '../../services/admin-match-cards-manager-table.service';
 
 @Component({
@@ -89,17 +92,17 @@ export class AdminMatchCardsManagerComponent implements OnInit, AfterViewInit, O
   }
 
   openEditModal(rowData: TableRow) {
-    // this.bsModalRef = this.modalService.show(AdminMatchGoalsEditModalComponent, {
-    //   initialState: {
-    //     title: 'Edit Card',
-    //     matchId: this.matchId,
-    //     rowData
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminMatchCardsEditModalComponent, {
+      initialState: {
+        title: 'Edit Card',
+        matchId: this.matchId,
+        rowData
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.goalEdited
-    //   .subscribe(() => this.onCardlEdited());
+    this.bsModalRef.content.cardEdited
+      .subscribe(() => this.onCardlEdited());
   }
 
   onCardlEdited() {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { BsModalRef } from 'ngx-bootstrap';
@@ -10,20 +10,24 @@ import { AlertService } from 'src/app/core/services/alert.service';
 import { CardService } from 'src/app/core/services/card.service';
 import { MatchService } from 'src/app/core/services/match.service';
 import { SquadService } from 'src/app/core/services/squad.service';
+import { TableRow } from 'src/app/datatable/models/table-row.interface';
 
 @Component({
-  selector: 'app-admin-match-cards-add-modal',
-  templateUrl: './admin-match-cards-add-modal.component.html',
-  styleUrls: ['./admin-match-cards-add-modal.component.scss']
+  selector: 'app-admin-match-cards-edit-modal',
+  templateUrl: './admin-match-cards-edit-modal.component.html',
+  styleUrls: ['./admin-match-cards-edit-modal.component.scss']
 })
-export class AdminMatchCardsAddModalComponent implements OnInit {
+export class AdminMatchCardsEditModalComponent implements OnInit, AfterViewInit {
 
   @ViewChild('clubSelect') clubSelect: NgSelectComponent;
+  @ViewChild('playerSelect') playerSelect: NgSelectComponent;
+  @ViewChild('cardTypeSelect') cardTypeSelect: NgSelectComponent;
 
   title: string;
-  cardAdded = new EventEmitter();
+  rowData: TableRow;
+  cardEdited = new EventEmitter();
 
-  addForm: FormGroup;
+  editForm: FormGroup;
   matchId: number;
   match: Match;
   clubs: Club[] = [];
@@ -48,17 +52,25 @@ export class AdminMatchCardsAddModalComponent implements OnInit {
     private alertService: AlertService) { }
 
   ngOnInit() {
-    this.addForm = this.fb.group({
-      clubId: [null, Validators.required],
-      playerId: [null, Validators.required],
-      cardType: [null, Validators.required],
-      cardTime: [null, [Validators.required, Validators.min(1), Validators.max(90)]]
+    this.editForm = this.fb.group({
+      clubId: [this.rowData.cells['club'].value.id, Validators.required],
+      playerId: [this.rowData.cells['player'].value.id, Validators.required],
+      cardType: [this.rowData.cells['cardType'].value, Validators.required],
+      cardTime: [this.rowData.cells['cardTime'].value, [
+        Validators.required, Validators.min(1), Validators.max(90)]
+      ]
     });
 
-    this.getMatchAndClubs();
+    this.getData();
   }
 
-  private getMatchAndClubs() {
+  ngAfterViewInit() {
+    this.clubSelect.disabled = true;
+    this.playerSelect.disabled = true;
+    this.cardTypeSelect.disabled = true;
+  }
+
+  private getData() {
     this.matchService.getMatch(this.matchId)
       .subscribe((match: Match) => {
         this.match = match;
@@ -74,6 +86,11 @@ export class AdminMatchCardsAddModalComponent implements OnInit {
             name: match.awayClub.name
           }
         ];
+
+        this.squadService.getPlayersInSquad(
+          this.match.season.id,
+          this.rowData.cells['club'].value.id)
+          .subscribe((players: Player[]) => this.players = players);
       });
   }
 
@@ -81,18 +98,21 @@ export class AdminMatchCardsAddModalComponent implements OnInit {
     this.squadService.getPlayersInSquad(this.match.season.id, club.id)
       .subscribe((players: Player[]) => this.players = players);
 
-    this.addForm.patchValue({ playerId: null });
+    this.editForm.patchValue({ playerId: null });
   }
 
-  addCard() {
-    this.cardService.createCard(this.matchId, this.addForm.value)
+  editCard() {
+    this.cardService.editCard(
+      this.matchId,
+      this.rowData.cells['id'].value,
+      this.editForm.value)
       .subscribe(
         (card: Card) => {
           this.bsModalRef.hide();
-          this.alertService.success('Add card successfully');
-          this.cardAdded.emit(card);
+          this.alertService.success('Edit card successfully');
+          this.cardEdited.emit(card);
         },
-        error => this.alertService.error('Add card failed')
+        error => this.alertService.error('Edit card failed')
       );
   }
 
