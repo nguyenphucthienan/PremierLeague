@@ -1,0 +1,40 @@
+<div class="d-none d-md-block">
+  <div class="row">
+    <div class="col-6">
+      <ul class="list-group">
+        <li *ngFor="let card of homeCards" class="list-group-item d-flex justify-content-between align-items-center">
+          <a class="player-name font-weight-bold" [routerLink]="['/players', card.player.id]">
+            {{ card.player.name }}
+          </a>
+          <span *ngIf="isYellowCard(card)" class="badge badge-warning badge-pill">{{ card.cardTime | number:'2.0' }}</span>
+          <span *ngIf="isRedCard(card)" class="badge badge-danger badge-pill">{{ card.cardTime | number:'2.0' }}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="col-6">
+      <ul class="list-group">
+        <li *ngFor="let card of awayCards" class="list-group-item d-flex justify-content-between align-items-center">
+          <span *ngIf="isYellowCard(card)" class="badge badge-warning badge-pill">{{ card.cardTime | number:'2.0' }}</span>
+          <span *ngIf="isRedCard(card)" class="badge badge-danger badge-pill">{{ card.cardTime | number:'2.0' }}</span>
+          <div>
+            <a class="player-name font-weight-bold" [routerLink]="['/players', card.player.id]">{{ card.player.name }}</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="d-block d-md-none">
+  <ul class="list-group">
+    <li *ngFor="let card of allCards" class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <span class="club-name">{{ card.club.code }} - </span>
+        <a class="player-name font-weight-bold" [routerLink]="['/players', card.player.id]">
+          {{ card.player.name }}
+        </a>
+      </div>
+      <span *ngIf="isYellowCard(card)" class="badge badge-warning badge-pill">{{ card.cardTime | number:'2.0' }}</span>
+      <span *ngIf="isRedCard(card)" class="badge badge-danger badge-pill">{{ card.cardTime | number:'2.0' }}</span>
+    </li>
+  </ul>
+</div>

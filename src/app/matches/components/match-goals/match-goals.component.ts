@@ -11,8 +11,8 @@ export class MatchGoalsComponent implements OnInit {
 
   @Input() match: Match;
 
-  homeGoals: Goal[];
   allGoals: Goal[];
+  homeGoals: Goal[];
   awayGoals: Goal[];
 
   constructor() { }

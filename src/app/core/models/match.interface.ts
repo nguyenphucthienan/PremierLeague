@@ -1,3 +1,4 @@
+import { Card } from './card.interface';
 import { Club } from './club.interface';
 import { Goal } from './goal.interface';
 import { Kit } from './kit.interface';
@@ -18,4 +19,5 @@ export interface Match {
   matchTime: Date;
   isPlayed: boolean;
   goals?: Goal[];
+  cards?: Card[];
 }

@@ -4,17 +4,19 @@
       <ul class="list-group">
         <li *ngFor="let goal of homeGoals" class="list-group-item d-flex justify-content-between align-items-center">
           <div>
-            <a class="player-name font-weight-bold" [routerLink]="['/players', goal.player.id]">{{ goal.player.name }}</a>
+            <a class="player-name font-weight-bold" [routerLink]="['/players', goal.player.id]">
+              {{ goal.player.name }}
+            </a>
             <span *ngIf="goal.isOwnGoal"> (OG)</span>
           </div>
-          <span class="badge badge-primary badge-pill">{{ goal.goalTime }}</span>
+          <span class="badge badge-primary badge-pill">{{ goal.goalTime | number:'2.0' }}</span>
         </li>
       </ul>
     </div>
     <div class="col-6">
       <ul class="list-group">
         <li *ngFor="let goal of awayGoals" class="list-group-item d-flex justify-content-between align-items-center">
-          <span class="badge badge-primary badge-pill">{{ goal.goalTime }}</span>
+          <span class="badge badge-primary badge-pill">{{ goal.goalTime | number:'2.0' }}</span>
           <div>
             <span *ngIf="goal.isOwnGoal">(OG) </span>
             <a class="player-name font-weight-bold" [routerLink]="['/players', goal.player.id]">{{ goal.player.name }}</a>
@@ -34,7 +36,7 @@
         </a>
         <span *ngIf="goal.isOwnGoal"> (OG)</span>
       </div>
-      <span class="badge badge-primary badge-pill">{{ goal.goalTime }}</span>
+      <span class="badge badge-primary badge-pill">{{ goal.goalTime | number:'2.0' }}</span>
     </li>
   </ul>
 </div>
