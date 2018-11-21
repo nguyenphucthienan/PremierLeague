@@ -3,13 +3,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { BsModalRef } from 'ngx-bootstrap';
 import { Club } from 'src/app/core/models/club.interface';
+import { Kit } from 'src/app/core/models/kit.interface';
 import { Match } from 'src/app/core/models/match.interface';
 import { Season } from 'src/app/core/models/season.interface';
 import { Stadium } from 'src/app/core/models/stadium.interface';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { ClubService } from 'src/app/core/services/club.service';
+import { KitService } from 'src/app/core/services/kit.service';
 import { MatchService } from 'src/app/core/services/match.service';
 import { StadiumService } from 'src/app/core/services/stadium.service';
+import { KitTypePipe } from 'src/app/shared/pipes/kit-type.pipe';
 
 @Component({
   selector: 'app-admin-match-add-modal',
@@ -29,12 +32,17 @@ export class AdminMatchAddModalComponent implements OnInit {
   clubs: Club[];
   stadiums: Stadium[];
 
+  homeClubKits: Kit[];
+  awayClubKits: Kit[];
+
   constructor(public bsModalRef: BsModalRef,
     private fb: FormBuilder,
     private clubService: ClubService,
+    private kitService: KitService,
     private stadiumService: StadiumService,
     private matchService: MatchService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private kitTypePipe: KitTypePipe) { }
 
   ngOnInit() {
     this.addForm = this.fb.group({
@@ -42,6 +50,8 @@ export class AdminMatchAddModalComponent implements OnInit {
       round: [null, Validators.required],
       homeClubId: [null, Validators.required],
       awayClubId: [null, Validators.required],
+      homeClubKitId: [null, Validators.required],
+      awayClubKitId: [null, Validators.required],
       matchTime: [null, Validators.required],
       isPlayed: [false, Validators.required],
       stadiumId: [null, Validators.required]
@@ -52,6 +62,26 @@ export class AdminMatchAddModalComponent implements OnInit {
 
     this.stadiumService.getBriefListStadium()
       .subscribe((stadiums: Stadium[]) => this.stadiums = stadiums);
+  }
+
+  onHomeClubChanged(club: Club) {
+    this.kitService.getKitsBySeasonIdAndClubId(this.season.id, club.id)
+      .subscribe((kits: Kit[]) => {
+        this.homeClubKits = kits.map(kit => ({
+          ...kit,
+          name: this.kitTypePipe.transform(kit.kitType)
+        }));
+      });
+  }
+
+  onAwayClubChanged(club: Club) {
+    this.kitService.getKitsBySeasonIdAndClubId(this.season.id, club.id)
+      .subscribe((kits: Kit[]) => {
+        this.awayClubKits = kits.map(kit => ({
+          ...kit,
+          name: this.kitTypePipe.transform(kit.kitType)
+        }));
+      });
   }
 
   addMatch() {

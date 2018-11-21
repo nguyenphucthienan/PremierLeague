@@ -13,17 +13,29 @@
     <div class="form-group">
       <label for="homeClubId">Home Club</label>
       <ng-select #homeClubSelect [items]="clubs" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
-        placeholder="Select Home Club" formControlName="homeClubId">
+        placeholder="Select Home Club" formControlName="homeClubId" (change)="onHomeClubChanged($event)">
       </ng-select>
     </div>
     <div class="form-group">
       <label for="awayClubId">Away Club</label>
       <ng-select #awayClubSelect [items]="clubs" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
-        placeholder="Select Away Club" formControlName="awayClubId">
+        placeholder="Select Away Club" formControlName="awayClubId" (change)="onAwayClubChanged($event)">
       </ng-select>
     </div>
     <div class="form-group">
-      <label for="awayClubId">Stadium</label>
+      <label for="homeClubKitId">Home Club Kit</label>
+      <ng-select [items]="homeClubKits" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
+        placeholder="Select Home Club Kit" formControlName="homeClubKitId">
+      </ng-select>
+    </div>
+    <div class="form-group">
+      <label for="awayClubKitId">Away Club Kit</label>
+      <ng-select [items]="awayClubKits" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
+        placeholder="Select Away Club Kit" formControlName="awayClubKitId">
+      </ng-select>
+    </div>
+    <div class="form-group">
+      <label for="stadiumId">Stadium</label>
       <ng-select [items]="stadiums" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
         placeholder="Select Stadium" formControlName="stadiumId">
       </ng-select>

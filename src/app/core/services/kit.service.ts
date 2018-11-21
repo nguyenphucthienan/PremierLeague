@@ -38,12 +38,21 @@ export class KitService {
       .applyFilter(filterMode)
       .build();
 
-    return this.http.get<Kit[]>(`${this.kitUrl}`, { params: params });
+    return this.http.get<Kit[]>(`${this.kitUrl}`, { params });
   }
 
   getKitsBySquadId(squadId: number): Observable<Kit[]> {
     const url = UrlUtils.resolveParams(this.kitListUrl, { squadId });
     return this.http.get<Kit[]>(url);
+  }
+
+  getKitsBySeasonIdAndClubId(seasonId: number, clubId: number): Observable<Kit[]> {
+    const url = UrlUtils.resolveParams(this.kitListUrl, { squadId: 0 });
+    const params = new ParamsBuilder()
+      .applyFilter({ seasonId, clubId })
+      .build();
+
+    return this.http.get<Kit[]>(url, { params });
   }
 
   getKit(squadId: number, id: number): Observable<Kit> {
