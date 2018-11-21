@@ -14,7 +14,8 @@ import { UrlUtils } from '../utils/url-utils';
 export class SquadService {
 
   private readonly squadUrl = `${environment.apiUrl}/squads`;
-  private readonly squadPlayersUrl = `${environment.apiUrl}/squads/{id}/players/{playerId}`;
+  private readonly squadPlayersUrl = `${environment.apiUrl}/squads/{id}/players`;
+  private readonly squadPlayersDetailUrl = `${environment.apiUrl}/squads/{id}/players/{playerId}`;
 
   private readonly defaultPagination: Pagination = {
     pageNumber: 1,
@@ -56,13 +57,14 @@ export class SquadService {
     return this.http.delete<Squad>(`${this.squadUrl}/${id}`);
   }
 
-  addPlayerToSquad(id: number, playerId: number): Observable<any> {
-    const url = UrlUtils.resolveParams(this.squadPlayersUrl, { id, playerId });
-    return this.http.post<any>(url, null);
+  addPlayerToSquad(id: number,
+    squadPlayer: { squadId: number, playerId: number }): Observable<any> {
+    const url = UrlUtils.resolveParams(this.squadPlayersUrl, { id });
+    return this.http.post<any>(url, squadPlayer);
   }
 
   removePlayerFromSquad(id: number, playerId: number): Observable<any> {
-    const url = UrlUtils.resolveParams(this.squadPlayersUrl, { id, playerId });
+    const url = UrlUtils.resolveParams(this.squadPlayersDetailUrl, { id, playerId });
     return this.http.delete<any>(url);
   }
 
