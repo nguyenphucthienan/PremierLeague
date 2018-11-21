@@ -11,6 +11,9 @@ import { TableCellChange } from 'src/app/datatable/models/table-cell-change.inte
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
+import {
+  AdminMatchCardsAddModalComponent,
+} from '../../modals/admin-match-cards-add-modal/admin-match-cards-add-modal.component';
 import { AdminMatchCardsManagerTableService } from '../../services/admin-match-cards-manager-table.service';
 
 @Component({
@@ -69,16 +72,16 @@ export class AdminMatchCardsManagerComponent implements OnInit, AfterViewInit, O
   }
 
   openAddModal() {
-    // this.bsModalRef = this.modalService.show(AdminMatchGoalsAddModalComponent, {
-    //   initialState: {
-    //     title: 'Add Goal',
-    //     matchId: this.matchId
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminMatchCardsAddModalComponent, {
+      initialState: {
+        title: 'Add Card',
+        matchId: this.matchId
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.goalAdded
-    //   .subscribe(() => this.onCardAdded());
+    this.bsModalRef.content.cardAdded
+      .subscribe(() => this.onCardAdded());
   }
 
   onCardAdded() {

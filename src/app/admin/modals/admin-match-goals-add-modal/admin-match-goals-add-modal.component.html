@@ -6,7 +6,6 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="addForm" (ngSubmit)="addGoal()" class="form">
-
     <div class="form-group">
       <label for="clubId">Club</label>
       <ng-select #clubSelect [items]="clubs" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
