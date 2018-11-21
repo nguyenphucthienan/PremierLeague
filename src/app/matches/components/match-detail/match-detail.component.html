@@ -1,13 +1,11 @@
 <div class="container mt-3">
-  <h1 class="text-center">Match Detail</h1>
   <div class="row mt-3">
     <div class="col-md-5">
-      <span class="club d-flex flex-row justify-content-md-end justify-content-center align-items-center">
-        <a class="club-name text-right font-weight-bold" [routerLink]="['/clubs', match.homeClub.id]">
+      <span class="club d-flex flex-md-row justify-content-md-end justify-content-center align-items-center">
+        <a class="club-name text-md-right text-right font-weight-bold" [routerLink]="['/clubs', match.homeClub.id]">
           {{ match.homeClub.name }}
         </a>
         <img class="club-photo img-fluid" [src]="match.homeClub.photoUrl" [alt]="match.homeClub.name">
-
       </span>
     </div>
     <div class="col-md-2 d-flex justify-content-center align-items-center">
@@ -18,16 +16,15 @@
     </div>
     <div class="col-md-5">
       <span class="club d-flex flex-md-row flex-row-reverse justify-content-md-start justify-content-center align-items-center">
-          <img class="club-photo" [src]="match.awayClub.photoUrl" [alt]="match.awayClub.name">
-
-        <a class="club-name font-weight-bold" [routerLink]="['/clubs', match.awayClub.id]">
+        <img class="club-photo" [src]="match.awayClub.photoUrl" [alt]="match.awayClub.name">
+        <a class="club-name text-md-left text-right font-weight-bold" [routerLink]="['/clubs', match.awayClub.id]">
           <span>{{ match.awayClub.name }}</span>
         </a>
       </span>
     </div>
   </div>
   <div class="row mt-3">
-    <div class="col-md-3">
+    <div class="col-lg-3">
       <div class="card mt-3">
         <div class="card-header">
           <span class="font-weight-bold">Overview</span>
@@ -44,10 +41,26 @@
           <hr>
           <i class="fa fa-map-marker"></i><span class="font-weight-bold"> Stadium: </span>
           <span>{{ match.stadium.name }}</span>
+          <hr>
+          <i class="fa fa-snowflake-o"></i><span class="font-weight-bold"> Kits: </span>
+          <div class="row">
+            <div class="col-6">
+              <div class="d-flex flex-column justify-content-center align-items-center">
+                <img class="kit-photo" [src]="match.homeClubKit.photoUrl" [alt]="match.homeClub.name">
+                <span class="text-center">Home</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex flex-column justify-content-center align-items-center">
+                <img class="kit-photo" [src]="match.awayClubKit.photoUrl" [alt]="match.awayClub.name">
+                <span class="text-center">Away</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-lg-9">
       <div class="card mt-3">
         <div class="card-header">
           <span class="font-weight-bold">Goals</span>
