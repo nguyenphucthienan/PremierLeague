@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, map, tap } from 'rxjs/operators';
@@ -28,7 +29,8 @@ export class AdminPlayerManagerComponent implements OnInit, AfterViewInit, OnDes
   searchSubscription: Subscription;
   bsModalRef: BsModalRef;
 
-  constructor(public adminPlayerManagerTableService: AdminPlayerManagerTableService,
+  constructor(private router: Router,
+    public adminPlayerManagerTableService: AdminPlayerManagerTableService,
     private playerService: PlayerService,
     private alertService: AlertService,
     private modalService: BsModalService) { }
@@ -49,6 +51,9 @@ export class AdminPlayerManagerComponent implements OnInit, AfterViewInit, OnDes
   onTableCellChanged(tableCellChange: TableCellChange) {
     const action = tableCellChange.newValue;
     switch (action.type) {
+      case TableActionType.GetDetail:
+        this.navigateToPlayerDetail(tableCellChange.row.cells['id'].value);
+        break;
       case TableActionType.Edit:
         this.openEditModal(tableCellChange.row);
         break;
@@ -61,6 +66,10 @@ export class AdminPlayerManagerComponent implements OnInit, AfterViewInit, OnDes
   searchPlayer(value: string) {
     this.adminPlayerManagerTableService.filterMode['name'] = value;
     this.datatable.refresh();
+  }
+
+  navigateToPlayerDetail(playerId: number) {
+    this.router.navigate(['/players', playerId]);
   }
 
   openAddModal() {

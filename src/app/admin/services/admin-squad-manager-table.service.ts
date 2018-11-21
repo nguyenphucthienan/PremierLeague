@@ -35,8 +35,8 @@ export class AdminSquadManagerTableService implements TableService {
   filterMode: FilterMode = {};
 
   actions: TableAction[] = [
-    { class: 'btn-info', icon: 'fa fa-snowflake-o', text: 'Kits', type: TableActionType.NavigateToSquadKits },
-    { class: 'btn-info', icon: 'fa fa-users', text: 'Players', type: TableActionType.NavigateToSquadPlayers },
+    { class: 'btn-dark', icon: 'fa fa-snowflake-o', text: 'Kits', type: TableActionType.NavigateToSquadKits },
+    { class: 'btn-dark', icon: 'fa fa-users', text: 'Players', type: TableActionType.NavigateToSquadPlayers },
     { class: 'btn-primary', icon: 'fa fa-edit', text: 'Edit', type: TableActionType.Edit },
     { class: 'btn-danger', icon: 'fa fa-trash', text: 'Delete', type: TableActionType.Delete }
   ];
