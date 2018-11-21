@@ -5,8 +5,8 @@ export interface Club {
   id: number;
   code: string;
   name: string;
-  establishedYear: number;
-  photoUrl: string;
+  establishedYear?: number;
+  photoUrl?: string;
   stadium?: Stadium;
   squads?: Squad[];
 }

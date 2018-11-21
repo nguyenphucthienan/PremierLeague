@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 
 import { FilterMode } from '../models/filter-mode.interface';
 import { Pagination } from '../models/pagination.interface';
+import { Player } from '../models/player.interface';
 import { SortMode } from '../models/sort-mode.interface';
 import { Squad } from '../models/squad.interface';
 import { ParamsBuilder } from '../utils/params-builder';
@@ -55,6 +56,20 @@ export class SquadService {
 
   deleteSquad(id: number): Observable<Squad> {
     return this.http.delete<Squad>(`${this.squadUrl}/${id}`);
+  }
+
+  getPlayersInSquadById(id: number): Observable<Player[]> {
+    const url = UrlUtils.resolveParams(this.squadPlayersUrl, { id });
+    return this.http.get<Player[]>(url);
+  }
+
+  getPlayersInSquad(seasonId: number, clubId: number): Observable<Player[]> {
+    const url = UrlUtils.resolveParams(this.squadPlayersUrl, { id: 0 });
+    const params = new ParamsBuilder()
+      .applyFilter({ seasonId, clubId })
+      .build();
+
+    return this.http.get<Player[]>(url, { params });
   }
 
   addPlayerToSquad(id: number, squadPlayer: { squadId: number, playerId: number })

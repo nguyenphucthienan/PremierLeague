@@ -11,6 +11,9 @@ import { TableCellChange } from 'src/app/datatable/models/table-cell-change.inte
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
+import {
+  AdminMatchGoalsAddModalComponent,
+} from '../../modals/admin-match-goals-add-modal/admin-match-goals-add-modal.component';
 import { AdminMatchGoalsManagerTableService } from '../../services/admin-match-goals-manager-table.service';
 
 @Component({
@@ -69,16 +72,16 @@ export class AdminMatchGoalsManagerComponent implements OnInit, AfterViewInit, O
   }
 
   openAddModal() {
-    // this.bsModalRef = this.modalService.show(AdminSquadKitsAddModalComponent, {
-    //   initialState: {
-    //     title: 'Add Kit',
-    //     matchId: this.matchId
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminMatchGoalsAddModalComponent, {
+      initialState: {
+        title: 'Add Goal',
+        matchId: this.matchId
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.kitAdded
-    //   .subscribe(() => this.onKitAdded());
+    this.bsModalRef.content.goalAdded
+      .subscribe(() => this.onGoalAdded());
   }
 
   onGoalAdded() {

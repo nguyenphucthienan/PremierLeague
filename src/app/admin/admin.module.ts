@@ -20,6 +20,9 @@ import { AdminClubEditModalComponent } from './modals/admin-club-edit-modal/admi
 import { AdminMatchAddModalComponent } from './modals/admin-match-add-modal/admin-match-add-modal.component';
 import { AdminMatchEditModalComponent } from './modals/admin-match-edit-modal/admin-match-edit-modal.component';
 import { AdminMatchGenerateModalComponent } from './modals/admin-match-generate-modal/admin-match-generate-modal.component';
+import {
+  AdminMatchGoalsAddModalComponent,
+} from './modals/admin-match-goals-add-modal/admin-match-goals-add-modal.component';
 import { AdminPlayerAddModalComponent } from './modals/admin-player-add-modal/admin-player-add-modal.component';
 import { AdminPlayerEditModalComponent } from './modals/admin-player-edit-modal/admin-player-edit-modal.component';
 import { AdminSeasonAddModalComponent } from './modals/admin-season-add-modal/admin-season-add-modal.component';
@@ -67,7 +70,8 @@ import { AdminStadiumEditModalComponent } from './modals/admin-stadium-edit-moda
     AdminMatchAddModalComponent,
     AdminMatchEditModalComponent,
     AdminMatchGenerateModalComponent,
-    AdminMatchGoalsManagerComponent
+    AdminMatchGoalsManagerComponent,
+    AdminMatchGoalsAddModalComponent
   ],
   imports: [
     SharedModule,
@@ -91,7 +95,8 @@ import { AdminStadiumEditModalComponent } from './modals/admin-stadium-edit-moda
     AdminSquadKitsEditModalComponent,
     AdminMatchAddModalComponent,
     AdminMatchEditModalComponent,
-    AdminMatchGenerateModalComponent
+    AdminMatchGenerateModalComponent,
+    AdminMatchGoalsAddModalComponent
   ]
 })
 export class AdminModule { }
