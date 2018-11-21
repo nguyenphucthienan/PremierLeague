@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Match } from 'src/app/core/models/match.interface';
 import { Goal } from 'src/app/core/models/goal.interface';
+import { Match } from 'src/app/core/models/match.interface';
 
 @Component({
   selector: 'app-match-goals',
@@ -22,11 +22,11 @@ export class MatchGoalsComponent implements OnInit {
       .sort((a, b) => a.goalTime - b.goalTime);
 
     this.homeGoals = this.match.goals
-      .filter((goal: Goal) => goal.clubId === this.match.homeClub.id)
+      .filter((goal: Goal) => goal.club.id === this.match.homeClub.id)
       .sort((a, b) => a.goalTime - b.goalTime);
 
     this.awayGoals = this.match.goals
-      .filter((goal: Goal) => goal.clubId === this.match.awayClub.id)
+      .filter((goal: Goal) => goal.club.id === this.match.awayClub.id)
       .sort((a, b) => a.goalTime - b.goalTime);
   }
 

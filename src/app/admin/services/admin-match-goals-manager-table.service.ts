@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { FilterMode } from 'src/app/core/models/filter-mode.interface';
 import { Pagination } from 'src/app/core/models/pagination.interface';
 import { SortMode } from 'src/app/core/models/sort-mode.interface';
-import { MatchService } from 'src/app/core/services/match.service';
+import { GoalService } from 'src/app/core/services/goal.service';
 import { TableAction, TableActionType } from 'src/app/datatable/models/table-action.interface';
 import { TableCell } from 'src/app/datatable/models/table-cell.interface';
 import { TableColumn } from 'src/app/datatable/models/table-column.interface';
@@ -11,15 +11,15 @@ import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { TableService } from 'src/app/datatable/services/table.service';
 
 @Injectable()
-export class AdminMatchManagerTableService implements TableService {
+export class AdminMatchGoalsManagerTableService implements TableService {
 
   columns: TableColumn[] = [
     { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true },
-    { name: 'round', text: 'Round', type: 'TextTableCellComponent', sortable: true },
-    { name: 'matchClubs', text: 'Clubs', type: 'MatchClubsTableCellComponent', sortable: false },
-    { name: 'matchTime', text: 'Match Time', type: 'DateTimeTableCellComponent', sortable: true },
-    { name: 'isPlayed', text: 'Played', type: 'TextTableCellComponent', sortable: true },
-    { name: 'stadium', text: 'Stadium', type: 'ObjectTextTableCellComponent', sortable: true },
+    { name: 'club', text: 'Club', type: 'ObjectTextTableCellComponent', sortable: true },
+    { name: 'player', text: 'Player', type: 'ObjectTextTableCellComponent', sortable: true },
+    { name: 'goalType', text: 'Type', type: 'TextTableCellComponent', sortable: true },
+    { name: 'isOwnGoal', text: 'OG', type: 'TextTableCellComponent', sortable: true },
+    { name: 'goalTime', text: 'Time', type: 'TextTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];
 
@@ -31,28 +31,25 @@ export class AdminMatchManagerTableService implements TableService {
   };
 
   sortMode: SortMode = {
-    sortBy: 'matchTime',
+    sortBy: 'goalTime',
     isSortAscending: true
   };
 
   filterMode: FilterMode = {};
 
   actions: TableAction[] = [
-    { class: 'btn-info', icon: 'fa fa-info-circle', text: 'Detail', type: TableActionType.GetDetail },
-    { class: 'btn-dark', icon: 'fa fa-empire', text: 'Goals', type: TableActionType.NavigateToMatchGoals },
-    { class: 'btn-dark', icon: 'fa fa-file-o', text: 'Cards', type: TableActionType.NavigateToMatchCards },
     { class: 'btn-primary', icon: 'fa fa-edit', text: 'Edit', type: TableActionType.Edit },
     { class: 'btn-danger', icon: 'fa fa-trash', text: 'Delete', type: TableActionType.Delete }
   ];
 
-  constructor(private matchService: MatchService) { }
+  constructor(private goalService: GoalService) { }
 
   getDataColumns() {
     return this.columns;
   }
 
   getRawData() {
-    return this.matchService.getMatches(this.pagination,
+    return this.goalService.getGoals(this.pagination,
       this.sortMode, this.filterMode)
       .pipe(
         map((response: any) => {
@@ -74,7 +71,7 @@ export class AdminMatchManagerTableService implements TableService {
               continue;
             }
 
-            if (key === 'stadium') {
+            if (key === 'club' || key === 'player') {
               cells[key] = {
                 value: row[key],
                 textProperty: 'name'
@@ -85,16 +82,6 @@ export class AdminMatchManagerTableService implements TableService {
               };
             }
           }
-
-          cells['matchClubs'] = {
-            value: {
-              isPlayed: cells['isPlayed'].value,
-              homeClub: cells['homeClub'].value,
-              awayClub: cells['awayClub'].value,
-              homeScore: cells['homeScore'].value,
-              awayScore: cells['awayScore'].value
-            }
-          };
 
           cells['actions'] = {
             value: this.actions,

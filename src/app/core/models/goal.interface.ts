@@ -1,10 +1,11 @@
+import { Club } from './club.interface';
+import { Player } from './player.interface';
+
 export interface Goal {
   id: number;
   matchId: number;
-  clubId: number;
-  clubCode?: string;
-  playerId: number;
-  playerName?: string;
+  club: Club;
+  player: Player;
   goalTime: number;
   goalType: number;
   isOwnGoal: boolean;

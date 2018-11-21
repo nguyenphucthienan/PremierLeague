@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { AdminClubManagerComponent } from './components/admin-club-manager/admin-club-manager.component';
+import { AdminMatchGoalsManagerComponent } from './components/admin-match-goals-manager/admin-match-goals-manager.component';
 import { AdminMatchManagerComponent } from './components/admin-match-manager/admin-match-manager.component';
 import { AdminPlayerManagerComponent } from './components/admin-player-manager/admin-player-manager.component';
 import { AdminSeasonManagerComponent } from './components/admin-season-manager/admin-season-manager.component';
@@ -61,7 +62,8 @@ import { AdminStadiumEditModalComponent } from './modals/admin-stadium-edit-moda
     AdminMatchManagerComponent,
     AdminMatchAddModalComponent,
     AdminMatchEditModalComponent,
-    AdminMatchGenerateModalComponent
+    AdminMatchGenerateModalComponent,
+    AdminMatchGoalsManagerComponent
   ],
   imports: [
     SharedModule,
