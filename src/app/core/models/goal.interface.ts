@@ -7,6 +7,13 @@ export interface Goal {
   club: Club;
   player: Player;
   goalTime: number;
-  goalType: number;
+  goalType: GoalType;
   isOwnGoal: boolean;
+}
+
+export enum GoalType {
+  Other,
+  LeftFoot,
+  RightFoot,
+  Head
 }

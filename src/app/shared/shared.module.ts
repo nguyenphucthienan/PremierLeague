@@ -16,6 +16,7 @@ import { FilterBarComponent } from './components/filter-bar/filter-bar.component
 import { PhotoUploaderComponent } from './components/photo-uploader/photo-uploader.component';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { ConfirmModalComponent } from './modals/confirm-modal/confirm-modal.component';
+import { GoalTypePipe } from './pipes/goal-type.pipe';
 import { KitTypePipe } from './pipes/kit-type.pipe';
 import { PositionTypePipe } from './pipes/position-type.pipe';
 
@@ -25,6 +26,7 @@ import { PositionTypePipe } from './pipes/position-type.pipe';
     FileDropDirective,
     KitTypePipe,
     PositionTypePipe,
+    GoalTypePipe,
     HasRoleDirective,
     FilterBarComponent,
     PhotoUploaderComponent,
@@ -61,7 +63,8 @@ import { PositionTypePipe } from './pipes/position-type.pipe';
   ],
   providers: [
     KitTypePipe,
-    PositionTypePipe
+    PositionTypePipe,
+    GoalTypePipe
   ],
   entryComponents: [
     ConfirmModalComponent

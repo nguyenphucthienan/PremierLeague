@@ -9,6 +9,7 @@ import { TableCell } from 'src/app/datatable/models/table-cell.interface';
 import { TableColumn } from 'src/app/datatable/models/table-column.interface';
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { TableService } from 'src/app/datatable/services/table.service';
+import { GoalTypePipe } from 'src/app/shared/pipes/goal-type.pipe';
 
 @Injectable()
 export class AdminMatchGoalsManagerTableService implements TableService {
@@ -17,7 +18,7 @@ export class AdminMatchGoalsManagerTableService implements TableService {
     { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true },
     { name: 'club', text: 'Club', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'player', text: 'Player', type: 'ObjectTextTableCellComponent', sortable: true },
-    { name: 'goalType', text: 'Type', type: 'TextTableCellComponent', sortable: true },
+    { name: 'goalType', text: 'Type', type: 'PipedTextTableCellComponent', sortable: true },
     { name: 'isOwnGoal', text: 'OG', type: 'TextTableCellComponent', sortable: true },
     { name: 'goalTime', text: 'Time', type: 'TextTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
@@ -42,7 +43,8 @@ export class AdminMatchGoalsManagerTableService implements TableService {
     { class: 'btn-danger', icon: 'fa fa-trash', text: 'Delete', type: TableActionType.Delete }
   ];
 
-  constructor(private goalService: GoalService) { }
+  constructor(private goalService: GoalService,
+    private goalTypePipe: GoalTypePipe) { }
 
   getDataColumns() {
     return this.columns;
@@ -75,6 +77,11 @@ export class AdminMatchGoalsManagerTableService implements TableService {
               cells[key] = {
                 value: row[key],
                 textProperty: 'name'
+              };
+            } else if (key === 'goalType') {
+              cells[key] = {
+                value: row[key],
+                pipe: this.goalTypePipe
               };
             } else {
               cells[key] = {
