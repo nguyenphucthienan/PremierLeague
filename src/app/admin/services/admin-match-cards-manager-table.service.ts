@@ -9,7 +9,7 @@ import { TableCell } from 'src/app/datatable/models/table-cell.interface';
 import { TableColumn } from 'src/app/datatable/models/table-column.interface';
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { TableService } from 'src/app/datatable/services/table.service';
-import { GoalTypePipe } from 'src/app/shared/pipes/goal-type.pipe';
+import { CardTypePipe } from 'src/app/shared/pipes/card-type.pipe';
 
 @Injectable()
 export class AdminMatchCardsManagerTableService implements TableService {
@@ -19,7 +19,6 @@ export class AdminMatchCardsManagerTableService implements TableService {
     { name: 'club', text: 'Club', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'player', text: 'Player', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'cardType', text: 'Type', type: 'PipedTextTableCellComponent', sortable: true },
-    { name: 'isOwnGoal', text: 'OG', type: 'BooleanTableCellComponent', sortable: true },
     { name: 'cardTime', text: 'Time', type: 'TextTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];
@@ -44,7 +43,7 @@ export class AdminMatchCardsManagerTableService implements TableService {
   ];
 
   constructor(private cardService: CardService,
-    private goalTypePipe: GoalTypePipe) { }
+    private cardTypePipe: CardTypePipe) { }
 
   getDataColumns() {
     return this.columns;
@@ -81,7 +80,7 @@ export class AdminMatchCardsManagerTableService implements TableService {
             } else if (key === 'cardType') {
               cells[key] = {
                 value: row[key],
-                pipe: this.goalTypePipe
+                pipe: this.cardTypePipe
               };
             } else {
               cells[key] = {

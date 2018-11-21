@@ -16,6 +16,7 @@ import { FilterBarComponent } from './components/filter-bar/filter-bar.component
 import { PhotoUploaderComponent } from './components/photo-uploader/photo-uploader.component';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { ConfirmModalComponent } from './modals/confirm-modal/confirm-modal.component';
+import { CardTypePipe } from './pipes/card-type.pipe';
 import { GoalTypePipe } from './pipes/goal-type.pipe';
 import { KitTypePipe } from './pipes/kit-type.pipe';
 import { PositionTypePipe } from './pipes/position-type.pipe';
@@ -27,6 +28,7 @@ import { PositionTypePipe } from './pipes/position-type.pipe';
     KitTypePipe,
     PositionTypePipe,
     GoalTypePipe,
+    CardTypePipe,
     HasRoleDirective,
     FilterBarComponent,
     PhotoUploaderComponent,
@@ -64,7 +66,8 @@ import { PositionTypePipe } from './pipes/position-type.pipe';
   providers: [
     KitTypePipe,
     PositionTypePipe,
-    GoalTypePipe
+    GoalTypePipe,
+    CardTypePipe
   ],
   entryComponents: [
     ConfirmModalComponent
