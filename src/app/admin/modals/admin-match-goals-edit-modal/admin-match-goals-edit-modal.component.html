@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{ title }}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="editForm" (ngSubmit)="editGoal()" class="form">
+
+    <div class="form-group">
+      <label for="clubId">Club</label>
+      <ng-select #clubSelect [items]="clubs" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
+        placeholder="Select Club" formControlName="clubId">
+      </ng-select>
+    </div>
+    <div class="form-group">
+      <label for="playerId">Player</label>
+      <ng-select [items]="players" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="label"
+        placeholder="Select Player" formControlName="playerId">
+      </ng-select>
+    </div>
+    <div class="form-group">
+      <label for="goalType">Goal Type</label>
+      <ng-select [items]="goalTypes" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
+        placeholder="Select Goal Type" formControlName="goalType">
+      </ng-select>
+    </div>
+    <div class="form-group">
+      <label for="goalTime">Goal Time</label>
+      <input type="number" id="goalTime" class="form-control" formControlName="goalTime" placeholder="Goal Time">
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-block btn-primary" (click)="editGoal()" [disabled]="editForm.invalid">Add</button>
+</div>

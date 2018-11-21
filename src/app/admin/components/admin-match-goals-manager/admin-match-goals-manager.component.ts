@@ -14,6 +14,9 @@ import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confi
 import {
   AdminMatchGoalsAddModalComponent,
 } from '../../modals/admin-match-goals-add-modal/admin-match-goals-add-modal.component';
+import {
+  AdminMatchGoalsEditModalComponent,
+} from '../../modals/admin-match-goals-edit-modal/admin-match-goals-edit-modal.component';
 import { AdminMatchGoalsManagerTableService } from '../../services/admin-match-goals-manager-table.service';
 
 @Component({
@@ -89,16 +92,17 @@ export class AdminMatchGoalsManagerComponent implements OnInit, AfterViewInit, O
   }
 
   openEditModal(rowData: TableRow) {
-    // this.bsModalRef = this.modalService.show(AdminSquadKitsEditModalComponent, {
-    //   initialState: {
-    //     title: 'Edit Kit',
-    //     rowData
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminMatchGoalsEditModalComponent, {
+      initialState: {
+        title: 'Edit Kit',
+        matchId: this.matchId,
+        rowData
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.kitEdited
-    //   .subscribe(() => this.onKitEdited());
+    this.bsModalRef.content.goalEdited
+      .subscribe(() => this.onGoalEdited());
   }
 
   onGoalEdited() {
