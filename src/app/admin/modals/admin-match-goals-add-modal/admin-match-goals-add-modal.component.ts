@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { BsModalRef } from 'ngx-bootstrap';
+import { forkJoin } from 'rxjs';
 import { Club } from 'src/app/core/models/club.interface';
 import { Goal, GoalType } from 'src/app/core/models/goal.interface';
 import { Match } from 'src/app/core/models/match.interface';
@@ -82,12 +83,27 @@ export class AdminMatchGoalsAddModalComponent implements OnInit {
             name: match.awayClub.name
           }
         ];
-      });
-  }
 
-  onClubChanged(club: Club) {
-    this.squadService.getPlayersInSquad(this.match.season.id, club.id)
-      .subscribe((players: Player[]) => this.players = players);
+        forkJoin(
+          this.squadService.getPlayersInSquad(this.match.season.id, this.match.homeClub.id),
+          this.squadService.getPlayersInSquad(this.match.season.id, this.match.awayClub.id)
+        )
+          .subscribe((data: any) => {
+            const homeClubPlayers = data[0].map(player => ({
+              id: player.id,
+              name: player.name,
+              label: `${this.match.homeClub.name} - ${player.name}`
+            }));
+
+            const awayClubPlayers = data[1].map(player => ({
+              id: player.id,
+              name: player.name,
+              label: `${this.match.awayClub.name} - ${player.name}`
+            }));
+
+            this.players = [...homeClubPlayers, ...awayClubPlayers];
+          });
+      });
   }
 
   addGoal() {

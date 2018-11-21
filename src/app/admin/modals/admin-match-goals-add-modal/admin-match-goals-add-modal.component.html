@@ -10,13 +10,13 @@
     <div class="form-group">
       <label for="clubId">Club</label>
       <ng-select #clubSelect [items]="clubs" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
-        placeholder="Select Club" formControlName="clubId" (change)="onClubChanged($event)">
+        placeholder="Select Club" formControlName="clubId">
       </ng-select>
     </div>
     <div class="form-group">
       <label for="playerId">Player</label>
-      <ng-select [items]="players" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name" placeholder="Select Player"
-        formControlName="playerId">
+      <ng-select [items]="players" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="label"
+        placeholder="Select Player" formControlName="playerId">
       </ng-select>
     </div>
     <div class="form-group">
