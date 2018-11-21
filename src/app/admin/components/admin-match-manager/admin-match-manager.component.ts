@@ -142,6 +142,7 @@ export class AdminMatchManagerComponent implements OnInit {
     this.bsModalRef = this.modalService.show(AdminMatchEditModalComponent, {
       initialState: {
         title: 'Edit Match',
+        season: this.currentSeason,
         rowData
       },
       class: 'modal-dialog-centered'
