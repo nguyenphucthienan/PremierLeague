@@ -8,11 +8,15 @@ import { SquadService } from 'src/app/core/services/squad.service';
 import { DatatableComponent } from 'src/app/datatable/datatable.component';
 import { TableActionType } from 'src/app/datatable/models/table-action.interface';
 import { TableCellChange } from 'src/app/datatable/models/table-cell-change.interface';
+import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
 import {
   AdminSquadPlayersAddModalComponent,
 } from '../../modals/admin-squad-players-add-modal/admin-squad-players-add-modal.component';
+import {
+  AdminSquadPlayersEditModalComponent,
+} from '../../modals/admin-squad-players-edit-modal/admin-squad-players-edit-modal.component';
 import { AdminSquadPlayersManagerTableService } from '../../services/admin-squad-players-manager-table.service';
 
 @Component({
@@ -56,6 +60,9 @@ export class AdminSquadPlayersManagerComponent implements OnInit, AfterViewInit,
   onTableCellChanged(tableCellChange: TableCellChange) {
     const action = tableCellChange.newValue;
     switch (action.type) {
+      case TableActionType.Edit:
+        this.openEditModal(tableCellChange.row);
+        break;
       case TableActionType.Delete:
         this.openRemoveModal(tableCellChange.row.cells['id'].value);
         break;
@@ -81,6 +88,24 @@ export class AdminSquadPlayersManagerComponent implements OnInit, AfterViewInit,
   }
 
   onPlayerAdded() {
+    this.datatable.refresh();
+  }
+
+  openEditModal(rowData: TableRow) {
+    this.bsModalRef = this.modalService.show(AdminSquadPlayersEditModalComponent, {
+      initialState: {
+        title: 'Edit Player',
+        squadId: this.squadId,
+        rowData
+      },
+      class: 'modal-dialog-centered'
+    });
+
+    this.bsModalRef.content.playerEdited
+      .subscribe(() => this.onPlayerEdited());
+  }
+
+  onPlayerEdited() {
     this.datatable.refresh();
   }
 

@@ -38,7 +38,7 @@ export class SquadService {
       .applyFilter(filterMode)
       .build();
 
-    return this.http.get<Squad[]>(`${this.squadUrl}`, { params: params });
+    return this.http.get<Squad[]>(`${this.squadUrl}`, { params });
   }
 
   getSquad(id: number): Observable<Squad> {
@@ -57,10 +57,20 @@ export class SquadService {
     return this.http.delete<Squad>(`${this.squadUrl}/${id}`);
   }
 
-  addPlayerToSquad(id: number,
-    squadPlayer: { squadId: number, playerId: number }): Observable<any> {
+  addPlayerToSquad(id: number, squadPlayer: { squadId: number, playerId: number })
+    : Observable<any> {
     const url = UrlUtils.resolveParams(this.squadPlayersUrl, { id });
     return this.http.post<any>(url, squadPlayer);
+  }
+
+  editPlayerInSquad(id: number, squadPlayer: { squadId: number, playerId: number })
+    : Observable<any> {
+    const url = UrlUtils.resolveParams(
+      this.squadPlayersDetailUrl,
+      { id, playerId: squadPlayer.playerId }
+    );
+
+    return this.http.put<any>(url, squadPlayer);
   }
 
   removePlayerFromSquad(id: number, playerId: number): Observable<any> {

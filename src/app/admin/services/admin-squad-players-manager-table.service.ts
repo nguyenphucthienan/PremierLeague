@@ -16,7 +16,7 @@ export class AdminSquadPlayersManagerTableService implements TableService {
 
   columns: TableColumn[] = [
     { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true },
-    { name: 'number', text: 'ID', type: 'TextTableCellComponent', sortable: true },
+    { name: 'number', text: 'No.', type: 'TextTableCellComponent', sortable: true },
     { name: 'photoUrl', text: 'Photo', type: 'ImageTableCellComponent', sortable: false, center: true },
     { name: 'name', text: 'Name', type: 'TextTableCellComponent', sortable: true },
     { name: 'positionType', text: 'Position', type: 'PipedTextTableCellComponent', sortable: true },
@@ -42,6 +42,7 @@ export class AdminSquadPlayersManagerTableService implements TableService {
   filterMode: FilterMode = {};
 
   actions: TableAction[] = [
+    { class: 'btn-primary', icon: 'fa fa-edit', text: 'Edit', type: TableActionType.Edit },
     { class: 'btn-danger', icon: 'fa fa-trash', text: 'Delete', type: TableActionType.Delete }
   ];
 

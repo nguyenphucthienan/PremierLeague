@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{ title }}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="editForm" (ngSubmit)="editPlayer()" class="form">
+    <div class="form-group">
+      <label for="playerId">Player</label>
+      <input type="playerId" id="playerId" class="form-control" [value]="rowData.cells['name'].value" placeholder="Player"
+        [attr.disabled]="true">
+    </div>
+    <div class="form-group">
+      <label for="number">Number</label>
+      <input type="number" id="name" class="form-control" formControlName="number" placeholder="Number">
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-block btn-primary" (click)="editPlayer()" [disabled]="editForm.invalid">OK</button>
+</div>
