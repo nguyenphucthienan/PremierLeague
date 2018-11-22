@@ -8,10 +8,9 @@ import { TableAction, TableActionType } from 'src/app/datatable/models/table-act
 import { TableCell } from 'src/app/datatable/models/table-cell.interface';
 import { TableColumn } from 'src/app/datatable/models/table-column.interface';
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
-import { TableService } from 'src/app/datatable/services/table.service';
 
 @Injectable()
-export class FixturesTableService implements TableService {
+export class ResultsTableService {
 
   columns: TableColumn[] = [
     { name: 'round', text: 'Round', type: 'TextTableCellComponent', sortable: true },
@@ -34,7 +33,7 @@ export class FixturesTableService implements TableService {
   };
 
   filterMode: FilterMode = {
-    isPlayed: false
+    isPlayed: true
   };
 
   actions: TableAction[] = [
