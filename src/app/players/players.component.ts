@@ -1,78 +1,100 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgSelectComponent } from '@ng-select/ng-select';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, map, tap } from 'rxjs/operators';
 
 import { Club } from '../core/models/club.interface';
-import { FilterMode } from '../core/models/filter-mode.interface';
-import { Pagination } from '../core/models/pagination.interface';
-import { Player } from '../core/models/player.interface';
 import { Season } from '../core/models/season.interface';
-import { SortMode } from '../core/models/sort-mode.interface';
-import { PlayerService } from '../core/services/player.service';
+import { ClubService } from '../core/services/club.service';
+import { DatatableComponent } from '../datatable/datatable.component';
+import { TableActionType } from '../datatable/models/table-action.interface';
+import { TableCellChange } from '../datatable/models/table-cell-change.interface';
+import { PlayersTableService } from './services/players-table.service';
 
 @Component({
   selector: 'app-players',
   templateUrl: './players.component.html',
-  styleUrls: ['./players.component.scss']
+  styleUrls: ['./players.component.scss'],
+  providers: [PlayersTableService]
 })
-export class PlayersComponent implements OnInit {
+export class PlayersComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('seasonSelect') seasonSelect: NgSelectComponent;
+  @ViewChild('clubSelect') clubSelect: NgSelectComponent;
+  @ViewChild(DatatableComponent) datatable: DatatableComponent;
+  @ViewChild('search') search: ElementRef;
 
+  searchSubscription: Subscription;
+
+  currentSeason: Season;
   seasons: Season[];
   clubs: Club[];
-  players: Player[];
 
-  pagination: Pagination = {
-    pageNumber: 1,
-    pageSize: 10
-  };
-
-  private sortMode: SortMode = {
-    sortBy: 'name',
-    isSortAscending: true
-  };
-
-  private filterMode: FilterMode = {};
-
-  constructor(private route: ActivatedRoute,
-    private playerService: PlayerService) { }
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    public playersTableService: PlayersTableService,
+    private clubService: ClubService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.seasons = data['seasons'];
-      this.clubs = data['clubs'];
+      this.currentSeason = this.seasons[0];
+      this.seasonSelect.writeValue(this.seasons[0].id);
+      this.playersTableService.filterMode.seasonId = this.seasons[0].id;
     });
 
-    this.seasonSelect.writeValue(this.seasons[0].id);
-    this.filterMode.seasonId = this.seasons[0].id;
-    this.getPlayers();
+    this.getClubs();
   }
 
-  getPlayers() {
-    this.playerService.getPlayers(this.pagination,
-      this.sortMode, this.filterMode)
-      .subscribe((response: any) => {
-        this.players = response.items;
-        this.pagination = response.pagination;
-      });
+  ngAfterViewInit() {
+    this.searchSubscription = fromEvent(this.search.nativeElement, 'keyup')
+      .pipe(
+        map((event: any) => event.target.value),
+        debounceTime(250),
+        tap((value: string) => this.searchPlayer(value))
+      )
+      .subscribe();
   }
 
-  onPageChanged(event: any) {
-    this.pagination.pageNumber = event.page;
-    this.getPlayers();
+  onTableCellChanged(tableCellChange: TableCellChange) {
+    const action = tableCellChange.newValue;
+    switch (action.type) {
+      case TableActionType.GetDetail:
+        this.navigateToPlayerDetail(tableCellChange.row.cells['id'].value);
+        break;
+    }
+  }
+
+  searchPlayer(value: string) {
+    this.playersTableService.filterMode['name'] = value;
+    this.datatable.refresh();
+  }
+
+  navigateToPlayerDetail(playerId: number) {
+    this.router.navigate(['/players', playerId]);
+  }
+
+  private getClubs() {
+    this.clubService.getBriefListClubBySeasonId(this.currentSeason.id)
+      .subscribe((clubs: Club[]) => this.clubs = clubs);
   }
 
   onSeasonFilterChanged(season: Season) {
-    this.filterMode.seasonId = season ? season.id : null;
-    this.pagination = { pageNumber: 1, pageSize: 10 };
-    this.getPlayers();
+    this.playersTableService.filterMode.seasonId = season ? season.id : null;
+    this.playersTableService.pagination = { pageNumber: 1, pageSize: 10 };
+    this.getClubs();
+    this.datatable.refresh();
   }
 
   onClubFilterChanged(club: Club) {
-    this.filterMode.clubId = club ? club.id : null;
-    this.pagination = { pageNumber: 1, pageSize: 10 };
-    this.getPlayers();
+    this.playersTableService.filterMode.clubId = club ? club.id : null;
+    this.playersTableService.pagination = { pageNumber: 1, pageSize: 10 };
+    this.datatable.refresh();
+  }
+
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
   }
 
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 
+import { DatatableModule } from '../datatable/datatable.module';
 import { SharedModule } from '../shared/shared.module';
 import { PlayerDetailComponent } from './components/player-detail/player-detail.component';
 import { PlayerOverviewComponent } from './components/player-overview/player-overview.component';
@@ -16,7 +17,8 @@ import { PlayersResolver } from './resolvers/players.resolver';
   ],
   imports: [
     SharedModule,
-    PlayersRoutingModule
+    PlayersRoutingModule,
+    DatatableModule
   ],
   providers: [
     PlayersResolver,
