@@ -13,17 +13,17 @@ import { TableService } from 'src/app/datatable/services/table.service';
 export class TablesTableService implements TableService {
 
   columns: TableColumn[] = [
-    { name: 'rank', text: 'Rank', type: 'TextTableCellComponent', sortable: false },
+    { name: 'rank', text: 'Rank', type: 'TextTableCellComponent', sortable: false, center: true },
     { name: 'photoUrl', text: 'Club', type: 'ImageTableCellComponent', sortable: false, center: true },
     { name: 'club', text: '', type: 'ObjectTextTableCellComponent', sortable: false },
-    { name: 'played', text: 'Played', type: 'TextTableCellComponent', sortable: false },
-    { name: 'won', text: 'W', type: 'TextTableCellComponent', sortable: false },
-    { name: 'drawn', text: 'D', type: 'TextTableCellComponent', sortable: false },
-    { name: 'lost', text: 'L', type: 'TextTableCellComponent', sortable: false },
-    { name: 'goalFor', text: 'GF', type: 'TextTableCellComponent', sortable: false },
-    { name: 'goalAgainst', text: 'GA', type: 'TextTableCellComponent', sortable: false },
-    { name: 'goalDifference', text: 'GD', type: 'TextTableCellComponent', sortable: false },
-    { name: 'point', text: 'P', type: 'TextTableCellComponent', sortable: false },
+    { name: 'played', text: 'Played', type: 'TextTableCellComponent', sortable: false, center: true },
+    { name: 'won', text: 'W', type: 'TextTableCellComponent', sortable: false, center: true },
+    { name: 'drawn', text: 'D', type: 'TextTableCellComponent', sortable: false, center: true },
+    { name: 'lost', text: 'L', type: 'TextTableCellComponent', sortable: false, center: true },
+    { name: 'goalFor', text: 'GF', type: 'TextTableCellComponent', sortable: false, center: true },
+    { name: 'goalAgainst', text: 'GA', type: 'TextTableCellComponent', sortable: false, center: true },
+    { name: 'goalDifference', text: 'GD', type: 'TextTableCellComponent', sortable: false, center: true },
+    { name: 'point', text: 'P', type: 'TextTableCellComponent', sortable: false, center: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];
 

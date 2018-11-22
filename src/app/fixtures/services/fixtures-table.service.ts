@@ -14,7 +14,7 @@ import { TableService } from 'src/app/datatable/services/table.service';
 export class FixturesTableService implements TableService {
 
   columns: TableColumn[] = [
-    { name: 'round', text: 'Round', type: 'TextTableCellComponent', sortable: true },
+    { name: 'round', text: 'R.', type: 'TextTableCellComponent', sortable: true, center: true },
     { name: 'matchClubs', text: 'Clubs', type: 'MatchClubsTableCellComponent', sortable: false },
     { name: 'matchTime', text: 'Match Time', type: 'DateTimeTableCellComponent', sortable: true },
     { name: 'stadium', text: 'Stadium', type: 'ObjectTextTableCellComponent', sortable: true },

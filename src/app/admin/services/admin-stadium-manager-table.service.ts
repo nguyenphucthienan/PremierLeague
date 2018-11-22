@@ -14,10 +14,10 @@ import { TableService } from 'src/app/datatable/services/table.service';
 export class AdminStadiumManagerTableService implements TableService {
 
   columns: TableColumn[] = [
-    { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true },
+    { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true, center: true },
     { name: 'name', text: 'Name', type: 'TextTableCellComponent', sortable: true },
-    { name: 'capacity', text: 'Capacity', type: 'TextTableCellComponent', sortable: true },
-    { name: 'builtYear', text: 'Built', type: 'TextTableCellComponent', sortable: true },
+    { name: 'capacity', text: 'Capacity', type: 'TextTableCellComponent', sortable: true, center: true },
+    { name: 'builtYear', text: 'Built', type: 'TextTableCellComponent', sortable: true, center: true },
     { name: 'pitchSize', text: 'Pitch Size', type: 'TextTableCellComponent', sortable: true },
     { name: 'address', text: 'Address', type: 'TextTableCellComponent', sortable: true },
     { name: 'phone', text: 'Phone', type: 'TextTableCellComponent', sortable: true },

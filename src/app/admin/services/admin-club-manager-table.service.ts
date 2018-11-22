@@ -14,7 +14,7 @@ import { TableService } from 'src/app/datatable/services/table.service';
 export class AdminClubManagerTableService implements TableService {
 
   columns: TableColumn[] = [
-    { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true },
+    { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true, center: true  },
     { name: 'photoUrl', text: 'Logo', type: 'ImageTableCellComponent', sortable: false, center: true },
     { name: 'code', text: 'Code', type: 'TextTableCellComponent', sortable: true },
     { name: 'name', text: 'Name', type: 'TextTableCellComponent', sortable: true },
@@ -85,7 +85,7 @@ export class AdminClubManagerTableService implements TableService {
 
           cells['actions'] = {
             value: this.actions,
-            showText: true
+            showText: false
           };
 
           return { cells };

@@ -15,11 +15,11 @@ import { CardTypePipe } from 'src/app/shared/pipes/card-type.pipe';
 export class AdminMatchCardsManagerTableService implements TableService {
 
   columns: TableColumn[] = [
-    { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true },
+    { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true, center: true },
     { name: 'club', text: 'Club', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'player', text: 'Player', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'cardType', text: 'Type', type: 'PipedTextTableCellComponent', sortable: true },
-    { name: 'cardTime', text: 'Time', type: 'TextTableCellComponent', sortable: true },
+    { name: 'cardTime', text: 'Time', type: 'TextTableCellComponent', sortable: true, center: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];
 

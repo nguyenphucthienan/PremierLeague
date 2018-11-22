@@ -14,7 +14,7 @@ import { TableService } from 'src/app/datatable/services/table.service';
 export class AdminSquadManagerTableService implements TableService {
 
   columns: TableColumn[] = [
-    { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true },
+    { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true, center: true },
     { name: 'season', text: 'Season', type: 'ObjectTextTableCellComponent', sortable: false },
     { name: 'club', text: 'Club', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }

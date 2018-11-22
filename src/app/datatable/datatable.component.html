@@ -6,7 +6,7 @@
           <input type="checkbox" [checked]="selectAllOnPage" (change)="selectAllHeader($event.target.checked)">
         </th>
         <th *ngFor="let column of columns" scope="col" (click)="changeSortMode(column)" class="align-middle"
-          [class.header-clickable]="column.sortable" nowrap>
+          [class.text-center]="column.center" [class.header-clickable]="column.sortable" nowrap>
           {{ column.text }}
           <span *ngIf="column.sortable" [ngClass]="getHeaderIconClass(column)"></span>
         </th>

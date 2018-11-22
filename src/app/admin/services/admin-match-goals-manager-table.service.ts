@@ -15,12 +15,12 @@ import { GoalTypePipe } from 'src/app/shared/pipes/goal-type.pipe';
 export class AdminMatchGoalsManagerTableService implements TableService {
 
   columns: TableColumn[] = [
-    { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true },
+    { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true, center: true },
     { name: 'club', text: 'Club', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'player', text: 'Player', type: 'ObjectTextTableCellComponent', sortable: true },
     { name: 'goalType', text: 'Type', type: 'PipedTextTableCellComponent', sortable: true },
-    { name: 'isOwnGoal', text: 'OG', type: 'BooleanTableCellComponent', sortable: true },
-    { name: 'goalTime', text: 'Time', type: 'TextTableCellComponent', sortable: true },
+    { name: 'isOwnGoal', text: 'OG', type: 'BooleanTableCellComponent', sortable: true, center: true },
+    { name: 'goalTime', text: 'Time', type: 'TextTableCellComponent', sortable: true, center: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];
 
