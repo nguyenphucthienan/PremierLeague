@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: 'players', loadChildren: './players/players.module#PlayersModule' },
   { path: 'fixtures', loadChildren: './fixtures/fixtures.module#FixturesModule' },
   { path: 'results', loadChildren: './results/results.module#ResultsModule' },
-  { path: 'matches', loadChildren: './matches/matches.module#MatchesModule' }
+  { path: 'matches', loadChildren: './matches/matches.module#MatchesModule' },
+  { path: 'tables', loadChildren: './tables/tables.module#TablesModule' }
 ];
 
 @NgModule({
