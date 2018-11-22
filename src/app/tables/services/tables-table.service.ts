@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { FilterMode } from 'src/app/core/models/filter-mode.interface';
 import { Pagination } from 'src/app/core/models/pagination.interface';
 import { SortMode } from 'src/app/core/models/sort-mode.interface';
-import { ClubService } from 'src/app/core/services/club.service';
+import { RankingTableService } from 'src/app/core/services/ranking-table.service';
 import { TableAction, TableActionType } from 'src/app/datatable/models/table-action.interface';
 import { TableCell } from 'src/app/datatable/models/table-cell.interface';
 import { TableColumn } from 'src/app/datatable/models/table-column.interface';
@@ -11,52 +10,47 @@ import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { TableService } from 'src/app/datatable/services/table.service';
 
 @Injectable()
-export class AdminClubManagerTableService implements TableService {
+export class TablesTableService implements TableService {
 
   columns: TableColumn[] = [
-    { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true },
-    { name: 'photoUrl', text: 'Logo', type: 'ImageTableCellComponent', sortable: false, center: true },
-    { name: 'code', text: 'Code', type: 'TextTableCellComponent', sortable: true },
-    { name: 'name', text: 'Name', type: 'TextTableCellComponent', sortable: true },
-    { name: 'establishedYear', text: 'Established Year', type: 'TextTableCellComponent', sortable: true },
-    { name: 'stadium', text: 'Stadium', type: 'ObjectTextTableCellComponent', sortable: true },
+    { name: 'rank', text: 'Rank', type: 'TextTableCellComponent', sortable: false },
+    { name: 'photoUrl', text: 'Club', type: 'ImageTableCellComponent', sortable: false, center: true },
+    { name: 'club', text: '', type: 'ObjectTextTableCellComponent', sortable: false },
+    { name: 'played', text: 'Played', type: 'TextTableCellComponent', sortable: false },
+    { name: 'won', text: 'W', type: 'TextTableCellComponent', sortable: false },
+    { name: 'drawn', text: 'D', type: 'TextTableCellComponent', sortable: false },
+    { name: 'lost', text: 'L', type: 'TextTableCellComponent', sortable: false },
+    { name: 'goalFor', text: 'GF', type: 'TextTableCellComponent', sortable: false },
+    { name: 'goalAgainst', text: 'GA', type: 'TextTableCellComponent', sortable: false },
+    { name: 'goalDifference', text: 'GD', type: 'TextTableCellComponent', sortable: false },
+    { name: 'point', text: 'P', type: 'TextTableCellComponent', sortable: false },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];
 
   rows: TableRow[];
 
-  pagination: Pagination = {
-    pageNumber: 1,
-    pageSize: 10
-  };
+  pagination: Pagination;
 
   sortMode: SortMode = {
-    sortBy: 'id',
+    sortBy: 'rank',
     isSortAscending: true
   };
 
   filterMode: FilterMode = {};
 
   actions: TableAction[] = [
-    { class: 'btn-dark', icon: 'fa fa-edit', text: 'Edit', type: TableActionType.Edit },
-    { class: 'btn-danger', icon: 'fa fa-trash', text: 'Delete', type: TableActionType.Delete }
+    { class: 'btn-primary', icon: 'fa fa-info-circle', text: 'Detail', type: TableActionType.GetDetail }
   ];
 
-  constructor(private clubService: ClubService) { }
+  constructor(private rankingTableService: RankingTableService) { }
 
   getDataColumns() {
     return this.columns;
   }
 
   getRawData() {
-    return this.clubService.getClubs(this.pagination,
-      this.sortMode, this.filterMode)
-      .pipe(
-        map((response: any) => {
-          this.pagination = response.pagination;
-          return response.items;
-        })
-      )
+    return this.rankingTableService
+      .getTable(this.filterMode)
       .toPromise();
   }
 
@@ -71,10 +65,14 @@ export class AdminClubManagerTableService implements TableService {
               continue;
             }
 
-            if (key === 'stadium') {
+            if (key === 'club') {
               cells[key] = {
                 value: row[key],
                 textProperty: 'name'
+              };
+
+              cells['photoUrl'] = {
+                value: row[key].photoUrl
               };
             } else {
               cells[key] = {

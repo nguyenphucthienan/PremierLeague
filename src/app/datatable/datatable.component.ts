@@ -64,14 +64,18 @@ export class DatatableComponent implements OnInit {
   }
 
   private recheckSelectRows(rows: TableRow[]) {
-    rows.forEach(row =>
-      row.selected = this.tableRowSelectTrackingService.getStateId(row.cells['id'].value)
-    );
+    if (this.selectableRow) {
+      rows.forEach(row =>
+        row.selected = this.tableRowSelectTrackingService.getStateId(row.cells['id'].value)
+      );
+    }
   }
 
   private checkSelectAllOnPage() {
-    this.selectAllOnPage = this.rows
-      .every(row => this.tableRowSelectTrackingService.getStateId(row.cells['id'].value));
+    if (this.selectableRow) {
+      this.selectAllOnPage = this.rows
+        .every(row => this.tableRowSelectTrackingService.getStateId(row.cells['id'].value));
+    }
   }
 
   getHeaderIconClass(column: TableColumn) {

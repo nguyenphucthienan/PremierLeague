@@ -17,6 +17,7 @@ import { GoalService } from './services/goal.service';
 import { KitService } from './services/kit.service';
 import { MatchService } from './services/match.service';
 import { PlayerService } from './services/player.service';
+import { RankingTableService } from './services/ranking-table.service';
 import { SeasonService } from './services/season.service';
 import { SquadService } from './services/squad.service';
 import { StadiumService } from './services/stadium.service';
@@ -60,6 +61,7 @@ const toastrOptions = {
     MatchService,
     GoalService,
     CardService,
+    RankingTableService,
     BriefSeasonsResolver,
     BriefClubsResolver,
     AuthRoleGuard
