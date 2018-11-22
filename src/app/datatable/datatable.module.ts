@@ -9,6 +9,7 @@ import { ImageTableCellComponent } from './cells/image-table-cell/image-table-ce
 import { MatchClubsTableCellComponent } from './cells/match-clubs-table-cell/match-clubs-table-cell.component';
 import { ObjectTextTableCellComponent } from './cells/object-text-table-cell/object-text-table-cell.component';
 import { PipedTextTableCellComponent } from './cells/piped-text-table-cell/piped-text-table-cell.component';
+import { RankTableCellComponent } from './cells/rank-table-cell/rank-table-cell.component';
 import { TableCellComponent } from './cells/table-cell/table-cell.component';
 import { TextTableCellComponent } from './cells/text-table-cell/text-table-cell.component';
 import { DatatableComponent } from './datatable.component';
@@ -25,7 +26,8 @@ import { TableRowSelectTrackingService } from './services/table-row-select-track
     ActionsTableCellComponent,
     ImageTableCellComponent,
     DateTimeTableCellComponent,
-    MatchClubsTableCellComponent
+    MatchClubsTableCellComponent,
+    RankTableCellComponent
   ],
   imports: [
     SharedModule,

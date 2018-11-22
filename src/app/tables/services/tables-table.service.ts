@@ -13,7 +13,7 @@ import { TableService } from 'src/app/datatable/services/table.service';
 export class TablesTableService implements TableService {
 
   columns: TableColumn[] = [
-    { name: 'rank', text: 'Rank', type: 'TextTableCellComponent', sortable: false, center: true },
+    { name: 'rank', text: 'Rank', type: 'RankTableCellComponent', sortable: false, center: true },
     { name: 'photoUrl', text: 'Club', type: 'ImageTableCellComponent', sortable: false, center: true },
     { name: 'club', text: '', type: 'ObjectTextTableCellComponent', sortable: false },
     { name: 'played', text: 'Played', type: 'TextTableCellComponent', sortable: false, center: true },
@@ -65,7 +65,13 @@ export class TablesTableService implements TableService {
               continue;
             }
 
-            if (key === 'club') {
+            if (key === 'rank') {
+              cells[key] = {
+                value: row[key],
+                textProperty: 'name',
+                totalClubs: data.length
+              };
+            } else if (key === 'club') {
               cells[key] = {
                 value: row[key],
                 textProperty: 'name',
@@ -75,7 +81,7 @@ export class TablesTableService implements TableService {
               cells['photoUrl'] = {
                 value: row[key].photoUrl
               };
-            } else if (key === 'rank' || key === 'point') {
+            } else if (key === 'point') {
               cells[key] = {
                 value: row[key],
                 bold: true

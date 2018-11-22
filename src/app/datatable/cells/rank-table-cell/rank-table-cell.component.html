@@ -1,0 +1,3 @@
+<span *ngIf="rank > 0 && rank <= 3" class="badge badge-primary">{{ rank }}</span>
+<span *ngIf="rank > 3 && rank <= (totalClubs - 3)" class="badge badge-secondary">{{rank}}</span>
+<span *ngIf="rank > (totalClubs - 3) && rank <= totalClubs" class="badge badge-danger">{{rank}}</span>
