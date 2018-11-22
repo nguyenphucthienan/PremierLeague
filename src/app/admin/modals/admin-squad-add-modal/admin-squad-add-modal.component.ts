@@ -2,14 +2,12 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap';
 import { Club } from 'src/app/core/models/club.interface';
-import { Stadium } from 'src/app/core/models/stadium.interface';
+import { Season } from 'src/app/core/models/season.interface';
+import { Squad } from 'src/app/core/models/squad.interface';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { ClubService } from 'src/app/core/services/club.service';
-import { StadiumService } from 'src/app/core/services/stadium.service';
-import { Squad } from 'src/app/core/models/squad.interface';
-import { SquadService } from 'src/app/core/services/squad.service';
-import { Season } from 'src/app/core/models/season.interface';
 import { SeasonService } from 'src/app/core/services/season.service';
+import { SquadService } from 'src/app/core/services/squad.service';
 
 @Component({
   selector: 'app-admin-squad-add-modal',

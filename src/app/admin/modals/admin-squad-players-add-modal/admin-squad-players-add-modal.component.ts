@@ -32,7 +32,11 @@ export class AdminSquadPlayersAddModalComponent implements OnInit {
   ngOnInit() {
     this.addForm = this.fb.group({
       playerId: [null, Validators.required],
-      number: [null, Validators.required]
+      number: [null, [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(99)
+      ]]
     });
 
     this.getPlayers();
