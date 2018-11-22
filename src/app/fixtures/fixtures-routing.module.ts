@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { BriefSeasonsResolver } from '../core/resolvers/brief-seasons.resolver';
 import { FixturesComponent } from './fixtures.component';
-import { MatchesResolver } from './resolvers/matches.resolver';
 
 const routes: Routes = [
   {
     path: '',
     component: FixturesComponent,
-    resolve: { matches: MatchesResolver }
+    resolve: { seasons: BriefSeasonsResolver }
   }
 ];
 

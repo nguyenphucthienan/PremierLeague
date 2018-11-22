@@ -30,8 +30,10 @@ export class ParamsBuilder {
 
   applyFilter(filterMode: FilterMode) {
     for (const key in filterMode) {
-      if (filterMode[key]) {
-        this.params = this.params.set(key, filterMode[key].toString());
+      if (filterMode.hasOwnProperty(key)) {
+        if (typeof (filterMode[key]) === 'boolean' || filterMode[key]) {
+          this.params = this.params.set(key, filterMode[key].toString());
+        }
       }
     }
 
