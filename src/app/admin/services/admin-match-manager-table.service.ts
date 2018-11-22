@@ -38,10 +38,10 @@ export class AdminMatchManagerTableService implements TableService {
   filterMode: FilterMode = {};
 
   actions: TableAction[] = [
-    { class: 'btn-info', icon: 'fa fa-info-circle', text: 'Detail', type: TableActionType.GetDetail },
+    { class: 'btn-primary', icon: 'fa fa-info-circle', text: 'Detail', type: TableActionType.GetDetail },
     { class: 'btn-dark', icon: 'fa fa-empire', text: 'Goals', type: TableActionType.NavigateToMatchGoals },
     { class: 'btn-dark', icon: 'fa fa-file-o', text: 'Cards', type: TableActionType.NavigateToMatchCards },
-    { class: 'btn-primary', icon: 'fa fa-edit', text: 'Edit', type: TableActionType.Edit },
+    { class: 'btn-dark', icon: 'fa fa-edit', text: 'Edit', type: TableActionType.Edit },
     { class: 'btn-danger', icon: 'fa fa-trash', text: 'Delete', type: TableActionType.Delete }
   ];
 

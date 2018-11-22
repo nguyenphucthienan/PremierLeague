@@ -37,7 +37,7 @@ export class AdminSquadManagerTableService implements TableService {
   actions: TableAction[] = [
     { class: 'btn-dark', icon: 'fa fa-address-card-o', text: 'Kits', type: TableActionType.NavigateToSquadKits },
     { class: 'btn-dark', icon: 'fa fa-users', text: 'Players', type: TableActionType.NavigateToSquadPlayers },
-    { class: 'btn-primary', icon: 'fa fa-edit', text: 'Edit', type: TableActionType.Edit },
+    { class: 'btn-dark', icon: 'fa fa-edit', text: 'Edit', type: TableActionType.Edit },
     { class: 'btn-danger', icon: 'fa fa-trash', text: 'Delete', type: TableActionType.Delete }
   ];
 
