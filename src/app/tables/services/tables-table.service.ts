@@ -39,7 +39,7 @@ export class TablesTableService implements TableService {
   filterMode: FilterMode = {};
 
   actions: TableAction[] = [
-    { class: 'btn-primary', icon: 'fa fa-info-circle', text: 'Detail', type: TableActionType.GetDetail }
+    { class: 'btn-primary', icon: '', text: 'Detail', type: TableActionType.GetDetail }
   ];
 
   constructor(private rankingTableService: RankingTableService) { }
@@ -68,11 +68,17 @@ export class TablesTableService implements TableService {
             if (key === 'club') {
               cells[key] = {
                 value: row[key],
-                textProperty: 'name'
+                textProperty: 'name',
+                bold: true
               };
 
               cells['photoUrl'] = {
                 value: row[key].photoUrl
+              };
+            } else if (key === 'rank' || key === 'point') {
+              cells[key] = {
+                value: row[key],
+                bold: true
               };
             } else {
               cells[key] = {

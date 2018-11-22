@@ -9,6 +9,7 @@ import { AbstractTableCellComponent } from '../abstract-table-cell/abstract-tabl
 })
 export class TextTableCellComponent extends AbstractTableCellComponent {
 
+  bold: boolean;
   text: string;
 
   constructor() {
@@ -16,7 +17,10 @@ export class TextTableCellComponent extends AbstractTableCellComponent {
   }
 
   updateValue() {
-    this.text = this.cell && this.cell.value;
+    if (this.cell) {
+      this.bold = this.cell.bold;
+      this.text = this.cell.value;
+    }
   }
 
 }

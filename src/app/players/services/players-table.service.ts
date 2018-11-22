@@ -40,7 +40,7 @@ export class PlayersTableService implements TableService {
   filterMode: FilterMode = {};
 
   actions: TableAction[] = [
-    { class: 'btn-primary', icon: 'fa fa-info-circle', text: 'Detail', type: TableActionType.GetDetail }
+    { class: 'btn-primary', icon: '', text: 'Detail', type: TableActionType.GetDetail }
   ];
 
   constructor(private playerService: PlayerService,
