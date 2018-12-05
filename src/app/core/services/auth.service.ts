@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject } from 'rxjs';
@@ -19,7 +19,15 @@ export class AuthService {
 
   readTokenFromStorage() {
     const token = localStorage.getItem('token');
-    this.changeDecodedToken(token);
+    this.getMyUserInfo(token)
+      .subscribe(
+        user => {
+          if (user) {
+            this.changeDecodedToken(token);
+          }
+        },
+        error => this.logout()
+      );
   }
 
   isLoggedIn() {
@@ -48,7 +56,12 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
-  private changeDecodedToken(token) {
+  private getMyUserInfo(token: string) {
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    return this.http.get(`${this.AUTH_URL}/me`, { headers });
+  }
+
+  private changeDecodedToken(token: string) {
     this.decodedToken = this.jwtHelper.decodeToken(token);
     this.decodedTokenSubject.next(this.decodedToken);
   }
