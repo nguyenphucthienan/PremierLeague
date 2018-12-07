@@ -11,21 +11,15 @@ import { TableCellChange } from 'src/app/datatable/models/table-cell-change.inte
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
-import {
-  AdminSquadPlayersAddModalComponent,
-} from '../../modals/admin-squad-players-add-modal/admin-squad-players-add-modal.component';
-import {
-  AdminSquadPlayersEditModalComponent,
-} from '../../modals/admin-squad-players-edit-modal/admin-squad-players-edit-modal.component';
-import { AdminSquadPlayersManagerTableService } from '../../services/admin-squad-players-manager-table.service';
+import { AdminSquadManagersManagerTableService } from '../../services/admin-squad-managers-manager-table.service';
 
 @Component({
-  selector: 'app-admin-squad-players-manager',
-  templateUrl: './admin-squad-players-manager.component.html',
-  styleUrls: ['./admin-squad-players-manager.component.scss'],
-  providers: [AdminSquadPlayersManagerTableService]
+  selector: 'app-admin-squad-managers-manager',
+  templateUrl: './admin-squad-managers-manager.component.html',
+  styleUrls: ['./admin-squad-managers-manager.component.scss'],
+  providers: [AdminSquadManagersManagerTableService]
 })
-export class AdminSquadPlayersManagerComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AdminSquadManagersManagerComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(DatatableComponent) datatable: DatatableComponent;
   @ViewChild('search') search: ElementRef;
@@ -36,7 +30,7 @@ export class AdminSquadPlayersManagerComponent implements OnInit, AfterViewInit,
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    public adminSquadPlayersManagerTableService: AdminSquadPlayersManagerTableService,
+    public adminSquadManagersManagerTableService: AdminSquadManagersManagerTableService,
     private squadService: SquadService,
     private alertService: AlertService,
     private modalService: BsModalService) { }
@@ -44,7 +38,7 @@ export class AdminSquadPlayersManagerComponent implements OnInit, AfterViewInit,
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.squadId = parseInt(params.get('squadId'), 10);
-      this.adminSquadPlayersManagerTableService.filterMode.squadId = this.squadId;
+      this.adminSquadManagersManagerTableService.filterMode.squadId = this.squadId;
     });
   }
 
@@ -53,7 +47,7 @@ export class AdminSquadPlayersManagerComponent implements OnInit, AfterViewInit,
       .pipe(
         map((event: any) => event.target.value),
         debounceTime(250),
-        tap((value: string) => this.searchPlayer(value))
+        tap((value: string) => this.searchManager(value))
       )
       .subscribe();
   }
@@ -62,7 +56,7 @@ export class AdminSquadPlayersManagerComponent implements OnInit, AfterViewInit,
     const action = tableCellChange.newValue;
     switch (action.type) {
       case TableActionType.GetDetail:
-        this.navigateToPlayerDetail(tableCellChange.row.cells['id'].value);
+        this.navigateToManagerDetail(tableCellChange.row.cells['id'].value);
         break;
       case TableActionType.Edit:
         this.openEditModal(tableCellChange.row);
@@ -73,71 +67,71 @@ export class AdminSquadPlayersManagerComponent implements OnInit, AfterViewInit,
     }
   }
 
-  searchPlayer(value: string) {
-    this.adminSquadPlayersManagerTableService.filterMode['name'] = value;
+  searchManager(value: string) {
+    this.adminSquadManagersManagerTableService.filterMode['name'] = value;
     this.datatable.refresh();
   }
 
-  navigateToPlayerDetail(playerId: number) {
-    this.router.navigate(['/players', playerId]);
+  navigateToManagerDetail(managerId: number) {
+    this.router.navigate(['/managers', managerId]);
   }
 
   openAddModal() {
-    this.bsModalRef = this.modalService.show(AdminSquadPlayersAddModalComponent, {
-      initialState: {
-        title: 'Add Player',
-        squadId: this.squadId
-      },
-      class: 'modal-dialog-centered'
-    });
+    // this.bsModalRef = this.modalService.show(AdminSquadPlayersAddModalComponent, {
+    //   initialState: {
+    //     title: 'Add Player',
+    //     squadId: this.squadId
+    //   },
+    //   class: 'modal-dialog-centered'
+    // });
 
-    this.bsModalRef.content.playerAdded
-      .subscribe(() => this.onPlayerAdded());
+    // this.bsModalRef.content.playerAdded
+    //   .subscribe(() => this.onPlayerAdded());
   }
 
-  onPlayerAdded() {
+  onManagerAdded() {
     this.datatable.refresh();
   }
 
   openEditModal(rowData: TableRow) {
-    this.bsModalRef = this.modalService.show(AdminSquadPlayersEditModalComponent, {
-      initialState: {
-        title: 'Edit Player',
-        squadId: this.squadId,
-        rowData
-      },
-      class: 'modal-dialog-centered'
-    });
+    // this.bsModalRef = this.modalService.show(AdminSquadPlayersEditModalComponent, {
+    //   initialState: {
+    //     title: 'Edit Player',
+    //     squadId: this.squadId,
+    //     rowData
+    //   },
+    //   class: 'modal-dialog-centered'
+    // });
 
-    this.bsModalRef.content.playerEdited
-      .subscribe(() => this.onPlayerEdited());
+    // this.bsModalRef.content.playerEdited
+    //   .subscribe(() => this.onPlayerEdited());
   }
 
-  onPlayerEdited() {
+  onManagerEdited() {
     this.datatable.refresh();
   }
 
   openRemoveModal(id: number) {
     this.bsModalRef = this.modalService.show(ConfirmModalComponent, {
       initialState: {
-        content: 'Are you sure you want to remove this player from this squad?'
+        content: 'Are you sure you want to remove this manager from this squad?'
       },
       class: 'modal-dialog-centered'
     });
 
     this.bsModalRef.content.ok
-      .subscribe(() => this.confirmRemovePlayer(id));
+      .subscribe(() => this.confirmRemoveManager(id));
   }
 
-  confirmRemovePlayer(id: number) {
-    this.squadService.removePlayerFromSquad(this.squadId, id)
-      .subscribe(
-        () => {
-          this.alertService.success('Remove player successfully');
-          this.datatable.refresh();
-        },
-        () => this.alertService.error('Remove player failed')
-      );
+  confirmRemoveManager(id: number) {
+    // this.squadService.removePlayerFromSquad(this.squadId, id)
+    //   .subscribe(
+    //     () => {
+    //       this.alertService.success('Remove manager successfully');
+    //       this.datatable.refresh();
+    //     },
+    //     () => this.alertService.error('Remove manager failed')
+    //   );
   }
 
   ngOnDestroy() {

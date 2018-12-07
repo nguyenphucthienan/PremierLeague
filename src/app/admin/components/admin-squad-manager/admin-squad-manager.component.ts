@@ -54,6 +54,9 @@ export class AdminSquadManagerComponent implements OnInit {
       case TableActionType.NavigateToSquadKits:
         this.navigateToSquadKits(tableCellChange.row.cells['id'].value);
         break;
+      case TableActionType.NavigateToSquadManagers:
+        this.navigateToSquadManagers(tableCellChange.row.cells['id'].value);
+        break;
       case TableActionType.NavigateToSquadPlayers:
         this.navigateToSquadPlayers(tableCellChange.row.cells['id'].value);
         break;
@@ -68,6 +71,10 @@ export class AdminSquadManagerComponent implements OnInit {
 
   navigateToSquadKits(squadId: number) {
     this.router.navigate(['/admin', 'squads', squadId, 'kits']);
+  }
+
+  navigateToSquadManagers(squadId: number) {
+    this.router.navigate(['/admin', 'squads', squadId, 'managers']);
   }
 
   navigateToSquadPlayers(squadId: number) {

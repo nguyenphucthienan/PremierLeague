@@ -38,8 +38,8 @@ export class SeasonService {
     return this.http.get<Season[]>(`${this.seasonUrl}`, { params: params });
   }
 
-  getBriefListSeason(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.seasonUrl}/brief-list`);
+  getBriefListSeason(): Observable<Season[]> {
+    return this.http.get<Season[]>(`${this.seasonUrl}/brief-list`);
   }
 
   getSeason(id: number): Observable<Season> {

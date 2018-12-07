@@ -14,6 +14,9 @@ import { AdminSeasonManagerComponent } from './components/admin-season-manager/a
 import { AdminSquadKitsManangerComponent } from './components/admin-squad-kits-mananger/admin-squad-kits-mananger.component';
 import { AdminSquadManagerComponent } from './components/admin-squad-manager/admin-squad-manager.component';
 import {
+  AdminSquadManagersManagerComponent,
+} from './components/admin-squad-managers-manager/admin-squad-managers-manager.component';
+import {
   AdminSquadPlayersManagerComponent,
 } from './components/admin-squad-players-manager/admin-squad-players-manager.component';
 import { AdminStadiumManagerComponent } from './components/admin-stadium-manager/admin-stadium-manager.component';
@@ -76,6 +79,7 @@ import { AdminStadiumEditModalComponent } from './modals/admin-stadium-edit-moda
     AdminSquadManagerComponent,
     AdminSquadAddModalComponent,
     AdminSquadEditModalComponent,
+    AdminSquadManagersManagerComponent,
     AdminSquadPlayersManagerComponent,
     AdminSquadPlayersAddModalComponent,
     AdminSquadPlayersEditModalComponent,

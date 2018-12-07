@@ -38,8 +38,8 @@ export class StadiumService {
     return this.http.get<Stadium[]>(`${this.stadiumUrl}`, { params: params });
   }
 
-  getBriefListStadium(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.stadiumUrl}/brief-list`);
+  getBriefListStadium(): Observable<Stadium[]> {
+    return this.http.get<Stadium[]>(`${this.stadiumUrl}/brief-list`);
   }
 
   getStadium(id: number): Observable<Stadium> {

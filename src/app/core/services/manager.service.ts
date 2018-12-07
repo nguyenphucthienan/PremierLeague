@@ -38,6 +38,10 @@ export class ManagerService {
     return this.http.get<Manager[]>(`${this.managerUrl}`, { params: params });
   }
 
+  getBriefListManager(): Observable<Manager[]> {
+    return this.http.get<Manager[]>(`${this.managerUrl}/brief-list`);
+  }
+
   getManager(id: number): Observable<Manager> {
     return this.http.get<Manager>(`${this.managerUrl}/${id}`);
   }

@@ -14,6 +14,9 @@ import { AdminSeasonManagerComponent } from './components/admin-season-manager/a
 import { AdminSquadKitsManangerComponent } from './components/admin-squad-kits-mananger/admin-squad-kits-mananger.component';
 import { AdminSquadManagerComponent } from './components/admin-squad-manager/admin-squad-manager.component';
 import {
+  AdminSquadManagersManagerComponent,
+} from './components/admin-squad-managers-manager/admin-squad-managers-manager.component';
+import {
   AdminSquadPlayersManagerComponent,
 } from './components/admin-squad-players-manager/admin-squad-players-manager.component';
 import { AdminStadiumManagerComponent } from './components/admin-stadium-manager/admin-stadium-manager.component';
@@ -65,6 +68,12 @@ const routes: Routes = [
   {
     path: 'squads/:squadId/kits',
     component: AdminSquadKitsManangerComponent,
+    canActivate: [AuthRoleGuard],
+    data: { roles: ['Admin'] }
+  },
+  {
+    path: 'squads/:squadId/managers',
+    component: AdminSquadManagersManagerComponent,
     canActivate: [AuthRoleGuard],
     data: { roles: ['Admin'] }
   },
