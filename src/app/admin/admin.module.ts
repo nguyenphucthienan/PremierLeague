@@ -53,6 +53,9 @@ import {
   AdminSquadManagersAddModalComponent,
 } from './modals/admin-squad-managers-add-modal/admin-squad-managers-add-modal.component';
 import {
+  AdminSquadManagersEditModalComponent,
+} from './modals/admin-squad-managers-edit-modal/admin-squad-managers-edit-modal.component';
+import {
   AdminSquadPlayersAddModalComponent,
 } from './modals/admin-squad-players-add-modal/admin-squad-players-add-modal.component';
 import {
@@ -84,6 +87,7 @@ import { AdminStadiumEditModalComponent } from './modals/admin-stadium-edit-moda
     AdminSquadEditModalComponent,
     AdminSquadManagersManagerComponent,
     AdminSquadManagersAddModalComponent,
+    AdminSquadManagersEditModalComponent,
     AdminSquadPlayersManagerComponent,
     AdminSquadPlayersAddModalComponent,
     AdminSquadPlayersEditModalComponent,
@@ -120,6 +124,7 @@ import { AdminStadiumEditModalComponent } from './modals/admin-stadium-edit-moda
     AdminSquadAddModalComponent,
     AdminSquadEditModalComponent,
     AdminSquadManagersAddModalComponent,
+    AdminSquadManagersEditModalComponent,
     AdminSquadPlayersAddModalComponent,
     AdminSquadPlayersEditModalComponent,
     AdminSquadKitsAddModalComponent,

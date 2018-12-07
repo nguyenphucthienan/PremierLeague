@@ -14,6 +14,9 @@ import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confi
 import {
   AdminSquadManagersAddModalComponent,
 } from '../../modals/admin-squad-managers-add-modal/admin-squad-managers-add-modal.component';
+import {
+  AdminSquadManagersEditModalComponent,
+} from '../../modals/admin-squad-managers-edit-modal/admin-squad-managers-edit-modal.component';
 import { AdminSquadManagersManagerTableService } from '../../services/admin-squad-managers-manager-table.service';
 
 @Component({
@@ -97,17 +100,17 @@ export class AdminSquadManagersManagerComponent implements OnInit, AfterViewInit
   }
 
   openEditModal(rowData: TableRow) {
-    // this.bsModalRef = this.modalService.show(AdminSquadPlayersEditModalComponent, {
-    //   initialState: {
-    //     title: 'Edit Player',
-    //     squadId: this.squadId,
-    //     rowData
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminSquadManagersEditModalComponent, {
+      initialState: {
+        title: 'Edit Manager',
+        squadId: this.squadId,
+        rowData
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.playerEdited
-    //   .subscribe(() => this.onPlayerEdited());
+    this.bsModalRef.content.managerEdited
+      .subscribe(() => this.onManagerEdited());
   }
 
   onManagerEdited() {

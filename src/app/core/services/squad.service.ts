@@ -101,6 +101,16 @@ export class SquadService {
     return this.http.post<any>(url, squadManager);
   }
 
+  editManagerInSquad(id: number, squadPlayer: { squadId: number, managerId: number })
+    : Observable<any> {
+    const url = UrlUtils.resolveParams(
+      this.squadManagersDetailUrl,
+      { id, managerId: squadPlayer.managerId }
+    );
+
+    return this.http.put<any>(url, squadPlayer);
+  }
+
   removeManagerFromSquad(id: number, managerId: number): Observable<any> {
     const url = UrlUtils.resolveParams(this.squadManagersDetailUrl, { id, managerId });
     return this.http.delete<any>(url);
