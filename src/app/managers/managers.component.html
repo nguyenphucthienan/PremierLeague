@@ -1,3 +1,42 @@
-<p>
-  managers works!
-</p>
+<div class="container mt-3 mb-4">
+  <h1 class="text-center">Managers</h1>
+  <div class="row mt-3">
+    <div class="col-lg-4 col-md-6">
+      <div class="d-flex flex-row align-items-center">
+        <div class="col-3">
+          <span class="font-weight-bold">Season: </span>
+        </div>
+        <div class="col-9">
+          <ng-select #seasonSelect [items]="seasons" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
+            placeholder="Select Season" (change)="onSeasonFilterChanged($event)"></ng-select>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="d-flex flex-row align-items-center">
+        <div class="col-3">
+          <span class="font-weight-bold">Club: </span>
+        </div>
+        <div class="col-9">
+          <ng-select #clubSelect [items]="clubs" [selectOnTab]="true" [clearable]="true" bindValue="id" bindLabel="name"
+            placeholder="Select Club" (change)="onClubFilterChanged($event)"></ng-select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-lg-8 align-self-center">
+      <div class="d-flex flex-row align-items-center">
+        <div class="col-2">
+          <span class="font-weight-bold mr-2">Search: </span>
+        </div>
+        <div class="col-10">
+          <input #search type="text" class="form-control" placeholder="Name">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-3">
+    <app-datatable [tableService]="managersTableService" (cellChanged)="onTableCellChanged($event)"></app-datatable>
+  </div>
+</div>
