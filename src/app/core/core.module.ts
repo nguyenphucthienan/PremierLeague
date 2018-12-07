@@ -15,6 +15,7 @@ import { CardService } from './services/card.service';
 import { ClubService } from './services/club.service';
 import { GoalService } from './services/goal.service';
 import { KitService } from './services/kit.service';
+import { ManagerService } from './services/manager.service';
 import { MatchService } from './services/match.service';
 import { PlayerService } from './services/player.service';
 import { RankingTableService } from './services/ranking-table.service';
@@ -57,6 +58,7 @@ const toastrOptions = {
     ClubService,
     SquadService,
     KitService,
+    ManagerService,
     PlayerService,
     MatchService,
     GoalService,

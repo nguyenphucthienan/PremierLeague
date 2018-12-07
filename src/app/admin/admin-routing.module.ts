@@ -5,6 +5,7 @@ import { AuthRoleGuard } from '../core/guards/auth-role.guard';
 import { BriefSeasonsResolver } from '../core/resolvers/brief-seasons.resolver';
 import { AdminComponent } from './admin.component';
 import { AdminClubManagerComponent } from './components/admin-club-manager/admin-club-manager.component';
+import { AdminManagerManagerComponent } from './components/admin-manager-manager/admin-manager-manager.component';
 import { AdminMatchCardsManagerComponent } from './components/admin-match-cards-manager/admin-match-cards-manager.component';
 import { AdminMatchGoalsManagerComponent } from './components/admin-match-goals-manager/admin-match-goals-manager.component';
 import { AdminMatchManagerComponent } from './components/admin-match-manager/admin-match-manager.component';
@@ -39,6 +40,12 @@ const routes: Routes = [
   {
     path: 'clubs',
     component: AdminClubManagerComponent,
+    canActivate: [AuthRoleGuard],
+    data: { roles: ['Admin'] }
+  },
+  {
+    path: 'managers',
+    component: AdminManagerManagerComponent,
     canActivate: [AuthRoleGuard],
     data: { roles: ['Admin'] }
   },
