@@ -5,14 +5,18 @@
       <div class="card">
         <img class="card-img-top" [src]="player.photoUrl" [alt]="player.name">
         <div class="card-body pt-0">
-          <hr>
-          <i class="fa fa-users"></i><span class="font-weight-bold"> Club: </span>
-          <a class="club-name" [routerLink]="['/clubs', player.club.id]">
-            <span>{{ player.club.name }}</span>
-          </a>
-          <hr>
-          <i class="fa fa-hashtag"></i><span class="font-weight-bold"> Number: </span>
-          <span>{{ player.number }}</span>
+          <ng-container *ngIf="player.club">
+            <hr>
+            <i class="fa fa-users"></i><span class="font-weight-bold"> Club: </span>
+            <a class="club-name" [routerLink]="['/clubs', player.club.id]">
+              <span>{{ player.club.name }}</span>
+            </a>
+          </ng-container>
+          <ng-container *ngIf="player.number">
+            <hr>
+            <i class="fa fa-hashtag"></i><span class="font-weight-bold"> Number: </span>
+            <span>{{ player.number }}</span>
+          </ng-container>
           <hr>
           <i class="fa fa-user"></i><span class="font-weight-bold"> Position: </span>
           <span>{{ player.positionType | positionType }}</span>
