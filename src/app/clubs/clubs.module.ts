@@ -8,6 +8,7 @@ import { ClubDetailComponent } from './components/club-detail/club-detail.compon
 import { ClubFixturesComponent } from './components/club-fixtures/club-fixtures.component';
 import { ClubKitCardComponent } from './components/club-kit-card/club-kit-card.component';
 import { ClubKitsComponent } from './components/club-kits/club-kits.component';
+import { ClubManagersComponent } from './components/club-managers/club-managers.component';
 import { ClubResultsComponent } from './components/club-results/club-results.component';
 import { ClubSquadComponent } from './components/club-squad/club-squad.component';
 import { ClubStadiumComponent } from './components/club-stadium/club-stadium.component';
@@ -23,6 +24,7 @@ import { ClubsResolver } from './resolvers/clubs.resolver';
     ClubDetailComponent,
     ClubSquadComponent,
     SquadPlayerCardComponent,
+    ClubManagersComponent,
     ClubKitsComponent,
     ClubKitCardComponent,
     ClubStadiumComponent,

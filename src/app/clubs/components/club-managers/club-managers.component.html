@@ -1,0 +1,21 @@
+<div class="row mt-3">
+  <div class="col-md-6">
+    <div class="d-flex flex-row align-items-center">
+      <div class="col-4">
+        <span class="font-weight-bold">Season: </span>
+      </div>
+      <div class="col-8">
+        <ng-select [items]="squads" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="seasonName"
+          placeholder="Select Season" (change)="onSquadFilterChanged($event)"></ng-select>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <!-- <app-squad-player-card *ngFor="let manager of managers" [manager]="manager" class="col-xl-3 col-lg-4 col-md-6 pt-3 pl-2 pr-2"></app-squad-player-card> -->
+  {{ managers | json }}
+</div>
+<div *ngIf="managers?.length > 0" class="pagination d-flex justify-content-center">
+  <pagination [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.pageSize" (pageChanged)="onPageChanged($event)"
+    [maxSize]="5" previousText="&lsaquo;" nextText="&rsaquo;"></pagination>
+</div>
