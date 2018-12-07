@@ -11,6 +11,7 @@ import { TableCellChange } from 'src/app/datatable/models/table-cell-change.inte
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
+import { AdminManagerAddModalComponent } from '../../modals/admin-manager-add-modal/admin-manager-add-modal.component';
 import { AdminManagerManagerTableService } from '../../services/admin-manager-manager-table.service';
 
 @Component({
@@ -71,18 +72,18 @@ export class AdminManagerManagerComponent implements OnInit, AfterViewInit, OnDe
   }
 
   openAddModal() {
-    // this.bsModalRef = this.modalService.show(AdminPlayerAddModalComponent, {
-    //   initialState: {
-    //     title: 'Add New Player'
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminManagerAddModalComponent, {
+      initialState: {
+        title: 'Add New Manager'
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.playerAdded
-    //   .subscribe(() => this.onPlayerAdded());
+    this.bsModalRef.content.managerAdded
+      .subscribe(() => this.onManagerAdded());
   }
 
-  onPlayerAdded() {
+  onManagerAdded() {
     this.datatable.refresh();
   }
 
@@ -106,7 +107,7 @@ export class AdminManagerManagerComponent implements OnInit, AfterViewInit, OnDe
   openDeleteModal(id: number) {
     this.bsModalRef = this.modalService.show(ConfirmModalComponent, {
       initialState: {
-        content: 'Are you sure you want to delete this player?'
+        content: 'Are you sure you want to delete this manager?'
       },
       class: 'modal-dialog-centered'
     });
