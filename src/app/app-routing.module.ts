@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
   { path: 'clubs', loadChildren: './clubs/clubs.module#ClubsModule' },
+  { path: 'managers', loadChildren: './managers/managers.module#ManagersModule' },
   { path: 'players', loadChildren: './players/players.module#PlayersModule' },
   { path: 'fixtures', loadChildren: './fixtures/fixtures.module#FixturesModule' },
   { path: 'results', loadChildren: './results/results.module#ResultsModule' },
