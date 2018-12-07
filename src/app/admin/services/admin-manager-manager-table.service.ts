@@ -18,7 +18,7 @@ export class AdminManagerManagerTableService implements TableService {
     { name: 'photoUrl', text: 'Photo', type: 'ImageTableCellComponent', sortable: false, center: true },
     { name: 'name', text: 'Name', type: 'TextTableCellComponent', sortable: true },
     { name: 'nationality', text: 'Nationality', type: 'TextTableCellComponent', sortable: true },
-    { name: 'birthdate', text: 'Birthdate', type: 'TextTableCellComponent', sortable: true },
+    { name: 'birthdate', text: 'Birthdate', type: 'DateTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];
 
