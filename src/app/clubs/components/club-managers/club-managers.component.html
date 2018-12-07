@@ -12,10 +12,9 @@
   </div>
 </div>
 <div class="row">
-  <!-- <app-squad-player-card *ngFor="let manager of managers" [manager]="manager" class="col-xl-3 col-lg-4 col-md-6 pt-3 pl-2 pr-2"></app-squad-player-card> -->
-  {{ managers | json }}
+  <app-squad-manager-card *ngFor="let manager of managers" [manager]="manager" class="col-md-6 pt-3 pl-2 pr-2"></app-squad-manager-card>
 </div>
-<div *ngIf="managers?.length > 0" class="pagination d-flex justify-content-center">
+<div *ngIf="managers?.length > 1" class="pagination d-flex justify-content-center">
   <pagination [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.pageSize" (pageChanged)="onPageChanged($event)"
     [maxSize]="5" previousText="&lsaquo;" nextText="&rsaquo;"></pagination>
 </div>
