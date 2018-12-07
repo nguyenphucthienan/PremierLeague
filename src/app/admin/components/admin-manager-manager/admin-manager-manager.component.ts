@@ -12,6 +12,7 @@ import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
 import { AdminManagerAddModalComponent } from '../../modals/admin-manager-add-modal/admin-manager-add-modal.component';
+import { AdminManagerEditModalComponent } from '../../modals/admin-manager-edit-modal/admin-manager-edit-modal.component';
 import { AdminManagerManagerTableService } from '../../services/admin-manager-manager-table.service';
 
 @Component({
@@ -42,7 +43,7 @@ export class AdminManagerManagerComponent implements OnInit, AfterViewInit, OnDe
       .pipe(
         map((event: any) => event.target.value),
         debounceTime(250),
-        tap((value: string) => this.searchPlayer(value))
+        tap((value: string) => this.searchManager(value))
       )
       .subscribe();
   }
@@ -62,7 +63,7 @@ export class AdminManagerManagerComponent implements OnInit, AfterViewInit, OnDe
     }
   }
 
-  searchPlayer(value: string) {
+  searchManager(value: string) {
     this.adminManagerManagerTableService.filterMode['name'] = value;
     this.datatable.refresh();
   }
@@ -88,16 +89,16 @@ export class AdminManagerManagerComponent implements OnInit, AfterViewInit, OnDe
   }
 
   openEditModal(rowData: TableRow) {
-    // this.bsModalRef = this.modalService.show(AdminPlayerEditModalComponent, {
-    //   initialState: {
-    //     title: 'Edit Player',
-    //     rowData
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminManagerEditModalComponent, {
+      initialState: {
+        title: 'Edit Manager',
+        rowData
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.playerEdited
-    //   .subscribe(() => this.onPlayerEdited());
+    this.bsModalRef.content.managerEdited
+      .subscribe(() => this.onManagerEdited());
   }
 
   onManagerEdited() {

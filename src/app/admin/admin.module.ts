@@ -20,6 +20,7 @@ import { AdminStadiumManagerComponent } from './components/admin-stadium-manager
 import { AdminClubAddModalComponent } from './modals/admin-club-add-modal/admin-club-add-modal.component';
 import { AdminClubEditModalComponent } from './modals/admin-club-edit-modal/admin-club-edit-modal.component';
 import { AdminManagerAddModalComponent } from './modals/admin-manager-add-modal/admin-manager-add-modal.component';
+import { AdminManagerEditModalComponent } from './modals/admin-manager-edit-modal/admin-manager-edit-modal.component';
 import { AdminMatchAddModalComponent } from './modals/admin-match-add-modal/admin-match-add-modal.component';
 import {
   AdminMatchCardsAddModalComponent,
@@ -68,6 +69,7 @@ import { AdminStadiumEditModalComponent } from './modals/admin-stadium-edit-moda
     AdminClubEditModalComponent,
     AdminManagerManagerComponent,
     AdminManagerAddModalComponent,
+    AdminManagerEditModalComponent,
     AdminPlayerManagerComponent,
     AdminPlayerAddModalComponent,
     AdminPlayerEditModalComponent,
@@ -104,6 +106,7 @@ import { AdminStadiumEditModalComponent } from './modals/admin-stadium-edit-moda
     AdminClubAddModalComponent,
     AdminClubEditModalComponent,
     AdminManagerAddModalComponent,
+    AdminManagerEditModalComponent,
     AdminPlayerAddModalComponent,
     AdminPlayerEditModalComponent,
     AdminSquadAddModalComponent,
