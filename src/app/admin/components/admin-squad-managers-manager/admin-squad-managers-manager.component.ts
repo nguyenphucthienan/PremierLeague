@@ -11,6 +11,9 @@ import { TableCellChange } from 'src/app/datatable/models/table-cell-change.inte
 import { TableRow } from 'src/app/datatable/models/table-row.interface';
 import { ConfirmModalComponent } from 'src/app/shared/modals/confirm-modal/confirm-modal.component';
 
+import {
+  AdminSquadManagersAddModalComponent,
+} from '../../modals/admin-squad-managers-add-modal/admin-squad-managers-add-modal.component';
 import { AdminSquadManagersManagerTableService } from '../../services/admin-squad-managers-manager-table.service';
 
 @Component({
@@ -77,16 +80,16 @@ export class AdminSquadManagersManagerComponent implements OnInit, AfterViewInit
   }
 
   openAddModal() {
-    // this.bsModalRef = this.modalService.show(AdminSquadPlayersAddModalComponent, {
-    //   initialState: {
-    //     title: 'Add Player',
-    //     squadId: this.squadId
-    //   },
-    //   class: 'modal-dialog-centered'
-    // });
+    this.bsModalRef = this.modalService.show(AdminSquadManagersAddModalComponent, {
+      initialState: {
+        title: 'Add Manager',
+        squadId: this.squadId
+      },
+      class: 'modal-dialog-centered'
+    });
 
-    // this.bsModalRef.content.playerAdded
-    //   .subscribe(() => this.onPlayerAdded());
+    this.bsModalRef.content.managerAdded
+      .subscribe(() => this.onManagerAdded());
   }
 
   onManagerAdded() {
@@ -124,14 +127,14 @@ export class AdminSquadManagersManagerComponent implements OnInit, AfterViewInit
   }
 
   confirmRemoveManager(id: number) {
-    // this.squadService.removePlayerFromSquad(this.squadId, id)
-    //   .subscribe(
-    //     () => {
-    //       this.alertService.success('Remove manager successfully');
-    //       this.datatable.refresh();
-    //     },
-    //     () => this.alertService.error('Remove manager failed')
-    //   );
+    this.squadService.removeManagerFromSquad(this.squadId, id)
+      .subscribe(
+        () => {
+          this.alertService.success('Remove manager successfully');
+          this.datatable.refresh();
+        },
+        () => this.alertService.error('Remove manager failed')
+      );
   }
 
   ngOnDestroy() {

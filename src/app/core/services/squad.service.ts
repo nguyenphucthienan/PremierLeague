@@ -17,6 +17,8 @@ export class SquadService {
   private readonly squadUrl = `${environment.apiUrl}/squads`;
   private readonly squadPlayersUrl = `${environment.apiUrl}/squads/{id}/players`;
   private readonly squadPlayersDetailUrl = `${environment.apiUrl}/squads/{id}/players/{playerId}`;
+  private readonly squadManagersUrl = `${environment.apiUrl}/squads/{id}/managers`;
+  private readonly squadManagersDetailUrl = `${environment.apiUrl}/squads/{id}/managers/{managerId}`;
 
   private readonly defaultPagination: Pagination = {
     pageNumber: 1,
@@ -90,6 +92,17 @@ export class SquadService {
 
   removePlayerFromSquad(id: number, playerId: number): Observable<any> {
     const url = UrlUtils.resolveParams(this.squadPlayersDetailUrl, { id, playerId });
+    return this.http.delete<any>(url);
+  }
+
+  addManagerToSquad(id: number, squadManager: { squadId: number, managerId: number })
+    : Observable<any> {
+    const url = UrlUtils.resolveParams(this.squadManagersUrl, { id });
+    return this.http.post<any>(url, squadManager);
+  }
+
+  removeManagerFromSquad(id: number, managerId: number): Observable<any> {
+    const url = UrlUtils.resolveParams(this.squadManagersDetailUrl, { id, managerId });
     return this.http.delete<any>(url);
   }
 
