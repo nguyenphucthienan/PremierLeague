@@ -10,12 +10,14 @@ import { SortMode } from '../models/sort-mode.interface';
 import { Squad } from '../models/squad.interface';
 import { ParamsBuilder } from '../utils/params-builder';
 import { UrlUtils } from '../utils/url-utils';
+import { SquadPlayer } from '../models/squad-player';
 
 @Injectable()
 export class SquadService {
 
   private readonly squadUrl = `${environment.apiUrl}/squads`;
   private readonly squadPlayersUrl = `${environment.apiUrl}/squads/{id}/players`;
+  private readonly squadPlayersBriefListUrl = `${environment.apiUrl}/squads/{id}/players/brief-list`;
   private readonly squadPlayersDetailUrl = `${environment.apiUrl}/squads/{id}/players/{playerId}`;
   private readonly squadManagersUrl = `${environment.apiUrl}/squads/{id}/managers`;
   private readonly squadManagersDetailUrl = `${environment.apiUrl}/squads/{id}/managers/{managerId}`;
@@ -60,13 +62,22 @@ export class SquadService {
     return this.http.delete<Squad>(`${this.squadUrl}/${id}`);
   }
 
-  getPlayersInSquadById(id: number): Observable<Player[]> {
-    const url = UrlUtils.resolveParams(this.squadPlayersUrl, { id });
-    return this.http.get<Player[]>(url);
+  getPlayersInSquad(pagination: Pagination = this.defaultPagination,
+    sortMode: SortMode = this.defaultSortMode,
+    filterMode?: FilterMode): Observable<SquadPlayer[]> {
+    const url = UrlUtils.resolveParams(this.squadPlayersUrl, { id: filterMode.squadId });
+
+    const params = new ParamsBuilder()
+      .applyPagination(pagination)
+      .applySort(sortMode)
+      .applyFilter(filterMode)
+      .build();
+
+    return this.http.get<SquadPlayer[]>(url, { params });
   }
 
-  getPlayersInSquad(seasonId: number, clubId: number): Observable<Player[]> {
-    const url = UrlUtils.resolveParams(this.squadPlayersUrl, { id: 0 });
+  getBriefListPlayersInSquad(seasonId: number, clubId: number): Observable<Player[]> {
+    const url = UrlUtils.resolveParams(this.squadPlayersBriefListUrl, { id: 0 });
     const params = new ParamsBuilder()
       .applyFilter({ seasonId, clubId })
       .build();
@@ -74,14 +85,12 @@ export class SquadService {
     return this.http.get<Player[]>(url, { params });
   }
 
-  addPlayerToSquad(id: number, squadPlayer: { squadId: number, playerId: number })
-    : Observable<any> {
+  addPlayerToSquad(id: number, squadPlayer: any): Observable<any> {
     const url = UrlUtils.resolveParams(this.squadPlayersUrl, { id });
     return this.http.post<any>(url, squadPlayer);
   }
 
-  editPlayerInSquad(id: number, squadPlayer: { squadId: number, playerId: number })
-    : Observable<any> {
+  editPlayerInSquad(id: number, squadPlayer: any): Observable<any> {
     const url = UrlUtils.resolveParams(
       this.squadPlayersDetailUrl,
       { id, playerId: squadPlayer.playerId }

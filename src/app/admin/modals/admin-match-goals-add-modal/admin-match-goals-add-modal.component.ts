@@ -85,8 +85,8 @@ export class AdminMatchGoalsAddModalComponent implements OnInit {
         ];
 
         forkJoin(
-          this.squadService.getPlayersInSquad(this.match.season.id, this.match.homeClub.id),
-          this.squadService.getPlayersInSquad(this.match.season.id, this.match.awayClub.id)
+          this.squadService.getBriefListPlayersInSquad(this.match.season.id, this.match.homeClub.id),
+          this.squadService.getBriefListPlayersInSquad(this.match.season.id, this.match.awayClub.id)
         )
           .subscribe((data: any) => {
             const homeClubPlayers = data[0].map(player => ({

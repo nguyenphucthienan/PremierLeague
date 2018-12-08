@@ -78,7 +78,7 @@ export class AdminMatchCardsAddModalComponent implements OnInit {
   }
 
   onClubChanged(club: Club) {
-    this.squadService.getPlayersInSquad(this.match.season.id, club.id)
+    this.squadService.getBriefListPlayersInSquad(this.match.season.id, club.id)
       .subscribe((players: Player[]) => this.players = players);
 
     this.addForm.patchValue({ playerId: null });

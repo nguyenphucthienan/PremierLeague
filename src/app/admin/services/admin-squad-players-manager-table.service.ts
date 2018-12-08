@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { FilterMode } from 'src/app/core/models/filter-mode.interface';
 import { Pagination } from 'src/app/core/models/pagination.interface';
 import { SortMode } from 'src/app/core/models/sort-mode.interface';
-import { PlayerService } from 'src/app/core/services/player.service';
+import { SquadService } from 'src/app/core/services/squad.service';
 import { TableAction, TableActionType } from 'src/app/datatable/models/table-action.interface';
 import { TableCell } from 'src/app/datatable/models/table-cell.interface';
 import { TableColumn } from 'src/app/datatable/models/table-column.interface';
@@ -21,9 +21,8 @@ export class AdminSquadPlayersManagerTableService implements TableService {
     { name: 'name', text: 'Name', type: 'TextTableCellComponent', sortable: true },
     { name: 'positionType', text: 'Position', type: 'PipedTextTableCellComponent', sortable: true },
     { name: 'nationality', text: 'Nationality', type: 'TextTableCellComponent', sortable: true },
-    { name: 'birthdate', text: 'Birthdate', type: 'TextTableCellComponent', sortable: true },
-    { name: 'height', text: 'Height', type: 'TextTableCellComponent', sortable: true, center: true },
-    { name: 'weight', text: 'Weight', type: 'TextTableCellComponent', sortable: true, center: true },
+    { name: 'startDate', text: 'Start Date', type: 'DateTableCellComponent', sortable: true },
+    { name: 'endDate', text: 'End Date', type: 'DateTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];
 
@@ -41,13 +40,14 @@ export class AdminSquadPlayersManagerTableService implements TableService {
 
   filterMode: FilterMode = {};
 
+
   actions: TableAction[] = [
     { class: 'btn-primary', icon: 'fa fa-info-circle', text: 'Detail', type: TableActionType.GetDetail },
     { class: 'btn-dark', icon: 'fa fa-edit', text: 'Edit', type: TableActionType.Edit },
     { class: 'btn-danger', icon: 'fa fa-trash', text: 'Delete', type: TableActionType.Delete }
   ];
 
-  constructor(private playerService: PlayerService,
+  constructor(private squadService: SquadService,
     private positionTypePipe: PositionTypePipe) { }
 
   getDataColumns() {
@@ -55,7 +55,7 @@ export class AdminSquadPlayersManagerTableService implements TableService {
   }
 
   getRawData() {
-    return this.playerService.getPlayers(this.pagination,
+    return this.squadService.getPlayersInSquad(this.pagination,
       this.sortMode, this.filterMode)
       .pipe(
         map((response: any) => {
@@ -77,11 +77,23 @@ export class AdminSquadPlayersManagerTableService implements TableService {
               continue;
             }
 
-            if (key === 'positionType') {
-              cells[key] = {
-                value: row[key],
-                pipe: this.positionTypePipe
-              };
+            if (key === 'player') {
+              for (const playerKey in row[key]) {
+                if (!row.hasOwnProperty(key)) {
+                  continue;
+                }
+
+                if (playerKey === 'positionType') {
+                  cells[playerKey] = {
+                    value: row[key][playerKey],
+                    pipe: this.positionTypePipe
+                  };
+                } else {
+                  cells[playerKey] = {
+                    value: row[key][playerKey]
+                  };
+                }
+              }
             } else {
               cells[key] = {
                 value: row[key]

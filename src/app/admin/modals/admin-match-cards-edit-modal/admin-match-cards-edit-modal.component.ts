@@ -87,7 +87,7 @@ export class AdminMatchCardsEditModalComponent implements OnInit, AfterViewInit 
           }
         ];
 
-        this.squadService.getPlayersInSquad(
+        this.squadService.getBriefListPlayersInSquad(
           this.match.season.id,
           this.rowData.cells['club'].value.id)
           .subscribe((players: Player[]) => this.players = players);
@@ -95,7 +95,7 @@ export class AdminMatchCardsEditModalComponent implements OnInit, AfterViewInit 
   }
 
   onClubChanged(club: Club) {
-    this.squadService.getPlayersInSquad(this.match.season.id, club.id)
+    this.squadService.getBriefListPlayersInSquad(this.match.season.id, club.id)
       .subscribe((players: Player[]) => this.players = players);
 
     this.editForm.patchValue({ playerId: null });

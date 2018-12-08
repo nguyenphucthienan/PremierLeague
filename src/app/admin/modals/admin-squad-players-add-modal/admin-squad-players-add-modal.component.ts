@@ -36,7 +36,9 @@ export class AdminSquadPlayersAddModalComponent implements OnInit {
         Validators.required,
         Validators.min(1),
         Validators.max(99)
-      ]]
+      ]],
+      startDate: [new Date(), Validators.required],
+      endDate: [null]
     });
 
     this.getPlayers();
