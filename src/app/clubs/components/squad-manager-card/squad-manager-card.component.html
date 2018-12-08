@@ -1,9 +1,9 @@
 <div class="card h-100">
-  <img class="card-img-top" [src]="manager.photoUrl" [alt]="manager.name">
+  <img class="card-img-top" [src]="squadManager.manager.photoUrl" [alt]="squadManager.manager.name">
   <div class="card-body">
-    <h5 class="card-title">{{ manager.name }}</h5>
+    <h5 class="card-title">{{ squadManager.manager.name }}</h5>
   </div>
   <div class="card-footer">
-    <a class="btn btn-block btn-sm btn-primary" [routerLink]="['/managers', manager.id]">Manager Detail</a>
+    <a class="btn btn-block btn-sm btn-primary" [routerLink]="['/managers', squadManager.manager.id]">Manager Detail</a>
   </div>
 </div>

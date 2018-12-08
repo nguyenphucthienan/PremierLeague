@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Manager } from 'src/app/core/models/manager.interface';
+import { SquadManager } from 'src/app/core/models/squad-manager';
 
 @Component({
   selector: 'app-squad-manager-card',
@@ -8,7 +8,7 @@ import { Manager } from 'src/app/core/models/manager.interface';
 })
 export class SquadManagerCardComponent implements OnInit {
 
-  @Input() manager: Manager;
+  @Input() squadManager: SquadManager;
 
   constructor() { }
 

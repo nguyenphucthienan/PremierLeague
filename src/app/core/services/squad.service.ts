@@ -7,10 +7,11 @@ import { FilterMode } from '../models/filter-mode.interface';
 import { Pagination } from '../models/pagination.interface';
 import { Player } from '../models/player.interface';
 import { SortMode } from '../models/sort-mode.interface';
+import { SquadManager } from '../models/squad-manager';
+import { SquadPlayer } from '../models/squad-player';
 import { Squad } from '../models/squad.interface';
 import { ParamsBuilder } from '../utils/params-builder';
 import { UrlUtils } from '../utils/url-utils';
-import { SquadPlayer } from '../models/squad-player';
 
 @Injectable()
 export class SquadService {
@@ -102,6 +103,20 @@ export class SquadService {
   removePlayerFromSquad(id: number, playerId: number): Observable<any> {
     const url = UrlUtils.resolveParams(this.squadPlayersDetailUrl, { id, playerId });
     return this.http.delete<any>(url);
+  }
+
+  getManagersInSquad(pagination: Pagination = this.defaultPagination,
+    sortMode: SortMode = this.defaultSortMode,
+    filterMode?: FilterMode): Observable<SquadManager[]> {
+    const url = UrlUtils.resolveParams(this.squadManagersUrl, { id: filterMode.squadId });
+
+    const params = new ParamsBuilder()
+      .applyPagination(pagination)
+      .applySort(sortMode)
+      .applyFilter(filterMode)
+      .build();
+
+    return this.http.get<SquadManager[]>(url, { params });
   }
 
   addManagerToSquad(id: number, squadManager: { squadId: number, managerId: number })
