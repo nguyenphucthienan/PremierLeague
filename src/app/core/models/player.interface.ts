@@ -10,7 +10,6 @@ export interface Player {
   weight?: number;
   photoUrl: string;
   club?: Club;
-  number?: number;
 }
 
 export enum PositionType {

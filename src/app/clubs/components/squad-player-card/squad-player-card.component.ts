@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Player } from 'src/app/core/models/player.interface';
+import { SquadPlayer } from 'src/app/core/models/squad-player';
 
 @Component({
   selector: 'app-squad-player-card',
@@ -8,7 +8,7 @@ import { Player } from 'src/app/core/models/player.interface';
 })
 export class SquadPlayerCardComponent implements OnInit {
 
-  @Input() player: Player;
+  @Input() squadPlayer: SquadPlayer;
 
   constructor() { }
 

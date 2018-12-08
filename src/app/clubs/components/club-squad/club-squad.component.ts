@@ -3,10 +3,10 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 import { Club } from 'src/app/core/models/club.interface';
 import { FilterMode } from 'src/app/core/models/filter-mode.interface';
 import { Pagination } from 'src/app/core/models/pagination.interface';
-import { Player } from 'src/app/core/models/player.interface';
 import { SortMode } from 'src/app/core/models/sort-mode.interface';
+import { SquadPlayer } from 'src/app/core/models/squad-player';
 import { Squad } from 'src/app/core/models/squad.interface';
-import { PlayerService } from 'src/app/core/services/player.service';
+import { SquadService } from 'src/app/core/services/squad.service';
 
 @Component({
   selector: 'app-club-squad',
@@ -19,7 +19,7 @@ export class ClubSquadComponent implements OnInit {
   @Input() club: Club;
 
   squads: Squad[];
-  players: Player[];
+  squadPlayers: SquadPlayer[];
 
   pagination: Pagination = {
     pageNumber: 1,
@@ -27,13 +27,13 @@ export class ClubSquadComponent implements OnInit {
   };
 
   private sortMode: SortMode = {
-    sortBy: 'positionType',
+    sortBy: 'number',
     isSortAscending: true
   };
 
   private filterMode: FilterMode = {};
 
-  constructor(private playerService: PlayerService) { }
+  constructor(private squadService: SquadService) { }
 
   ngOnInit() {
     this.squads = this.club.squads;
@@ -43,10 +43,10 @@ export class ClubSquadComponent implements OnInit {
   }
 
   getPlayers() {
-    this.playerService.getPlayers(this.pagination,
+    this.squadService.getPlayersInSquad(this.pagination,
       this.sortMode, this.filterMode)
       .subscribe((response: any) => {
-        this.players = response.items;
+        this.squadPlayers = response.items;
         this.pagination = response.pagination;
       });
   }
