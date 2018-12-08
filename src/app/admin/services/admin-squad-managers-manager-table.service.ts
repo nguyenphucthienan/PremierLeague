@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { FilterMode } from 'src/app/core/models/filter-mode.interface';
 import { Pagination } from 'src/app/core/models/pagination.interface';
 import { SortMode } from 'src/app/core/models/sort-mode.interface';
-import { ManagerService } from 'src/app/core/services/manager.service';
+import { SquadService } from 'src/app/core/services/squad.service';
 import { TableAction, TableActionType } from 'src/app/datatable/models/table-action.interface';
 import { TableCell } from 'src/app/datatable/models/table-cell.interface';
 import { TableColumn } from 'src/app/datatable/models/table-column.interface';
@@ -42,14 +42,14 @@ export class AdminSquadManagersManagerTableService implements TableService {
     { class: 'btn-danger', icon: 'fa fa-trash', text: 'Delete', type: TableActionType.Delete }
   ];
 
-  constructor(private mangerService: ManagerService) { }
+  constructor(private squadService: SquadService) { }
 
   getDataColumns() {
     return this.columns;
   }
 
   getRawData() {
-    return this.mangerService.getManagers(this.pagination,
+    return this.squadService.getManagersInSquad(this.pagination,
       this.sortMode, this.filterMode)
       .pipe(
         map((response: any) => {
@@ -71,9 +71,21 @@ export class AdminSquadManagersManagerTableService implements TableService {
               continue;
             }
 
-            cells[key] = {
-              value: row[key]
-            };
+            if (key === 'manager') {
+              for (const managerKey in row[key]) {
+                if (!row.hasOwnProperty(key)) {
+                  continue;
+                }
+
+                cells[managerKey] = {
+                  value: row[key][managerKey]
+                };
+              }
+            } else {
+              cells[key] = {
+                value: row[key]
+              };
+            }
           }
 
           cells['actions'] = {

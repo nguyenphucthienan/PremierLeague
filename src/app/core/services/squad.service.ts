@@ -63,6 +63,39 @@ export class SquadService {
     return this.http.delete<Squad>(`${this.squadUrl}/${id}`);
   }
 
+  getManagersInSquad(pagination: Pagination = this.defaultPagination,
+    sortMode: SortMode = this.defaultSortMode,
+    filterMode?: FilterMode): Observable<SquadManager[]> {
+    const url = UrlUtils.resolveParams(this.squadManagersUrl, { id: filterMode.squadId });
+
+    const params = new ParamsBuilder()
+      .applyPagination(pagination)
+      .applySort(sortMode)
+      .applyFilter(filterMode)
+      .build();
+
+    return this.http.get<SquadManager[]>(url, { params });
+  }
+
+  addManagerToSquad(id: number, squadManager: any): Observable<any> {
+    const url = UrlUtils.resolveParams(this.squadManagersUrl, { id });
+    return this.http.post<any>(url, squadManager);
+  }
+
+  editManagerInSquad(id: number, squadManager: any): Observable<any> {
+    const url = UrlUtils.resolveParams(
+      this.squadManagersDetailUrl,
+      { id, managerId: squadManager.managerId }
+    );
+
+    return this.http.put<any>(url, squadManager);
+  }
+
+  removeManagerFromSquad(id: number, managerId: number): Observable<any> {
+    const url = UrlUtils.resolveParams(this.squadManagersDetailUrl, { id, managerId });
+    return this.http.delete<any>(url);
+  }
+
   getPlayersInSquad(pagination: Pagination = this.defaultPagination,
     sortMode: SortMode = this.defaultSortMode,
     filterMode?: FilterMode): Observable<SquadPlayer[]> {
@@ -102,41 +135,6 @@ export class SquadService {
 
   removePlayerFromSquad(id: number, playerId: number): Observable<any> {
     const url = UrlUtils.resolveParams(this.squadPlayersDetailUrl, { id, playerId });
-    return this.http.delete<any>(url);
-  }
-
-  getManagersInSquad(pagination: Pagination = this.defaultPagination,
-    sortMode: SortMode = this.defaultSortMode,
-    filterMode?: FilterMode): Observable<SquadManager[]> {
-    const url = UrlUtils.resolveParams(this.squadManagersUrl, { id: filterMode.squadId });
-
-    const params = new ParamsBuilder()
-      .applyPagination(pagination)
-      .applySort(sortMode)
-      .applyFilter(filterMode)
-      .build();
-
-    return this.http.get<SquadManager[]>(url, { params });
-  }
-
-  addManagerToSquad(id: number, squadManager: { squadId: number, managerId: number })
-    : Observable<any> {
-    const url = UrlUtils.resolveParams(this.squadManagersUrl, { id });
-    return this.http.post<any>(url, squadManager);
-  }
-
-  editManagerInSquad(id: number, squadPlayer: { squadId: number, managerId: number })
-    : Observable<any> {
-    const url = UrlUtils.resolveParams(
-      this.squadManagersDetailUrl,
-      { id, managerId: squadPlayer.managerId }
-    );
-
-    return this.http.put<any>(url, squadPlayer);
-  }
-
-  removeManagerFromSquad(id: number, managerId: number): Observable<any> {
-    const url = UrlUtils.resolveParams(this.squadManagersDetailUrl, { id, managerId });
     return this.http.delete<any>(url);
   }
 
