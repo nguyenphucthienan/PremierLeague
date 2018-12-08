@@ -1,4 +1,5 @@
 import { Club } from './club.interface';
+import { SquadPlayer } from './squad-player';
 
 export interface Player {
   id: number;
@@ -9,7 +10,9 @@ export interface Player {
   height?: number;
   weight?: number;
   photoUrl: string;
+  squadPlayers?: SquadPlayer[];
   club?: Club;
+  number?: number;
 }
 
 export enum PositionType {

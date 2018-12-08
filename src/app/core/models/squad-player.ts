@@ -1,7 +1,8 @@
 import { Player } from './player.interface';
+import { Squad } from './squad.interface';
 
 export interface SquadPlayer {
-  squadId: number;
+  squad: Squad;
   player: Player;
   number: number;
   startDate: Date;

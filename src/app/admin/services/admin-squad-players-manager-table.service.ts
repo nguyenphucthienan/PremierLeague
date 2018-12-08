@@ -34,7 +34,7 @@ export class AdminSquadPlayersManagerTableService implements TableService {
   };
 
   sortMode: SortMode = {
-    sortBy: 'id',
+    sortBy: 'number',
     isSortAscending: true
   };
 

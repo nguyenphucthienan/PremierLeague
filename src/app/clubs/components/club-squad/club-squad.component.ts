@@ -31,7 +31,9 @@ export class ClubSquadComponent implements OnInit {
     isSortAscending: true
   };
 
-  private filterMode: FilterMode = {};
+  private filterMode: FilterMode = {
+    isActive: true
+  };
 
   constructor(private squadService: SquadService) { }
 
