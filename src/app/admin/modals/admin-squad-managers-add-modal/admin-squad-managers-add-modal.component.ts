@@ -31,7 +31,9 @@ export class AdminSquadManagersAddModalComponent implements OnInit {
 
   ngOnInit() {
     this.addForm = this.fb.group({
-      managerId: [null, Validators.required]
+      managerId: [null, Validators.required],
+      startDate: [new Date(), Validators.required],
+      endDate: [null]
     });
 
     this.getManagers();

@@ -27,7 +27,7 @@ export class ClubManagersComponent implements OnInit {
   };
 
   private sortMode: SortMode = {
-    sortBy: 'name',
+    sortBy: 'startDate',
     isSortAscending: true
   };
 

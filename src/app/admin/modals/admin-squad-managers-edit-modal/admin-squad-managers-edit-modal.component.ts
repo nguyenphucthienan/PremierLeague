@@ -33,7 +33,18 @@ export class AdminSquadManagersEditModalComponent implements OnInit {
 
   ngOnInit() {
     this.editForm = this.fb.group({
-      managerId: [this.rowData.cells['id'].value, Validators.required],
+      managerId: [
+        this.rowData.cells['id'].value,
+        Validators.required
+      ],
+      startDate: [
+        new Date(this.rowData.cells['startDate'].value),
+        Validators.required
+      ],
+      endDate: [
+        this.rowData.cells['endDate'].value
+        && new Date(this.rowData.cells['endDate'].value)
+      ]
     });
 
     this.getManagers();
