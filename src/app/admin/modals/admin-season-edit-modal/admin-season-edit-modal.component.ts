@@ -26,7 +26,14 @@ export class AdminSeasonEditModalComponent implements OnInit {
 
   ngOnInit() {
     this.editForm = this.fb.group({
-      name: [this.rowData.cells['name'].value, Validators.required]
+      name: [
+        this.rowData.cells['name'].value,
+        Validators.required
+      ],
+      startDate: [
+        new Date(this.rowData.cells['startDate'].value),
+        Validators.required
+      ]
     });
   }
 

@@ -24,7 +24,8 @@ export class AdminSeasonAddModalComponent implements OnInit {
 
   ngOnInit() {
     this.addForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      startDate: [new Date(), Validators.required]
     });
   }
 

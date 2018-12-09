@@ -16,6 +16,8 @@ export class AdminSeasonManagerTableService implements TableService {
   columns: TableColumn[] = [
     { name: 'id', text: 'ID', type: 'TextTableCellComponent', sortable: true, center: true },
     { name: 'name', text: 'Name', type: 'TextTableCellComponent', sortable: true },
+    { name: 'startDate', text: 'Start Date', type: 'DateTableCellComponent', sortable: true },
+    { name: 'endDate', text: 'End Date', type: 'DateTableCellComponent', sortable: true },
     { name: 'actions', text: 'Actions', type: 'ActionsTableCellComponent', sortable: false }
   ];
 
@@ -27,7 +29,7 @@ export class AdminSeasonManagerTableService implements TableService {
   };
 
   sortMode: SortMode = {
-    sortBy: 'id',
+    sortBy: 'startDate',
     isSortAscending: true
   };
 
