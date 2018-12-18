@@ -8,14 +8,14 @@
   <form [formGroup]="editForm" (ngSubmit)="editSquad()" class="form">
     <div class="form-group">
       <label for="seasonId">Season</label>
-      <ng-select [items]="seasons" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name" placeholder="Select Season"
-        formControlName="seasonId">
+      <ng-select #seasonSelect [items]="seasons" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
+        placeholder="Select Season" formControlName="seasonId">
       </ng-select>
     </div>
     <div class="form-group">
       <label for="clubId">Club</label>
-      <ng-select [items]="clubs" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name" placeholder="Select Club"
-        formControlName="clubId">
+      <ng-select #clubSelect [items]="clubs" [selectOnTab]="true" [clearable]="false" bindValue="id" bindLabel="name"
+        placeholder="Select Club" formControlName="clubId">
       </ng-select>
     </div>
   </form>

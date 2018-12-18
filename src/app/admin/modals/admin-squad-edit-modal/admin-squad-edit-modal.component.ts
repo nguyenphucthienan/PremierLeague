@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgSelectComponent } from '@ng-select/ng-select';
 import { BsModalRef } from 'ngx-bootstrap';
 import { Club } from 'src/app/core/models/club.interface';
 import { Season } from 'src/app/core/models/season.interface';
@@ -15,7 +16,10 @@ import { TableRow } from 'src/app/datatable/models/table-row.interface';
   templateUrl: './admin-squad-edit-modal.component.html',
   styleUrls: ['./admin-squad-edit-modal.component.scss']
 })
-export class AdminSquadEditModalComponent implements OnInit {
+export class AdminSquadEditModalComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('seasonSelect') seasonSelect: NgSelectComponent;
+  @ViewChild('clubSelect') clubSelect: NgSelectComponent;
 
   title: string;
   rowData: TableRow;
@@ -43,6 +47,11 @@ export class AdminSquadEditModalComponent implements OnInit {
 
     this.clubService.getBriefListClub()
       .subscribe((clubs: Club[]) => this.clubs = clubs);
+  }
+
+  ngAfterViewInit() {
+    this.seasonSelect.disabled = true;
+    this.clubSelect.disabled = true;
   }
 
   editSquad() {
