@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { FileDropDirective, FileSelectDirective } from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
 import {
   BsDatepickerModule,
   BsDropdownModule,
@@ -23,8 +23,6 @@ import { PositionTypePipe } from './pipes/position-type.pipe';
 
 @NgModule({
   declarations: [
-    FileSelectDirective,
-    FileDropDirective,
     KitTypePipe,
     PositionTypePipe,
     GoalTypePipe,
@@ -39,6 +37,7 @@ import { PositionTypePipe } from './pipes/position-type.pipe';
     FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
+    FileUploadModule,
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
     PaginationModule.forRoot(),
