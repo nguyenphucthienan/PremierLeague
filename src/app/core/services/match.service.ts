@@ -50,6 +50,14 @@ export class MatchService {
     return this.http.post<any>(`${this.matchUrl}/generate`, null, { params });
   }
 
+  deleteMatches(seasonId: number): Observable<any> {
+    const params = new ParamsBuilder()
+      .applyFilter({ seasonId })
+      .build();
+
+    return this.http.delete<any>(`${this.matchUrl}/delete`, { params });
+  }
+
   createMatch(match: Match): Observable<Match> {
     return this.http.post<Match>(`${this.matchUrl}`, match);
   }

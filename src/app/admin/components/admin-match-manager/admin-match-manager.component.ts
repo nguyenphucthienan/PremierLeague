@@ -110,7 +110,7 @@ export class AdminMatchManagerComponent implements OnInit {
     this.datatable.refresh();
   }
 
-  openGenerateModal() {
+  openGenerateMatchesModal() {
     this.bsModalRef = this.modalService.show(AdminMatchGenerateModalComponent, {
       initialState: {
         season: this.currentSeason
@@ -126,6 +126,29 @@ export class AdminMatchManagerComponent implements OnInit {
     this.adminMatchManagerTableService.filterMode.round = null;
     this.adminMatchManagerTableService.pagination = { pageNumber: 1, pageSize: 10 };
     this.datatable.refresh();
+  }
+
+  openDeleteMatchesModal() {
+    this.bsModalRef = this.modalService.show(ConfirmModalComponent, {
+      initialState: {
+        content: 'Are you sure you want to delete all matches in this season?'
+      },
+      class: 'modal-dialog-centered'
+    });
+
+    this.bsModalRef.content.ok
+      .subscribe(() => this.confirmDeleteMatches());
+  }
+
+  confirmDeleteMatches() {
+    this.matchService.deleteMatches(this.currentSeason.id)
+      .subscribe(
+        () => {
+          this.alertService.success('Delete matches successfully');
+          this.datatable.refresh();
+        },
+        () => this.alertService.error('Delete matches failed')
+      );
   }
 
   openAddModal() {
