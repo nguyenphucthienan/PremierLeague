@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, map, tap } from 'rxjs/operators';
@@ -28,7 +29,8 @@ export class AdminClubManagerComponent implements OnInit, AfterViewInit, OnDestr
   searchSubscription: Subscription;
   bsModalRef: BsModalRef;
 
-  constructor(public adminClubManagerTableService: AdminClubManagerTableService,
+  constructor(private router: Router,
+    public adminClubManagerTableService: AdminClubManagerTableService,
     private clubService: ClubService,
     private alertService: AlertService,
     private modalService: BsModalService) { }
@@ -49,6 +51,9 @@ export class AdminClubManagerComponent implements OnInit, AfterViewInit, OnDestr
   onTableCellChanged(tableCellChange: TableCellChange) {
     const action = tableCellChange.newValue;
     switch (action.type) {
+      case TableActionType.GetDetail:
+        this.navigateToClubDetail(tableCellChange.row.cells['id'].value);
+        break;
       case TableActionType.Edit:
         this.openEditModal(tableCellChange.row);
         break;
@@ -56,6 +61,10 @@ export class AdminClubManagerComponent implements OnInit, AfterViewInit, OnDestr
         this.openDeleteModal(tableCellChange.row.cells['id'].value);
         break;
     }
+  }
+
+  navigateToClubDetail(clubId: number) {
+    this.router.navigate(['/clubs', clubId]);
   }
 
   searchClub(value: string) {
