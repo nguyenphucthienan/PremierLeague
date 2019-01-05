@@ -94,7 +94,7 @@ export class AdminMatchGoalsManagerComponent implements OnInit, AfterViewInit, O
   openEditModal(rowData: TableRow) {
     this.bsModalRef = this.modalService.show(AdminMatchGoalsEditModalComponent, {
       initialState: {
-        title: 'Edit Kit',
+        title: 'Edit Goal',
         matchId: this.matchId,
         rowData
       },
